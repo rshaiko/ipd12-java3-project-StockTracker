@@ -10,3 +10,4 @@ Each member write down 3 questions
 28.02.2018
 Roman
 1. GUI hello
+2. Project Outline
