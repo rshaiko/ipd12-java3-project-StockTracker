@@ -7,7 +7,28 @@ Each member write down 3 questions
 2. What I plan to do from this Scrum to next? (next 24 hours)
 3. Where do I need assistance?  What do I need to figure out?
 
-28.02.2018
-Roman
-1. GUI hello
-3.New
+28.02.2018 Roman
+1. Done till now
+- created project description
+- creared the main app window
+- created database
+- added cards to Trello
+2. Plan until next Scrum
+- dialog window 'Add trade'
+- add entries to the database
+- create query to get information for the main table
+- write working code for API and JSON
+3. Need assistance / figure things out
+- How to implement API
+- Unable to add borders to the menu
+
+
+
+
+2018.02.28 Dmitrii
+1. Done till now
+- created project description
+- creared the app dialog windows
+- created database
+- added cards to Trello
+2. 
