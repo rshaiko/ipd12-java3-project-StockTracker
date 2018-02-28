@@ -40,7 +40,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dlgUser_lblPasswordOk = new javax.swing.JDialog();
+        dlgUser = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         dlgUser_tfUsername = new javax.swing.JTextField();
@@ -97,8 +97,27 @@ public class MainWindow extends javax.swing.JFrame {
         ppMain_Move = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         ppMain_Delete = new javax.swing.JMenuItem();
+        ppManage = new javax.swing.JPopupMenu();
+        ppManage_Edit = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        ppManage_Delete = new javax.swing.JMenuItem();
         dlgAdd = new javax.swing.JDialog();
         jLabel16 = new javax.swing.JLabel();
+        dlgAdd_tfNumberOfShares = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        dlgAdd_tfSymbol = new javax.swing.JTextField();
+        dlgAdd_btAdd = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        dlgAdd_rbBuy = new javax.swing.JRadioButton();
+        dlgAdd_rbSell = new javax.swing.JRadioButton();
+        jPanel4 = new javax.swing.JPanel();
+        dlgAdd_rbShortSell = new javax.swing.JRadioButton();
+        dlgAdd_rbCoverShort = new javax.swing.JRadioButton();
+        dlgAdd_btReset = new javax.swing.JButton();
+        dlgAdd_btCancel = new javax.swing.JButton();
+        dlgAdd_lblSymbolOk = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        btgAdd = new javax.swing.ButtonGroup();
         lblStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -129,8 +148,9 @@ public class MainWindow extends javax.swing.JFrame {
         mUser = new javax.swing.JMenu();
         mLogin = new javax.swing.JMenu();
 
-        dlgUser_lblPasswordOk.setResizable(false);
-        dlgUser_lblPasswordOk.setSize(new java.awt.Dimension(380, 200));
+        dlgUser.setModal(true);
+        dlgUser.setResizable(false);
+        dlgUser.setSize(new java.awt.Dimension(380, 200));
 
         jLabel1.setText("Username");
 
@@ -163,34 +183,34 @@ public class MainWindow extends javax.swing.JFrame {
 
         dlgUser_btSignUp.setText("Sign Up");
 
-        javax.swing.GroupLayout dlgUser_lblPasswordOkLayout = new javax.swing.GroupLayout(dlgUser_lblPasswordOk.getContentPane());
-        dlgUser_lblPasswordOk.getContentPane().setLayout(dlgUser_lblPasswordOkLayout);
-        dlgUser_lblPasswordOkLayout.setHorizontalGroup(
-            dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgUser_lblPasswordOkLayout.createSequentialGroup()
+        javax.swing.GroupLayout dlgUserLayout = new javax.swing.GroupLayout(dlgUser.getContentPane());
+        dlgUser.getContentPane().setLayout(dlgUserLayout);
+        dlgUserLayout.setHorizontalGroup(
+            dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgUserLayout.createSequentialGroup()
                 .addContainerGap(39, Short.MAX_VALUE)
-                .addGroup(dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dlgUser_lblPasswordOkLayout.createSequentialGroup()
-                        .addGroup(dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dlgUser_lblPasswordOkLayout.createSequentialGroup()
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlgUserLayout.createSequentialGroup()
+                        .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dlgUserLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(dlgUser_lblHelpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(dlgUser_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(dlgUser_lblPasswordOkLayout.createSequentialGroup()
+                            .addGroup(dlgUserLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(21, 21, 21)
                                 .addComponent(dlgUser_lblHelpPassword)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(dlgUser_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(17, 17, 17))
-                    .addGroup(dlgUser_lblPasswordOkLayout.createSequentialGroup()
+                    .addGroup(dlgUserLayout.createSequentialGroup()
                         .addComponent(dlgUser_btCancel)
                         .addGap(18, 18, 18)
-                        .addGroup(dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dlgUser_cbbDefaultUser)
-                            .addGroup(dlgUser_lblPasswordOkLayout.createSequentialGroup()
+                            .addGroup(dlgUserLayout.createSequentialGroup()
                                 .addComponent(dlgUser_btLogin)
                                 .addGap(18, 18, 18)
                                 .addComponent(dlgUser_btSignUp)))
@@ -201,27 +221,27 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        dlgUser_lblPasswordOkLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgUser_btCancel, dlgUser_btLogin, dlgUser_btSignUp});
+        dlgUserLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgUser_btCancel, dlgUser_btLogin, dlgUser_btSignUp});
 
-        dlgUser_lblPasswordOkLayout.setVerticalGroup(
-            dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgUser_lblPasswordOkLayout.createSequentialGroup()
+        dlgUserLayout.setVerticalGroup(
+            dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgUserLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(dlgUser_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dlgUser_lblHelpUserName)
                     .addComponent(dlgUser_lblUserOk)
                     .addComponent(jLabel7))
                 .addGap(26, 26, 26)
-                .addGroup(dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(dlgUser_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dlgUser_lblHelpPassword))
                 .addGap(18, 18, 18)
                 .addComponent(dlgUser_cbbDefaultUser)
                 .addGap(18, 18, 18)
-                .addGroup(dlgUser_lblPasswordOkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dlgUser_btCancel)
                     .addComponent(dlgUser_btLogin)
                     .addComponent(dlgUser_btSignUp))
@@ -528,9 +548,104 @@ public class MainWindow extends javax.swing.JFrame {
         ppMain_Delete.setText("Delete trade");
         ppMain.add(ppMain_Delete);
 
+        ppManage_Edit.setText("Edit");
+        ppManage.add(ppManage_Edit);
+        ppManage.add(jSeparator3);
+
+        ppManage_Delete.setText("Delete");
+        ppManage.add(ppManage_Delete);
+
+        dlgAdd.setModal(true);
         dlgAdd.setResizable(false);
 
         jLabel16.setText("Number of Shares");
+
+        jLabel18.setText("Symbol");
+
+        dlgAdd_btAdd.setText("Add Trade");
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btgAdd.add(dlgAdd_rbBuy);
+        dlgAdd_rbBuy.setText("Buy");
+        dlgAdd_rbBuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgAdd_rbBuyActionPerformed(evt);
+            }
+        });
+
+        btgAdd.add(dlgAdd_rbSell);
+        dlgAdd_rbSell.setText("Sell");
+        dlgAdd_rbSell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgAdd_rbSellActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dlgAdd_rbBuy)
+                .addGap(10, 10, 10)
+                .addComponent(dlgAdd_rbSell)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgAdd_rbBuy)
+                    .addComponent(dlgAdd_rbSell))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btgAdd.add(dlgAdd_rbShortSell);
+        dlgAdd_rbShortSell.setText("Short Sell");
+
+        btgAdd.add(dlgAdd_rbCoverShort);
+        dlgAdd_rbCoverShort.setText("Cover a Short");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dlgAdd_rbShortSell)
+                .addGap(18, 18, 18)
+                .addComponent(dlgAdd_rbCoverShort)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgAdd_rbShortSell)
+                    .addComponent(dlgAdd_rbCoverShort))
+                .addContainerGap())
+        );
+
+        dlgAdd_btReset.setText("Reset");
+
+        dlgAdd_btCancel.setText("Cancel");
+        dlgAdd_btCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgAdd_btCancelActionPerformed(evt);
+            }
+        });
+
+        dlgAdd_lblSymbolOk.setBackground(new java.awt.Color(51, 204, 0));
+        dlgAdd_lblSymbolOk.setForeground(new java.awt.Color(51, 204, 0));
+        dlgAdd_lblSymbolOk.setText("");
+
+        jLabel19.setText("symbol not found");
 
         javax.swing.GroupLayout dlgAddLayout = new javax.swing.GroupLayout(dlgAdd.getContentPane());
         dlgAdd.getContentPane().setLayout(dlgAddLayout);
@@ -538,15 +653,61 @@ public class MainWindow extends javax.swing.JFrame {
             dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dlgAdd_tfNumberOfShares))
+                        .addGap(18, 18, 18)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dlgAdd_lblSymbolOk)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dlgAdd_btAdd))
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgAddLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
+
+        dlgAddLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgAdd_tfNumberOfShares, dlgAdd_tfSymbol});
+
         dlgAddLayout.setVerticalGroup(
             dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgAddLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel16)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dlgAdd_tfNumberOfShares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dlgAdd_lblSymbolOk)))
+                    .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -726,14 +887,26 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_dlgSignUp_tfPassConfirmationActionPerformed
 
     private void mLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mLoginMouseClicked
-        dlgUser_lblPasswordOk.pack();
-        dlgUser_lblPasswordOk.setLocationRelativeTo(null);
-        dlgUser_lblPasswordOk.setVisible(true);
+        dlgUser.pack();
+        dlgUser.setLocationRelativeTo(null);
+        dlgUser.setVisible(true);
     }//GEN-LAST:event_mLoginMouseClicked
 
     private void btMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btMoveActionPerformed
+
+    private void dlgAdd_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dlgAdd_btCancelActionPerformed
+
+    private void dlgAdd_rbSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_rbSellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dlgAdd_rbSellActionPerformed
+
+    private void dlgAdd_rbBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_rbBuyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dlgAdd_rbBuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -776,9 +949,20 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btMove;
     private javax.swing.JButton btRefresh;
     private javax.swing.JButton btSaveChanges;
+    private javax.swing.ButtonGroup btgAdd;
     private javax.swing.JCheckBox cbIsDefaultPortfolio;
     private javax.swing.JComboBox<String> cbbPortfolio;
     private javax.swing.JDialog dlgAdd;
+    private javax.swing.JButton dlgAdd_btAdd;
+    private javax.swing.JButton dlgAdd_btCancel;
+    private javax.swing.JButton dlgAdd_btReset;
+    private javax.swing.JLabel dlgAdd_lblSymbolOk;
+    private javax.swing.JRadioButton dlgAdd_rbBuy;
+    private javax.swing.JRadioButton dlgAdd_rbCoverShort;
+    private javax.swing.JRadioButton dlgAdd_rbSell;
+    private javax.swing.JRadioButton dlgAdd_rbShortSell;
+    private javax.swing.JTextField dlgAdd_tfNumberOfShares;
+    private javax.swing.JTextField dlgAdd_tfSymbol;
     private javax.swing.JDialog dlgManage;
     private javax.swing.JButton dlgManage_btnAdd;
     private javax.swing.JButton dlgManage_btnDelete;
@@ -805,13 +989,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPasswordField dlgSignUp_tfPassConfirmation;
     private javax.swing.JPasswordField dlgSignUp_tfPassword;
     private javax.swing.JTextField dlgSignUp_tfUsername;
+    private javax.swing.JDialog dlgUser;
     private javax.swing.JButton dlgUser_btCancel;
     private javax.swing.JButton dlgUser_btLogin;
     private javax.swing.JButton dlgUser_btSignUp;
     private javax.swing.JCheckBox dlgUser_cbbDefaultUser;
     private javax.swing.JLabel dlgUser_lblHelpPassword;
     private javax.swing.JLabel dlgUser_lblHelpUserName;
-    private javax.swing.JDialog dlgUser_lblPasswordOk;
     private javax.swing.JLabel dlgUser_lblUserOk;
     private javax.swing.JPasswordField dlgUser_tfPassword;
     private javax.swing.JTextField dlgUser_tfUsername;
@@ -825,6 +1009,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -836,10 +1022,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JList<String> jList1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JMenu mEmpty;
@@ -853,6 +1042,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu ppMain;
     private javax.swing.JMenuItem ppMain_Delete;
     private javax.swing.JMenuItem ppMain_Move;
+    private javax.swing.JPopupMenu ppManage;
+    private javax.swing.JMenuItem ppManage_Delete;
+    private javax.swing.JMenuItem ppManage_Edit;
     private javax.swing.JMenuItem smExit;
     private javax.swing.JMenuItem smExpCsv;
     private javax.swing.JMenuItem smExpExcel;
