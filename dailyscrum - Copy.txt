@@ -6,7 +6,3 @@ Each member write down 3 questions
 1. What I have done/not done since last Scrum?
 2. What I plan to do from this Scrum to next? (next 24 hours)
 3. Where do I need assistance?  What do I need to figure out?
-
-28.02.2018
-Roman
-1. GUI
