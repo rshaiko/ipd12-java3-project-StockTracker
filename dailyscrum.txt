@@ -32,4 +32,15 @@ Each member write down 3 questions
 - created project description
 - added cards to Trello
 
-2. 
+2. Plan until next Scrum
+-finish the discription file
+-create sign-up menu item
+-create log-in, sign-up functionality
+3. Need assistance / figure things out
+-Complicated quieries
+
+
+
+
+
+
