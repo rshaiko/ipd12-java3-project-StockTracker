@@ -3,6 +3,8 @@ package ipd12.Java3.Project.StockTracker;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 /**
  * @author Roman Shaiko, Dmitrii Kudrik
@@ -10,14 +12,84 @@ import javax.swing.JOptionPane;
 public class MainWindow extends javax.swing.JFrame {
     
     Database db;
-    
+    public TableModel tm = new MyTableModel(new Object[][]{});
     public boolean isReal = true; //the app opens in TrackMode by default
-
+    
     public MainWindow() {
-        
         try {
             db = new Database();
             initComponents();
+            
+            tm = new MyTableModel(
+            
+            new Object[][] {
+            {"Mary", "Camp", "Snowboa", new Integer(5),
+                new Boolean(false), "Mary", "Camp", "Sn"},
+            {"Alison", "Huml", "Rowing", new Integer(3), new Boolean(true), "Mary", "Campione", "Sn"},
+            {"Kathy", "Walrath", "Knitting", new Integer(2),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Sharon", "Zakhour", "Speed rea", new Integer(20),
+                new Boolean(true), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Camp", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Camp", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Camp", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Camp", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"},
+            {"Philip", "Milne", "Pool", new Integer(10),
+                new Boolean(false), "Mary", "Campione", "Sn"}}
+            
+            );
+            tTable.setModel(tm);
+            
+            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tTable.getColumnModel().getColumn(0).setPreferredWidth(120);
+            tTable.getColumnModel().getColumn(1).setPreferredWidth(70);
+            tTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(3).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(48);
+   
+            //Set columns names
+//            tTable.setColumnSelectionAllowed(true);
+//            jScrollPane1.setViewportView(tTable);
+//            tTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+//            if (tTable.getColumnModel().getColumnCount() > 0) {
+//                tTable.getColumnModel().getColumn(0).setHeaderValue("Symbol");
+//                tTable.getColumnModel().getColumn(1).setHeaderValue("Quantity");
+//                tTable.getColumnModel().getColumn(2).setHeaderValue("Entry");
+//                tTable.getColumnModel().getColumn(3).setHeaderValue("Last");
+//                tTable.getColumnModel().getColumn(4).setHeaderValue("Change");
+//                tTable.getColumnModel().getColumn(5).setHeaderValue("Value");
+//                tTable.getColumnModel().getColumn(6).setHeaderValue("Gain/Loss");
+//                tTable.getColumnModel().getColumn(7).setHeaderValue("%");
+//            }
+        
+        
+            
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -30,6 +102,8 @@ public class MainWindow extends javax.swing.JFrame {
         }
         
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,7 +206,8 @@ public class MainWindow extends javax.swing.JFrame {
         btRefresh = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        btEditTrade = new javax.swing.JButton();
+        mMenuBar = new javax.swing.JMenuBar();
         mFile = new javax.swing.JMenu();
         smExpExcel = new javax.swing.JMenuItem();
         smExpCsv = new javax.swing.JMenuItem();
@@ -711,30 +786,29 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(935, 550));
         setResizable(false);
+        setSize(new java.awt.Dimension(935, 550));
 
         lblStatus.setText("Status");
         getContentPane().add(lblStatus, java.awt.BorderLayout.PAGE_END);
 
-        tTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Symbol", "Quantity", "Entry", "Last", "Change", "Value", "Gain/Loss", "%"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tTable.setColumnSelectionAllowed(true);
+        tTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tTable.setComponentPopupMenu(ppMain);
+        tTable.setNextFocusableComponent(btRefresh);
+        tTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(tTable);
         tTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tTable.getColumnModel().getColumnCount() > 0) {
+            tTable.getColumnModel().getColumn(0).setHeaderValue("Symbol");
+            tTable.getColumnModel().getColumn(1).setHeaderValue("Quantity");
+            tTable.getColumnModel().getColumn(2).setHeaderValue("Entry");
+            tTable.getColumnModel().getColumn(3).setHeaderValue("Last");
+            tTable.getColumnModel().getColumn(4).setHeaderValue("Change");
+            tTable.getColumnModel().getColumn(5).setHeaderValue("Value");
+            tTable.getColumnModel().getColumn(6).setHeaderValue("Gain/Loss");
+            tTable.getColumnModel().getColumn(7).setHeaderValue("%");
+        }
 
         lblTotal.setText("sdfsdfsdfsd");
 
@@ -760,6 +834,8 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9.setText("Portfolio:");
 
         jLabel2.setText("Total");
+
+        btEditTrade.setText("Edit Trade");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -788,8 +864,9 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,25 +878,35 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(cbIsDefaultPortfolio))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblTotal))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btAddTrade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
+                        .addGap(18, 18, 18)
+                        .addComponent(btEditTrade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btMove, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btDeleteTrade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btSaveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btMove, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblTotal))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        mMenuBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                mMenuBarMouseMoved(evt);
+            }
+        });
 
         mFile.setText(" File ");
 
@@ -833,16 +920,16 @@ public class MainWindow extends javax.swing.JFrame {
         smExit.setText("Exit");
         mFile.add(smExit);
 
-        jMenuBar1.add(mFile);
+        mMenuBar.add(mFile);
 
         mTrade.setText(" Add trade/Trade now ");
-        jMenuBar1.add(mTrade);
+        mMenuBar.add(mTrade);
 
         mSwitch.setText(" Switch to Test Mode ");
-        jMenuBar1.add(mSwitch);
+        mMenuBar.add(mSwitch);
 
         mPortfolios.setText(" Manage portfolios ");
-        jMenuBar1.add(mPortfolios);
+        mMenuBar.add(mPortfolios);
 
         mReports.setText(" Create report ");
 
@@ -852,13 +939,13 @@ public class MainWindow extends javax.swing.JFrame {
         smReportAll.setText("All portfolios");
         mReports.add(smReportAll);
 
-        jMenuBar1.add(mReports);
+        mMenuBar.add(mReports);
 
-        mEmpty.setText("                                                                                                          ");
-        jMenuBar1.add(mEmpty);
+        mEmpty.setText("                                                                                         ");
+        mMenuBar.add(mEmpty);
 
         mUser.setText("User:                               ");
-        jMenuBar1.add(mUser);
+        mMenuBar.add(mUser);
 
         mLogin.setText("Log In/Out");
         mLogin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -866,9 +953,9 @@ public class MainWindow extends javax.swing.JFrame {
                 mLoginMouseClicked(evt);
             }
         });
-        jMenuBar1.add(mLogin);
+        mMenuBar.add(mLogin);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mMenuBar);
 
         pack();
         setLocationRelativeTo(null);
@@ -908,6 +995,15 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dlgAdd_rbBuyActionPerformed
 
+    private void mMenuBarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMenuBarMouseMoved
+       // mMenuBar.set
+    }//GEN-LAST:event_mMenuBarMouseMoved
+    
+    public void rewriteMainTable(Object[][] newData) {
+        tm = new MyTableModel(newData);
+        tTable.setModel(tm);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -937,6 +1033,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainWindow().setVisible(true);
             }
@@ -946,6 +1043,7 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddTrade;
     private javax.swing.JButton btDeleteTrade;
+    private javax.swing.JButton btEditTrade;
     private javax.swing.JButton btMove;
     private javax.swing.JButton btRefresh;
     private javax.swing.JButton btSaveChanges;
@@ -1020,7 +1118,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -1034,6 +1131,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu mEmpty;
     private javax.swing.JMenu mFile;
     private javax.swing.JMenu mLogin;
+    private javax.swing.JMenuBar mMenuBar;
     private javax.swing.JMenu mPortfolios;
     private javax.swing.JMenu mReports;
     private javax.swing.JMenu mSwitch;
