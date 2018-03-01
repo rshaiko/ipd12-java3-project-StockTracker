@@ -23,8 +23,6 @@ Each member write down 3 questions
 - Unable to add borders to the menu
 
 
-
-
 2018.02.28 Dmitrii
 1. Done since last scrum
 - creared the programm dialog windows
@@ -40,6 +38,22 @@ Each member write down 3 questions
 -Complicated quieries
 
 
+01.03.2018 Roman
+1. Done since last scrum
+- converting URL to JSON
+- generating list to chosen portfolio combobox
+	not done
+- add entries to the database 
+- create query to get information for the main table
+2. Plan until next Scrum
+- filling the Main Table
+- add full list of Symbols to database
+- add entries to the database
+- parsing JSON	
+3. Need assistance / figure things out
+- how to work with generated JSwing table
+- git branches merging
+- Still unable to add borders to the menu
 
 
 
