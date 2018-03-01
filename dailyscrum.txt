@@ -57,4 +57,20 @@ Each member write down 3 questions
 
 
 
+01.03.2018 Dmitrii
+1. Done since last scrum 
+- project description
+- create query to get check user name and password
+	not done
+-signup functionality
+2. Plan until next Scrum
+- Continue developing signup functionality
+- portfolio list
+3. Need assistance / figure things out
+- pushes and merges provoke errors
+
+
+
+
+
 
