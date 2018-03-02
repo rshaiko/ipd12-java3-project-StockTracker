@@ -18,7 +18,7 @@ public class MainWindow extends javax.swing.JFrame {
     public TableModel tm = new MyTableModel(new Object[][]{});
     public DefaultComboBoxModel <Portfolio> cbbPortfolioModel = new DefaultComboBoxModel<>();//R
     public static boolean isRealMode = true; //the app opens in TrackMode by default
-    
+     public boolean isLoggedIn = false;
     
     public MainWindow() {
          
@@ -107,35 +107,6 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dlgUser = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        dlgUser_tfUsername = new javax.swing.JTextField();
-        dlgUser_tfPassword = new javax.swing.JPasswordField();
-        dlgUser_btCancel = new javax.swing.JButton();
-        dlgUser_btLogin = new javax.swing.JButton();
-        dlgUser_lblHelpUserName = new javax.swing.JLabel();
-        dlgUser_lblHelpPassword = new javax.swing.JLabel();
-        dlgUser_lblUserOk = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        dlgUser_cbbDefaultUser = new javax.swing.JCheckBox();
-        dlgUser_btSignUp = new javax.swing.JButton();
-        dlgSignUp = new javax.swing.JDialog();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        dlgSignUp_tfUsername = new javax.swing.JTextField();
-        dlgSignUp_tfPassword = new javax.swing.JPasswordField();
-        dlgSignUp_rbtCancel = new javax.swing.JButton();
-        dlgSignUp_lblHelpUserName = new javax.swing.JLabel();
-        dlgSignUp_lblHelpPassword = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        dlgSignUp_lblPassOk = new javax.swing.JLabel();
-        dlgSignUp_cbbDefaultUser = new javax.swing.JCheckBox();
-        dlgSignUp_btSignUp = new javax.swing.JButton();
-        dlgSignUp_tfPassConfirmation = new javax.swing.JPasswordField();
-        jLabel10 = new javax.swing.JLabel();
-        dlgSignUp_lblUserOk = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         dlgPortfolios = new javax.swing.JDialog();
         dlgMoving = new javax.swing.JDialog();
         jLabel6 = new javax.swing.JLabel();
@@ -185,6 +156,35 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_lblSymbolOk = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         btgAdd = new javax.swing.ButtonGroup();
+        dlgUser = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        dlgUser_tfUsername = new javax.swing.JTextField();
+        dlgUser_tfPassword = new javax.swing.JPasswordField();
+        dlgUser_btCancel = new javax.swing.JButton();
+        dlgUser_btLogin = new javax.swing.JButton();
+        dlgUser_lblHelpUserName = new javax.swing.JLabel();
+        dlgUser_lblHelpPassword = new javax.swing.JLabel();
+        dlgUser_lblUserOk = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        dlgUser_cbbDefaultUser = new javax.swing.JCheckBox();
+        dlgUser_btSignUp = new javax.swing.JButton();
+        dlgSignUp = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        dlgSignUp_tfUsername = new javax.swing.JTextField();
+        dlgSignUp_tfPassword = new javax.swing.JPasswordField();
+        dlgSignUp_rbtCancel = new javax.swing.JButton();
+        dlgSignUp_lblHelpUserName = new javax.swing.JLabel();
+        dlgSignUp_lblHelpPassword = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        dlgSignUp_lblPassOk = new javax.swing.JLabel();
+        dlgSignUp_cbbDefaultUser = new javax.swing.JCheckBox();
+        dlgSignUp_btSignUp = new javax.swing.JButton();
+        dlgSignUp_tfPassConfirmation = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        dlgSignUp_lblUserOk = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -215,230 +215,6 @@ public class MainWindow extends javax.swing.JFrame {
         mEmpty = new javax.swing.JMenu();
         mUser = new javax.swing.JMenu();
         mLogin = new javax.swing.JMenu();
-
-        dlgUser.setModal(true);
-        dlgUser.setResizable(false);
-        dlgUser.setSize(new java.awt.Dimension(380, 200));
-
-        jLabel1.setText("Username");
-
-        jLabel3.setText("Password");
-
-        dlgUser_tfPassword.setText("jPasswordField1");
-
-        dlgUser_btCancel.setText("Cancel");
-        dlgUser_btCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dlgUser_btCancelActionPerformed(evt);
-            }
-        });
-
-        dlgUser_btLogin.setText("Log In");
-
-        dlgUser_lblHelpUserName.setText("?");
-
-        dlgUser_lblHelpPassword.setText("?");
-
-        dlgUser_lblUserOk.setBackground(new java.awt.Color(0, 204, 0));
-        dlgUser_lblUserOk.setForeground(new java.awt.Color(255, 51, 51));
-        dlgUser_lblUserOk.setText("x");
-
-        jLabel7.setBackground(new java.awt.Color(51, 204, 0));
-        jLabel7.setForeground(new java.awt.Color(51, 204, 0));
-        jLabel7.setText("");
-
-        dlgUser_cbbDefaultUser.setText("Default user");
-
-        dlgUser_btSignUp.setText("Sign Up");
-
-        javax.swing.GroupLayout dlgUserLayout = new javax.swing.GroupLayout(dlgUser.getContentPane());
-        dlgUser.getContentPane().setLayout(dlgUserLayout);
-        dlgUserLayout.setHorizontalGroup(
-            dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgUserLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dlgUserLayout.createSequentialGroup()
-                        .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dlgUserLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(dlgUser_lblHelpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dlgUser_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(dlgUserLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(21, 21, 21)
-                                .addComponent(dlgUser_lblHelpPassword)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dlgUser_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17))
-                    .addGroup(dlgUserLayout.createSequentialGroup()
-                        .addComponent(dlgUser_btCancel)
-                        .addGap(18, 18, 18)
-                        .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dlgUser_cbbDefaultUser)
-                            .addGroup(dlgUserLayout.createSequentialGroup()
-                                .addComponent(dlgUser_btLogin)
-                                .addGap(18, 18, 18)
-                                .addComponent(dlgUser_btSignUp)))
-                        .addGap(18, 18, 18)))
-                .addComponent(dlgUser_lblUserOk, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addGap(22, 22, 22))
-        );
-
-        dlgUserLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgUser_btCancel, dlgUser_btLogin, dlgUser_btSignUp});
-
-        dlgUserLayout.setVerticalGroup(
-            dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgUserLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(dlgUser_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgUser_lblHelpUserName)
-                    .addComponent(dlgUser_lblUserOk)
-                    .addComponent(jLabel7))
-                .addGap(26, 26, 26)
-                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(dlgUser_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgUser_lblHelpPassword))
-                .addGap(18, 18, 18)
-                .addComponent(dlgUser_cbbDefaultUser)
-                .addGap(18, 18, 18)
-                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgUser_btCancel)
-                    .addComponent(dlgUser_btLogin)
-                    .addComponent(dlgUser_btSignUp))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
-        dlgSignUp.setResizable(false);
-        dlgSignUp.setSize(new java.awt.Dimension(380, 200));
-
-        jLabel4.setText("Username");
-
-        jLabel5.setText("Password");
-
-        dlgSignUp_tfPassword.setText("jPasswordField1");
-
-        dlgSignUp_rbtCancel.setText("Cancel");
-        dlgSignUp_rbtCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dlgSignUp_rbtCancelActionPerformed(evt);
-            }
-        });
-
-        dlgSignUp_lblHelpUserName.setText("?");
-
-        dlgSignUp_lblHelpPassword.setText("?");
-
-        jLabel8.setBackground(new java.awt.Color(0, 204, 0));
-        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel8.setText("x");
-
-        dlgSignUp_lblPassOk.setBackground(new java.awt.Color(51, 204, 0));
-        dlgSignUp_lblPassOk.setForeground(new java.awt.Color(51, 204, 0));
-        dlgSignUp_lblPassOk.setText("");
-
-        dlgSignUp_cbbDefaultUser.setText("Default user");
-
-        dlgSignUp_btSignUp.setText("Sign Up");
-
-        dlgSignUp_tfPassConfirmation.setText("jPasswordField1");
-        dlgSignUp_tfPassConfirmation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dlgSignUp_tfPassConfirmationActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("Confirm");
-
-        dlgSignUp_lblUserOk.setBackground(new java.awt.Color(51, 204, 0));
-        dlgSignUp_lblUserOk.setForeground(new java.awt.Color(51, 204, 0));
-        dlgSignUp_lblUserOk.setText("");
-
-        jLabel12.setBackground(new java.awt.Color(0, 204, 0));
-        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel12.setText("x");
-
-        javax.swing.GroupLayout dlgSignUpLayout = new javax.swing.GroupLayout(dlgSignUp.getContentPane());
-        dlgSignUp.getContentPane().setLayout(dlgSignUpLayout);
-        dlgSignUpLayout.setHorizontalGroup(
-            dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgSignUpLayout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgSignUpLayout.createSequentialGroup()
-                        .addComponent(dlgSignUp_rbtCancel)
-                        .addGap(49, 49, 49)
-                        .addComponent(dlgSignUp_btSignUp)
-                        .addGap(89, 89, 89))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(dlgSignUpLayout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(dlgSignUp_lblHelpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(dlgSignUpLayout.createSequentialGroup()
-                                    .addComponent(dlgSignUp_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(dlgSignUp_lblUserOk)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(dlgSignUp_cbbDefaultUser))
-                            .addContainerGap(25, Short.MAX_VALUE))
-                        .addGroup(dlgSignUpLayout.createSequentialGroup()
-                            .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10)
-                                .addGroup(dlgSignUpLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dlgSignUp_lblHelpPassword)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(dlgSignUp_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(dlgSignUpLayout.createSequentialGroup()
-                                    .addComponent(dlgSignUp_tfPassConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(dlgSignUp_lblPassOk)
-                                    .addGap(4, 4, 4)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-        );
-        dlgSignUpLayout.setVerticalGroup(
-            dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgSignUpLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(dlgSignUp_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgSignUp_lblHelpUserName)
-                    .addComponent(jLabel8)
-                    .addComponent(dlgSignUp_lblUserOk))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dlgSignUp_cbbDefaultUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(dlgSignUp_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgSignUp_lblHelpPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgSignUp_tfPassConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(dlgSignUp_lblPassOk)
-                    .addComponent(jLabel12))
-                .addGap(26, 26, 26)
-                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgSignUp_rbtCancel)
-                    .addComponent(dlgSignUp_btSignUp))
-                .addContainerGap())
-        );
 
         javax.swing.GroupLayout dlgPortfoliosLayout = new javax.swing.GroupLayout(dlgPortfolios.getContentPane());
         dlgPortfolios.getContentPane().setLayout(dlgPortfoliosLayout);
@@ -778,8 +554,244 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        dlgUser.setModal(true);
+        dlgUser.setResizable(false);
+        dlgUser.setSize(new java.awt.Dimension(380, 200));
+
+        jLabel1.setText("Username");
+
+        jLabel3.setText("Password");
+
+        dlgUser_tfPassword.setText("jPasswordField1");
+
+        dlgUser_btCancel.setText("Cancel");
+        dlgUser_btCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgUser_btCancelActionPerformed(evt);
+            }
+        });
+
+        dlgUser_btLogin.setText("Log In");
+        dlgUser_btLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgUser_btLoginActionPerformed(evt);
+            }
+        });
+
+        dlgUser_lblHelpUserName.setText("?");
+
+        dlgUser_lblHelpPassword.setText("?");
+
+        dlgUser_lblUserOk.setBackground(new java.awt.Color(0, 204, 0));
+        dlgUser_lblUserOk.setForeground(new java.awt.Color(255, 51, 51));
+        dlgUser_lblUserOk.setText("x");
+
+        jLabel7.setBackground(new java.awt.Color(51, 204, 0));
+        jLabel7.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel7.setText("");
+
+        dlgUser_cbbDefaultUser.setText("Default user");
+
+        dlgUser_btSignUp.setText("Sign Up");
+        dlgUser_btSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgUser_btSignUpActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlgUserLayout = new javax.swing.GroupLayout(dlgUser.getContentPane());
+        dlgUser.getContentPane().setLayout(dlgUserLayout);
+        dlgUserLayout.setHorizontalGroup(
+            dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgUserLayout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlgUserLayout.createSequentialGroup()
+                        .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dlgUserLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(dlgUser_lblHelpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dlgUser_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(dlgUserLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(21, 21, 21)
+                                .addComponent(dlgUser_lblHelpPassword)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dlgUser_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17))
+                    .addGroup(dlgUserLayout.createSequentialGroup()
+                        .addComponent(dlgUser_btCancel)
+                        .addGap(18, 18, 18)
+                        .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dlgUser_cbbDefaultUser)
+                            .addGroup(dlgUserLayout.createSequentialGroup()
+                                .addComponent(dlgUser_btLogin)
+                                .addGap(18, 18, 18)
+                                .addComponent(dlgUser_btSignUp)))
+                        .addGap(18, 18, 18)))
+                .addComponent(dlgUser_lblUserOk, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(22, 22, 22))
+        );
+        dlgUserLayout.setVerticalGroup(
+            dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgUserLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(dlgUser_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgUser_lblHelpUserName)
+                    .addComponent(dlgUser_lblUserOk)
+                    .addComponent(jLabel7))
+                .addGap(26, 26, 26)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(dlgUser_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgUser_lblHelpPassword))
+                .addGap(18, 18, 18)
+                .addComponent(dlgUser_cbbDefaultUser)
+                .addGap(18, 18, 18)
+                .addGroup(dlgUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgUser_btCancel)
+                    .addComponent(dlgUser_btLogin)
+                    .addComponent(dlgUser_btSignUp))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        dlgSignUp.setModal(true);
+        dlgSignUp.setResizable(false);
+        dlgSignUp.setSize(new java.awt.Dimension(380, 200));
+
+        jLabel4.setText("Username");
+
+        jLabel5.setText("Password");
+
+        dlgSignUp_tfPassword.setText("jPasswordField1");
+
+        dlgSignUp_rbtCancel.setText("Cancel");
+        dlgSignUp_rbtCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgSignUp_rbtCancelActionPerformed(evt);
+            }
+        });
+
+        dlgSignUp_lblHelpUserName.setText("?");
+
+        dlgSignUp_lblHelpPassword.setText("?");
+
+        jLabel8.setBackground(new java.awt.Color(0, 204, 0));
+        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel8.setText("x");
+
+        dlgSignUp_lblPassOk.setBackground(new java.awt.Color(51, 204, 0));
+        dlgSignUp_lblPassOk.setForeground(new java.awt.Color(51, 204, 0));
+        dlgSignUp_lblPassOk.setText("");
+
+        dlgSignUp_cbbDefaultUser.setText("Default user");
+
+        dlgSignUp_btSignUp.setText("Sign Up");
+        dlgSignUp_btSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgSignUp_btSignUpActionPerformed(evt);
+            }
+        });
+
+        dlgSignUp_tfPassConfirmation.setText("jPasswordField1");
+        dlgSignUp_tfPassConfirmation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgSignUp_tfPassConfirmationActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Confirm");
+
+        dlgSignUp_lblUserOk.setBackground(new java.awt.Color(51, 204, 0));
+        dlgSignUp_lblUserOk.setForeground(new java.awt.Color(51, 204, 0));
+        dlgSignUp_lblUserOk.setText("");
+
+        jLabel12.setBackground(new java.awt.Color(0, 204, 0));
+        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel12.setText("x");
+
+        javax.swing.GroupLayout dlgSignUpLayout = new javax.swing.GroupLayout(dlgSignUp.getContentPane());
+        dlgSignUp.getContentPane().setLayout(dlgSignUpLayout);
+        dlgSignUpLayout.setHorizontalGroup(
+            dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgSignUpLayout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgSignUpLayout.createSequentialGroup()
+                        .addComponent(dlgSignUp_rbtCancel)
+                        .addGap(49, 49, 49)
+                        .addComponent(dlgSignUp_btSignUp)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dlgSignUpLayout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(dlgSignUp_lblHelpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(dlgSignUpLayout.createSequentialGroup()
+                                    .addComponent(dlgSignUp_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(dlgSignUp_lblUserOk)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dlgSignUp_cbbDefaultUser))
+                            .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(dlgSignUpLayout.createSequentialGroup()
+                            .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10)
+                                .addGroup(dlgSignUpLayout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dlgSignUp_lblHelpPassword)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(dlgSignUp_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(dlgSignUpLayout.createSequentialGroup()
+                                    .addComponent(dlgSignUp_tfPassConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(dlgSignUp_lblPassOk)
+                                    .addGap(4, 4, 4)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+        );
+        dlgSignUpLayout.setVerticalGroup(
+            dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgSignUpLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(dlgSignUp_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgSignUp_lblHelpUserName)
+                    .addComponent(jLabel8)
+                    .addComponent(dlgSignUp_lblUserOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dlgSignUp_cbbDefaultUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(dlgSignUp_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgSignUp_lblHelpPassword))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgSignUp_tfPassConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(dlgSignUp_lblPassOk)
+                    .addComponent(jLabel12))
+                .addGap(26, 26, 26)
+                .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgSignUp_rbtCancel)
+                    .addComponent(dlgSignUp_btSignUp))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(935, 550));
         setResizable(false);
         setSize(new java.awt.Dimension(935, 550));
 
@@ -954,18 +966,6 @@ public class MainWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dlgUser_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgUser_btCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dlgUser_btCancelActionPerformed
-
-    private void dlgSignUp_rbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgSignUp_rbtCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dlgSignUp_rbtCancelActionPerformed
-
-    private void dlgSignUp_tfPassConfirmationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgSignUp_tfPassConfirmationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dlgSignUp_tfPassConfirmationActionPerformed
-
     private void mLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mLoginMouseClicked
         dlgUser.pack();
         dlgUser.setLocationRelativeTo(null);
@@ -991,6 +991,103 @@ public class MainWindow extends javax.swing.JFrame {
     private void mMenuBarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMenuBarMouseMoved
        // mMenuBar.set
     }//GEN-LAST:event_mMenuBarMouseMoved
+
+    private void dlgUser_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgUser_btCancelActionPerformed
+        dlgUser.setVisible(false);
+    }//GEN-LAST:event_dlgUser_btCancelActionPerformed
+
+    private void dlgUser_btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgUser_btLoginActionPerformed
+
+        if ((dlgUser_btLogin.getText()).equals("Log In")) {
+            try {
+
+                String userN = dlgUser_tfUsername.getText();
+                String pass = dlgUser_tfPassword.getText();
+                if(userN.equals("") || pass.equals("")){
+                    return;
+                }
+                isLoggedIn = db.checkLogin(userN, pass);
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+
+            }
+            if (isLoggedIn) {
+                JOptionPane.showMessageDialog(null, "Yoy have successfully logged in!");
+                dlgUser_btLogin.setText("Log Out");
+
+                dlgUser.setVisible(false);
+                dlgUser_tfUsername.setText("");
+                dlgUser_tfPassword.setText("");
+
+                // mLogin.setVisible(false);
+            } else {
+                dlgUser_tfUsername.setText("");
+                dlgUser_tfPassword.setText("");
+                dlgUser_tfUsername.requestFocus();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "You have successfully logged out!");
+            dlgUser_btLogin.setText("Log In");
+            dlgUser.setVisible(false);
+            //if (db.getConn() != null) {
+                //    try {
+                    //        db.getConn().close();
+                    //    } catch (SQLException ex) {
+                    //        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                    //     }
+                // }
+        }
+    }//GEN-LAST:event_dlgUser_btLoginActionPerformed
+
+    private void dlgUser_btSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgUser_btSignUpActionPerformed
+        dlgUser.setVisible(false);
+        dlgSignUp.pack();
+        dlgSignUp.setLocationRelativeTo(null);
+        dlgSignUp.setVisible(true);
+
+    }//GEN-LAST:event_dlgUser_btSignUpActionPerformed
+
+    private void dlgSignUp_rbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgSignUp_rbtCancelActionPerformed
+        dlgSignUp.setVisible(false);
+        dlgUser.setVisible(true);
+    }//GEN-LAST:event_dlgSignUp_rbtCancelActionPerformed
+
+    private void dlgSignUp_btSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgSignUp_btSignUpActionPerformed
+        try {
+
+            String userN = dlgSignUp_tfUsername.getText();
+            String pass = dlgSignUp_tfPassword.getText();
+            String passConf = dlgSignUp_tfPassConfirmation.getText();
+            boolean isDef=dlgSignUp_cbbDefaultUser.isSelected();
+            if(userN.equals("") || pass.equals("")|| passConf.equals("")){
+                return;
+            }
+            if(pass.equals(passConf)){
+                db.signUp( userN,  pass,  passConf,   isDef);
+                JOptionPane.showMessageDialog(null, "Success!");
+                dlgSignUp_tfUsername.setText("");
+                dlgSignUp_tfPassword.setText("");
+                dlgSignUp_tfPassConfirmation.setText("");
+                dlgSignUp.setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Password and confirmation password must be the same value!" ,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_dlgSignUp_btSignUpActionPerformed
+
+    private void dlgSignUp_tfPassConfirmationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgSignUp_tfPassConfirmationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dlgSignUp_tfPassConfirmationActionPerformed
     
     public void rewriteMainTable(Object[][] newData) {
         tm = new MyTableModel(newData);
