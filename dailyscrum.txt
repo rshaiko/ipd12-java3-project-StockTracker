@@ -70,7 +70,36 @@ Each member write down 3 questions
 - pushes and merges provoke errors
 
 
+02.03.2018 Dmitrii
+1. Done since last scrum 
+- created code for login and signup functionality(needs testing)
+- created query to check user name and password
+	extra
+-started manage portfolio list
+	
+2. Plan until next Scrum
+-complete manage portfolio list
+-test signup 
+-"by default" debugging 
+3. Need assistance / figure things out
+---------
 
+02.03.2018 Roman
+1. Done since last scrum 
+- Main Table model, Portfolio combo-boxes models
+- Classes MyTableModel, Portfolio, User 
+- filling the Main Table 
+   Not done
+- parsing JSON
+- full list of Symbols
+2. Plan until next Scrum (weekend)
+- to parse JSON
+- full list of Symbols
+- add trades of current portfolio to the Main Table
+- track current prices using API JSON
+- implement totals calculations
+3. Need assistance / figure things out
+----------- 
 
 
 
