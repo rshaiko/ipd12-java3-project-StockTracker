@@ -1,7 +1,10 @@
 
 package ipd12.Java3.Project.StockTracker;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -13,13 +16,17 @@ public class MainWindow extends javax.swing.JFrame {
     
     Database db;
     public TableModel tm = new MyTableModel(new Object[][]{});
-    public boolean isReal = true; //the app opens in TrackMode by default
+    public DefaultComboBoxModel <Portfolio> cbbPortfolioModel = new DefaultComboBoxModel<>();//R
+    public static boolean isRealMode = true; //the app opens in TrackMode by default
+    
     
     public MainWindow() {
+         
         try {
             db = new Database();
             initComponents();
             
+            cbbPortfolio.addItemListener(new ItemChangeListener());//R
             tm = new MyTableModel(
             
             new Object[][] {
@@ -73,21 +80,7 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(7).setPreferredWidth(48);
    
-            //Set columns names
-//            tTable.setColumnSelectionAllowed(true);
-//            jScrollPane1.setViewportView(tTable);
-//            tTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-//            if (tTable.getColumnModel().getColumnCount() > 0) {
-//                tTable.getColumnModel().getColumn(0).setHeaderValue("Symbol");
-//                tTable.getColumnModel().getColumn(1).setHeaderValue("Quantity");
-//                tTable.getColumnModel().getColumn(2).setHeaderValue("Entry");
-//                tTable.getColumnModel().getColumn(3).setHeaderValue("Last");
-//                tTable.getColumnModel().getColumn(4).setHeaderValue("Change");
-//                tTable.getColumnModel().getColumn(5).setHeaderValue("Value");
-//                tTable.getColumnModel().getColumn(6).setHeaderValue("Gain/Loss");
-//                tTable.getColumnModel().getColumn(7).setHeaderValue("%");
-//            }
-        
+     
         
             
 
@@ -818,7 +811,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         btSaveChanges.setText("Save Changes");
 
-        cbbPortfolio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choosen Portfolio", "Item 2", "Item 3", "Item 4" }));
+        cbbPortfolio.setModel(cbbPortfolioModel);
 
         cbIsDefaultPortfolio.setText("use by default");
 
@@ -1004,6 +997,17 @@ public class MainWindow extends javax.swing.JFrame {
         tTable.setModel(tm);
     }
     
+    //R
+    class ItemChangeListener implements ItemListener{
+    @Override
+    public void itemStateChanged(ItemEvent event) {
+        if (event.getStateChange() == ItemEvent.SELECTED) {
+            Portfolio chosenPortfolio = cbbPortfolioModel.getElementAt(cbbPortfolio.getSelectedIndex());
+            db.updateByPortfolio (chosenPortfolio.id);
+        }
+    }       
+}
+        
     /**
      * @param args the command line arguments
      */
@@ -1049,7 +1053,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btSaveChanges;
     private javax.swing.ButtonGroup btgAdd;
     private javax.swing.JCheckBox cbIsDefaultPortfolio;
-    private javax.swing.JComboBox<String> cbbPortfolio;
+    private javax.swing.JComboBox<Portfolio> cbbPortfolio;
     private javax.swing.JDialog dlgAdd;
     private javax.swing.JButton dlgAdd_btAdd;
     private javax.swing.JButton dlgAdd_btCancel;

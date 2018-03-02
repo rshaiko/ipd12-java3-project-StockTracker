@@ -22,4 +22,10 @@ public class Database {
                 USERNAME, PASSWORD); 
         System.out.println("Connection to database established!");
     }
+
+    //R
+    void updateByPortfolio(long id) throws UnsupportedOperationException {
+        
+    }
+    
 }
