@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 class RecordNotFoundException extends SQLException {
@@ -88,5 +89,82 @@ public class Database {
 
      void updateByPortfolio(long id) throws UnsupportedOperationException {
         
+    }
+
+    ArrayList<Portfolio> getAllPortfolios()throws SQLException {
+        String sql = "SELECT * FROM portfolios";
+        ArrayList<Portfolio> list = new ArrayList<>();
+        
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            while (result.next()) {
+                long id = result.getLong("id");
+                String name = result.getString("name");
+                Portfolio.Type type = Portfolio.Type.valueOf(result.getString("type"));
+                
+                boolean isDef = result.getBoolean("isDefault");
+                //long userId = result.getLong("userId");
+                BigDecimal amount = result.getBigDecimal("availCash");
+                Portfolio portfolio = new Portfolio(id, name,isDef, type, amount);
+                list.add(portfolio);
+            }
+        }
+        return list;
+    }
+
+    void addPortfolio(Portfolio p) throws SQLException {
+        String sql = "INSERT INTO portfolios (name, type, userId, isDefault, availCash) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, p.getName());
+            stmt.setString(2, p.getType()+"");            
+            stmt.setLong(3,Globals.currentUser.getId());
+            
+            stmt.setBoolean(4, p.isIsDefault());
+            stmt.setBigDecimal(5, p.getAmount());
+            
+            
+            
+            stmt.executeUpdate();
+        }
+    }
+
+    long getCurrentUserId(String userN)  throws SQLException {
+       String sql = "SELECT * FROM users WHERE username=" + "'" + userN + "'";
+
+        try (Statement stmt = getConn().createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            if (result.next()) {
+                long id = result.getInt("id");
+              
+               return id;
+            } else {
+                throw new RecordNotFoundException("Record not found!");
+
+                // return null;
+            }
+        }
+    }
+
+    String getCurrentUserName(String userN)throws SQLException {
+       String sql = "SELECT * FROM users WHERE username=" + "'" + userN + "'";
+
+        try (Statement stmt = getConn().createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            if (result.next()) {
+                long id = result.getInt("id");
+                String name = result.getString("name");
+                String username = result.getString("username");
+                System.out.println(userN+" "+id);
+                //char[] password = (result.getString("password")).toCharArray();
+                String password = result.getString("password");
+                boolean isDef = result.getBoolean("isDefault");
+
+               return username;
+            } else {
+                throw new RecordNotFoundException("Record not found!");
+
+                // return null;
+            }
+        }
     }
 }

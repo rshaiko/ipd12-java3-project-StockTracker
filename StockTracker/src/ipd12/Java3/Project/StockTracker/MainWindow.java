@@ -1,76 +1,86 @@
-
 package ipd12.Java3.Project.StockTracker;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
 /**
  * @author Roman Shaiko, Dmitrii Kudrik
  */
 public class MainWindow extends javax.swing.JFrame {
-    
+
     Database db;
     public TableModel tm = new MyTableModel(new Object[][]{});
-    public DefaultComboBoxModel <Portfolio> cbbPortfolioModel = new DefaultComboBoxModel<>();//R
+    public DefaultComboBoxModel<Portfolio> cbbPortfolioModel = new DefaultComboBoxModel<>();//R
     public static boolean isRealMode = true; //the app opens in TrackMode by default
-     public boolean isLoggedIn = false;
+    public boolean isLoggedIn = false;
+    public User user;
     
+    //D
+    DefaultListModel<Portfolio> modelPortfoliosList = new DefaultListModel<>();
+
     public MainWindow() {
-         
+
         try {
             db = new Database();
             initComponents();
-            
+            //D
+            reloadPortfolios();
+
             cbbPortfolio.addItemListener(new ItemChangeListener());//R
             tm = new MyTableModel(
-            
-            new Object[][] {
-            {"Mary", "Camp", "Snowboa", new Integer(5),
-                new Boolean(false), "Mary", "Camp", "Sn"},
-            {"Alison", "Huml", "Rowing", new Integer(3), new Boolean(true), "Mary", "Campione", "Sn"},
-            {"Kathy", "Walrath", "Knitting", new Integer(2),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Sharon", "Zakhour", "Speed rea", new Integer(20),
-                new Boolean(true), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Camp", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Camp", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Camp", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Camp", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"},
-            {"Philip", "Milne", "Pool", new Integer(10),
-                new Boolean(false), "Mary", "Campione", "Sn"}}
-            
+                    new Object[][]{
+                        {"Mary", "Camp", "Snowboa", new Integer(5),
+                            new Boolean(false), "Mary", "Camp", "Sn"},
+                        {"Alison", "Huml", "Rowing", new Integer(3), new Boolean(true), "Mary", "Campione", "Sn"},
+                        {"Kathy", "Walrath", "Knitting", new Integer(2),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Sharon", "Zakhour", "Speed rea", new Integer(20),
+                            new Boolean(true), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Camp", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Camp", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Camp", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Camp", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"},
+                        {"Philip", "Milne", "Pool", new Integer(10),
+                            new Boolean(false), "Mary", "Campione", "Sn"}}
             );
             tTable.setModel(tm);
-            
+
             tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             tTable.getColumnModel().getColumn(0).setPreferredWidth(120);
             tTable.getColumnModel().getColumn(1).setPreferredWidth(70);
@@ -79,10 +89,6 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(4).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(7).setPreferredWidth(48);
-   
-     
-        
-            
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -93,10 +99,27 @@ public class MainWindow extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
-        
+
     }
-    
-    
+
+    private void reloadPortfolios() {
+        try {
+            // reload the list
+            modelPortfoliosList.clear();
+            ArrayList<Portfolio> list = db.getAllPortfolios();
+            for (Portfolio p : list) {
+                modelPortfoliosList.addElement(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // display dialog with error message and terminate the program
+            JOptionPane.showMessageDialog(this,
+                    "Error: unable to reload transactions\n" + ex.getMessage(),
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,7 +144,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgManage_btnDelete = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstPortfolios = new javax.swing.JList<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         dlgManage_tfName = new javax.swing.JTextField();
@@ -286,6 +309,11 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         dlgManage_btnAdd.setText("Add");
+        dlgManage_btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgManage_btnAddActionPerformed(evt);
+            }
+        });
 
         dlgManage_btnEdit.setText("Edit");
 
@@ -293,7 +321,21 @@ public class MainWindow extends javax.swing.JFrame {
 
         jButton1.setText("Cancel");
 
-        jScrollPane2.setViewportView(jList1);
+        lstPortfolios.setModel(modelPortfoliosList);
+        lstPortfolios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstPortfoliosMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lstPortfoliosMouseReleased(evt);
+            }
+        });
+        lstPortfolios.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPortfoliosValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(lstPortfolios);
 
         jLabel13.setText("Portfolio id: ");
 
@@ -934,6 +976,11 @@ public class MainWindow extends javax.swing.JFrame {
         mMenuBar.add(mSwitch);
 
         mPortfolios.setText(" Manage portfolios ");
+        mPortfolios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mPortfoliosMouseClicked(evt);
+            }
+        });
         mMenuBar.add(mPortfolios);
 
         mReports.setText(" Create report ");
@@ -989,12 +1036,19 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_dlgAdd_rbBuyActionPerformed
 
     private void mMenuBarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMenuBarMouseMoved
-       // mMenuBar.set
+        // mMenuBar.set
     }//GEN-LAST:event_mMenuBarMouseMoved
 
     private void dlgUser_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgUser_btCancelActionPerformed
         dlgUser.setVisible(false);
     }//GEN-LAST:event_dlgUser_btCancelActionPerformed
+ long currentUserIdForAdd=0;
+ String currentNameForAdd="";
+ String currentUserNameForAdd="";
+ String currentPasswordForAdd="";
+ boolean currentIsDefaultForAdd=false;
+
+ 
 
     private void dlgUser_btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgUser_btLoginActionPerformed
 
@@ -1003,7 +1057,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                 String userN = dlgUser_tfUsername.getText();
                 String pass = dlgUser_tfPassword.getText();
-                if(userN.equals("") || pass.equals("")){
+                if (userN.equals("") || pass.equals("")) {
                     return;
                 }
                 isLoggedIn = db.checkLogin(userN, pass);
@@ -1013,14 +1067,29 @@ public class MainWindow extends javax.swing.JFrame {
 
             }
             if (isLoggedIn) {
+               
                 JOptionPane.showMessageDialog(null, "Yoy have successfully logged in!");
-                dlgUser_btLogin.setText("Log Out");
+                
+                //dlgUser_btLogin.setText("Log Out");
 
-                dlgUser.setVisible(false);
+                 try {
+
+                String userN = dlgUser_tfUsername.getText();
+                currentUserIdForAdd=db.getCurrentUserId(userN);
+               currentNameForAdd=db.getCurrentUserName(userN);
+              currentUserNameForAdd=dlgUser_tfUsername.getText();
+              currentPasswordForAdd=dlgUser_tfPassword.getText();
+              currentIsDefaultForAdd = dlgUser_cbbDefaultUser.isSelected();
+               
+                 user=new User(currentUserIdForAdd, currentNameForAdd, currentUserNameForAdd, currentPasswordForAdd, currentIsDefaultForAdd);
+                 Globals.currentUser = user;
+                 }catch(SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+
+            }
+                 dlgUser.setVisible(false);
                 dlgUser_tfUsername.setText("");
                 dlgUser_tfPassword.setText("");
-
-                // mLogin.setVisible(false);
             } else {
                 dlgUser_tfUsername.setText("");
                 dlgUser_tfPassword.setText("");
@@ -1031,12 +1100,12 @@ public class MainWindow extends javax.swing.JFrame {
             dlgUser_btLogin.setText("Log In");
             dlgUser.setVisible(false);
             //if (db.getConn() != null) {
-                //    try {
-                    //        db.getConn().close();
-                    //    } catch (SQLException ex) {
-                    //        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-                    //     }
-                // }
+            //    try {
+            //        db.getConn().close();
+            //    } catch (SQLException ex) {
+            //        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+            //     }
+            // }
         }
     }//GEN-LAST:event_dlgUser_btLoginActionPerformed
 
@@ -1059,28 +1128,28 @@ public class MainWindow extends javax.swing.JFrame {
             String userN = dlgSignUp_tfUsername.getText();
             String pass = dlgSignUp_tfPassword.getText();
             String passConf = dlgSignUp_tfPassConfirmation.getText();
-            boolean isDef=dlgSignUp_cbbDefaultUser.isSelected();
-            if(userN.equals("") || pass.equals("")|| passConf.equals("")){
+            boolean isDef = dlgSignUp_cbbDefaultUser.isSelected();
+            if (userN.equals("") || pass.equals("") || passConf.equals("")) {
                 return;
             }
-            if(pass.equals(passConf)){
-                db.signUp( userN,  pass,  passConf,   isDef);
+            if (pass.equals(passConf)) {
+                db.signUp(userN, pass, passConf, isDef);
                 JOptionPane.showMessageDialog(null, "Success!");
                 dlgSignUp_tfUsername.setText("");
                 dlgSignUp_tfPassword.setText("");
                 dlgSignUp_tfPassConfirmation.setText("");
                 dlgSignUp.setVisible(false);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Password and confirmation password must be the same value!" ,
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+                dlgUser.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Password and confirmation password must be the same value!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_dlgSignUp_btSignUpActionPerformed
@@ -1088,23 +1157,123 @@ public class MainWindow extends javax.swing.JFrame {
     private void dlgSignUp_tfPassConfirmationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgSignUp_tfPassConfirmationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dlgSignUp_tfPassConfirmationActionPerformed
-    
+
+    private void mPortfoliosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mPortfoliosMouseClicked
+        dlgManage.pack();
+        dlgManage.setLocationRelativeTo(null);
+        dlgManage.setVisible(true);
+    }//GEN-LAST:event_mPortfoliosMouseClicked
+
+    long currSelectedId = 0;
+    String currSelectedName = "";
+    boolean currSelectedIsDef = false;
+    Portfolio.Type currSelectedType = Portfolio.Type.Test;
+    long currSelectedUserId=0;
+    BigDecimal currSelectedAmount = new BigDecimal(0);
+
+
+    private void lstPortfoliosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPortfoliosValueChanged
+        Portfolio port = lstPortfolios.getSelectedValue();
+        if (port == null) {
+            currSelectedId = 0;
+
+            return;
+        }
+        currSelectedId = port.getId();
+        currSelectedName = port.getName();
+        currSelectedIsDef = port.isIsDefault();
+        currSelectedType = port.getType();
+        //currSelectedUserId = port.getUserId();
+        currSelectedAmount = port.getAmount();
+
+
+    }//GEN-LAST:event_lstPortfoliosValueChanged
+
+    private void lstPortfoliosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPortfoliosMouseClicked
+
+        dlgManage_lblId.setText(currSelectedId + "");
+        dlgManage_tfName.setText(currSelectedName);
+        dlgManage_cbbType.setSelectedIndex(currSelectedType.ordinal());
+        dlgManage_cbByDefault.setSelected(currSelectedIsDef);
+        dlgManage_tfCash.setText(currSelectedAmount + "");
+
+
+    }//GEN-LAST:event_lstPortfoliosMouseClicked
+
+    private void lstPortfoliosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPortfoliosMouseReleased
+
+            //Right click Roma
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            JList list = (JList) evt.getSource();
+
+            ppManage.show(evt.getComponent(), evt.getX(), evt.getY());
+
+            int index = lstPortfolios.locationToIndex((evt.getPoint()));
+            if (index == -1) {
+                return;
+            }
+            list.setSelectedIndex(index);
+        }
+    }//GEN-LAST:event_lstPortfoliosMouseReleased
+
+    private void dlgManage_btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgManage_btnAddActionPerformed
+        try {
+            int id=0;
+            String name = dlgManage_tfName.getText();
+            if (dlgManage_tfName.equals("")) {
+                return;
+            }
+            Portfolio.Type pType = Portfolio.Type.valueOf(dlgManage_cbbType.getSelectedItem().toString());
+
+            DecimalFormat formatter = new DecimalFormat("###.##");
+            formatter.setParseBigDecimal(true);
+            BigDecimal amount = (BigDecimal) formatter.parse(dlgManage_tfCash.getText() + "");
+            
+            boolean isDef = dlgManage_cbByDefault.isSelected();
+            
+            
+            Portfolio p;
+
+            p = new Portfolio(id, name, isDef, pType,  amount);
+
+           
+                db.addPortfolio(p);
+           
+           
+            reloadPortfolios();
+        } catch (ParseException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: you must enter a valid non-negative decimal number as the engine size",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // display dialog with error message and terminate the program
+            JOptionPane.showMessageDialog(this,
+                    "Error adding record:\n" + ex.getMessage(),
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_dlgManage_btnAddActionPerformed
+
     public void rewriteMainTable(Object[][] newData) {
         tm = new MyTableModel(newData);
         tTable.setModel(tm);
     }
-    
+
     //R
-    class ItemChangeListener implements ItemListener{
-    @Override
-    public void itemStateChanged(ItemEvent event) {
-        if (event.getStateChange() == ItemEvent.SELECTED) {
-            Portfolio chosenPortfolio = cbbPortfolioModel.getElementAt(cbbPortfolio.getSelectedIndex());
-            db.updateByPortfolio (chosenPortfolio.id);
+    class ItemChangeListener implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                Portfolio chosenPortfolio = cbbPortfolioModel.getElementAt(cbbPortfolio.getSelectedIndex());
+                db.updateByPortfolio(chosenPortfolio.getId());
+            }
         }
-    }       
-}
-        
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1218,7 +1387,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -1229,6 +1397,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JList<Portfolio> lstPortfolios;
     private javax.swing.JMenu mEmpty;
     private javax.swing.JMenu mFile;
     private javax.swing.JMenu mLogin;
