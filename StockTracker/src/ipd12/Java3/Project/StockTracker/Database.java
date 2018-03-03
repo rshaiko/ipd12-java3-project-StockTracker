@@ -55,7 +55,7 @@ public class Database {
                 String name = result.getString("name");
                 String username = result.getString("username");
 
-                //char[] password = (result.getString("password")).toCharArray();
+                
                 String password = result.getString("password");
                 boolean isDef = result.getBoolean("isDefault");
 
@@ -73,12 +73,12 @@ public class Database {
         }
     }
 
-    void signUp(String userN, String pass, String passConf, boolean def)throws SQLException {
+    void signUp(String name, String userN, String pass, boolean def)throws SQLException {
         String sql = "INSERT INTO users (name, username, password, isDefault) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, userN);
-            stmt.setString(2, pass);
-            stmt.setString(3, passConf);
+            stmt.setString(1, name);
+            stmt.setString(2, userN);
+            stmt.setString(3, pass);
             stmt.setBoolean(4,def);
             
             
@@ -140,7 +140,7 @@ public class Database {
             } else {
                 throw new RecordNotFoundException("Record not found!");
 
-                // return null;
+               
             }
         }
     }
@@ -153,9 +153,7 @@ public class Database {
             if (result.next()) {
                 long id = result.getInt("id");
                 String name = result.getString("name");
-                String username = result.getString("username");
-                System.out.println(userN+" "+id);
-                //char[] password = (result.getString("password")).toCharArray();
+                String username = result.getString("username");                             
                 String password = result.getString("password");
                 boolean isDef = result.getBoolean("isDefault");
 
@@ -163,8 +161,31 @@ public class Database {
             } else {
                 throw new RecordNotFoundException("Record not found!");
 
-                // return null;
+               
             }
         }
+    }
+
+    void updateIsDefaultUserSetFalse() throws SQLException {
+       String sql = "UPDATE users set isDefault = 0 where isDefault >0";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+       
+        stmt.executeUpdate();
+    }
+
+    void updateIsDefaultUserSetTrue()throws SQLException {
+       String sql = "UPDATE users set isDefault = 1 where id ="+  "'" + Globals.currentUser.getId() + "'";
+        System.out.println(Globals.currentUser.getId());
+        PreparedStatement stmt = conn.prepareStatement(sql);
+       
+        stmt.executeUpdate();
+    }
+
+    void updateIsDefaultUserSignUpSetFalse() throws SQLException {
+       String sql = "UPDATE users set isDefault = 0 where isDefault >0 and id<"
+               +"'" + Globals.currentUser.getId() + "'";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+       
+        stmt.executeUpdate();
     }
 }
