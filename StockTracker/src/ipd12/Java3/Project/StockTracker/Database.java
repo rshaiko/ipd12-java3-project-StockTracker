@@ -1,5 +1,6 @@
 package ipd12.Java3.Project.StockTracker;
 
+import ipd12.Java3.Project.StockTracker.Portfolio.PortType;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+
 
 class RecordNotFoundException extends SQLException {
 
@@ -91,6 +92,8 @@ public class Database {
         
     }
 
+     
+     
     ArrayList<Portfolio> getAllPortfolios()throws SQLException {
         String sql = "SELECT * FROM portfolios";
         ArrayList<Portfolio> list = new ArrayList<>();
@@ -100,7 +103,7 @@ public class Database {
             while (result.next()) {
                 long id = result.getLong("id");
                 String name = result.getString("name");
-                Portfolio.Type type = Portfolio.Type.valueOf(result.getString("type"));
+                Portfolio.PortType type = PortType.valueOf(result.getString("type"));
                 
                 boolean isDef = result.getBoolean("isDefault");
                 //long userId = result.getLong("userId");
@@ -114,16 +117,13 @@ public class Database {
 
     void addPortfolio(Portfolio p) throws SQLException {
         String sql = "INSERT INTO portfolios (name, type, userId, isDefault, availCash) VALUES (?, ?, ?, ?, ?)";
+        
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, p.getName());
-            stmt.setString(2, p.getType()+"");            
+            stmt.setString(2, p.getPortType()+"");            
             stmt.setLong(3,Globals.currentUser.getId());
-            
             stmt.setBoolean(4, p.isIsDefault());
             stmt.setBigDecimal(5, p.getAmount());
-            
-            
-            
             stmt.executeUpdate();
         }
     }
@@ -135,12 +135,9 @@ public class Database {
             ResultSet result = stmt.executeQuery(sql);
             if (result.next()) {
                 long id = result.getInt("id");
-              
-               return id;
+                return id;
             } else {
                 throw new RecordNotFoundException("Record not found!");
-
-               
             }
         }
     }
@@ -187,5 +184,44 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(sql);
        
         stmt.executeUpdate();
+    }
+
+    public String checkDefaultUser()  {
+        String sql = "SELECT username FROM users WHERE isDefault = 1";
+        String defUser="";
+        try (Statement stmt = getConn().createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            if (result.next()) {
+                defUser = result.getString("username");
+            } 
+        }catch (SQLException e) {
+        }
+        return defUser;
+    }
+
+    ArrayList<Portfolio> getPortfolios() {
+        
+        String mode="Test";
+        if (MainWindow.isRealMode){
+            mode="Real";
+        }
+        String sql = "SELECT * FROM portfolios WHERE userId = " + Globals.currentUser.getId() + " AND type = '"+ mode + "'";
+        ArrayList <Portfolio> list= new ArrayList<>();
+      
+        Long qId; String qName; PortType qType; boolean qIsDef; BigDecimal qCash;  
+        try (Statement stmt = getConn().createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            while (result.next()) {
+                qId = result.getLong("id");
+                qName = result.getString("name");
+                qType = PortType.valueOf(result.getString("type"));
+                qIsDef = (result.getInt("isDefault") == 1);
+                qCash = new BigDecimal(result.getString("availCash"));
+                list.add(new Portfolio(qId, qName, qIsDef, qType, qCash));
+            } 
+        }catch (SQLException e) {
+            //ADD ERROR  EDDING- in WINDOW
+        }
+        return list;
     }
 }

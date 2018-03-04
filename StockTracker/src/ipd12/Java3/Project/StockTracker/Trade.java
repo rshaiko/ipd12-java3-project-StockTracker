@@ -9,24 +9,31 @@ import java.sql.Date;
 
 public class Trade {
     long id;
+    long symbolID;
     Date opDate;
     String symbol;
-    Type type;
+    TradeType tradeType;
     int numerOfShares;
-    BigDecimal opPrice;
-    long portfolioId;
+    BigDecimal sharePrice;
+    String sector;
+    String industry;
     
-    enum Type {Buy, Sell, ShortSell, CoverAShort};
+    
+    enum TradeType {Buy, ShortSell};
 
-    public Trade(long id, Date opDate, String symbol, Type type, int numerOfShares, BigDecimal opPrice, long portfolioId) {
+    public Trade(long id, long symbolID, Date opDate, String symbol, TradeType tradeType, int numerOfShares, BigDecimal sharePrice, String sector, String industry) {
         this.id = id;
+        this.symbolID = symbolID;
         this.opDate = opDate;
         this.symbol = symbol;
-        this.type = type;
+        this.tradeType = tradeType;
         this.numerOfShares = numerOfShares;
-        this.opPrice = opPrice;
-        this.portfolioId = portfolioId;
+        this.sharePrice = sharePrice;
+        this.sector = sector;
+        this.industry = industry;
     }
+
+    
     
     
 }

@@ -11,4 +11,5 @@ package ipd12.Java3.Project.StockTracker;
  */
 public class Globals {
     static User currentUser;
+    static Portfolio currentPortfolio;
 }

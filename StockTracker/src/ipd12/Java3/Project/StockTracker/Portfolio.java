@@ -11,16 +11,16 @@ public class Portfolio {
     private long id;
     private String name;
     private boolean isDefault;
-    private Type type;
-    public enum Type {Real, Test};
+    private PortType portType;
+    public enum PortType {Real, Test};
     //private long userId;
     private BigDecimal amount;
 
-    public Portfolio(long id, String name, boolean isDefault, Type type, BigDecimal amount) {
+    public Portfolio(long id, String name, boolean isDefault, PortType portType, BigDecimal amount) {
         this.id = id;
         this.name = name;
         this.isDefault = isDefault;
-        this.type = type;
+        this.portType = portType;
         //this.userId = userId;
         this.amount = amount;
     }
@@ -82,15 +82,13 @@ public class Portfolio {
     /**
      * @return the type
      */
-    public Type getType() {
-        return type;
+    public PortType getPortType() {
+        return portType;
     }
 
-    /**
-     * @param type the type to set
-     */
-    public void setType(Type type) {
-        this.type = type;
+
+    public void setPortType(PortType portType) {
+        this.portType = portType;
     }
 
    /* public long getUserId() {
