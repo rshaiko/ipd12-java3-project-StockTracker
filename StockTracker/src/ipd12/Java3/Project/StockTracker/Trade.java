@@ -10,6 +10,7 @@ import java.sql.Date;
 public class Trade {
     long id;
     long symbolID;
+    String name;
     Date opDate;
     String symbol;
     TradeType tradeType;
@@ -21,9 +22,10 @@ public class Trade {
     
     enum TradeType {Buy, ShortSell};
 
-    public Trade(long id, long symbolID, Date opDate, String symbol, TradeType tradeType, int numerOfShares, BigDecimal sharePrice, String sector, String industry) {
+    public Trade(long id, long symbolID, String name, Date opDate, String symbol, TradeType tradeType, int numerOfShares, BigDecimal sharePrice, String sector, String industry) {
         this.id = id;
         this.symbolID = symbolID;
+        this.name = name;
         this.opDate = opDate;
         this.symbol = symbol;
         this.tradeType = tradeType;

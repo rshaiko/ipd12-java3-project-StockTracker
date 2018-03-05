@@ -235,7 +235,7 @@ public class Database {
 
     ArrayList<Trade> updateByPortfolio() {
         
-        String sql = "SELECT t2.*, symbol, sector, industry FROM symbols as t1 JOIN\n"
+        String sql = "SELECT t2.*, name, symbol, sector, industry FROM symbols as t1 JOIN\n"
                 + "	(SELECT id, symbolId, type, opDate, numberOfShares, sharePrice\n"
                 + "	 FROM trades\n"
                 + "     WHERE potrfolioId= "+currentPortfolio.getId()+" AND isActive=1) as t2\n"
@@ -247,7 +247,7 @@ public class Database {
         long id;
         long symbolID;
         Date opDate;
-        String symbol;
+        String name, symbol;
         Trade.TradeType tradeType;
         int numerOfShares;
         BigDecimal sharePrice;
@@ -259,6 +259,7 @@ public class Database {
             while (result.next()) {
                 id = result.getLong("id");
                 symbolID = result.getLong("symbolId");
+                name = result.getString("name");
                 opDate = result.getDate("opDate");
                 symbol = result.getString("symbol");
                 tradeType = Trade.TradeType.valueOf(result.getString("type"));
@@ -266,7 +267,7 @@ public class Database {
                 sharePrice = new BigDecimal(result.getString("sharePrice"));
                 sector = result.getString("sector");
                 industry = result.getString("industry");
-                list.add(new Trade(id,symbolID,opDate,symbol,tradeType,numerOfShares,sharePrice, sector,industry));
+                list.add(new Trade(id,symbolID,name, opDate,symbol,tradeType,numerOfShares,sharePrice, sector,industry));
             }
         }catch (SQLException e) {
             //ADD ERROR  EDDING- in WINDOW
@@ -307,5 +308,21 @@ public class Database {
         stmt.setBigDecimal(5, p.getAmount());
         stmt.setLong(6, p.getId());
         stmt.executeUpdate();
+    }
+
+    int checkSymbol(String symbol) {
+
+        String sql = "Select count(*) as count from symbols where symbol like '%" + symbol + "%'";
+
+        int numberReturned=0;
+        try (Statement stmt = getConn().createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            while (result.next()) {
+                numberReturned = result.getInt("count");
+            } 
+        }catch (SQLException e) {
+            //ADD ERROR  EDDING- in WINDOW
+        }
+         return numberReturned;
     }
 }

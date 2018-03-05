@@ -1,8 +1,0 @@
-Database server: den1.mysql3.gear.host
-Database: stocktracker
-
-Username		Password	
-stocktracker	Fx4Sq8vm?!zv
-https://github.com/rshaiko/ipd12-java3-project-StockTracker.git
-
-https://github.com/rshaiko/ipd12-java3-project-StockTracker/invitations

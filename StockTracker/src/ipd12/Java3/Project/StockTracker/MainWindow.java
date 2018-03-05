@@ -53,10 +53,14 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent lse) throws UnsupportedOperationException {
-                    int sRow = tTable.getSelectedRow();
-                    Trade t = currentTradesSet.get(sRow);
-                    String status = String.format("%s - %s (%s) opened since %s", t.symbol, t.sector, t.industry, t.opDate + "");
-                    lblStatus.setText(status);
+                    try {
+                        int sRow = tTable.getSelectedRow();
+                        Trade t = currentTradesSet.get(sRow);
+                        String status = String.format("   %s - %s (%s) trade opened since %s", t.name, t.sector, t.industry, t.opDate + "");
+                        lblStatus.setText(status);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                    }
+                    
                 }
             });
             tm = new MyTableModel( new Object[][] {{"", "", "", "", "", "", "", ""}} );
@@ -462,6 +466,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel18.setText("Symbol");
 
+        dlgAdd_tfSymbol.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dlgAdd_tfSymbolPropertyChange(evt);
+            }
+        });
+        dlgAdd_tfSymbol.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dlgAdd_tfSymbolKeyTyped(evt);
+            }
+        });
+
         dlgAdd_btAdd.setText("Add Trade");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -533,6 +548,11 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         dlgAdd_btReset.setText("Reset");
+        dlgAdd_btReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgAdd_btResetActionPerformed(evt);
+            }
+        });
 
         dlgAdd_btCancel.setText("Cancel");
         dlgAdd_btCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -597,13 +617,13 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dlgAdd_lblSymbolOk)))
                     .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addComponent(dlgAdd_lblStatus)
                 .addGap(18, 18, 18)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -845,6 +865,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stock Tracker");
         setResizable(false);
         setSize(new java.awt.Dimension(935, 550));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -875,6 +896,11 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         btAddTrade.setText("Add Trade/Trade Now");
+        btAddTrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddTradeActionPerformed(evt);
+            }
+        });
 
         btDeleteTrade.setText("Delete Trade");
 
@@ -1200,33 +1226,7 @@ public class MainWindow extends javax.swing.JFrame {
             if (name.equals("") ||userN.equals("") || pass.equals("") || passConf.equals("")) {
                 return;
             }
-        if (!name.matches("[A-Za-z]{2,25}")) {
-                    JOptionPane.showMessageDialog(this,
-                    "Error: Name must contain"
-                            + " letters only and be between 2 and 15 characters.",
-                    "Database error",
-                    JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            if (!userN.matches("[A-Za-z0-9_-]{3,10}")) {
-                 JOptionPane.showMessageDialog(this,
-                    "Username must contain  "
-                            + " minimum 3 and maximum 10 characters, "
-                            + "can be made up of letters, numbers, underscore and hyphen.",
-                    "Database error",
-                    JOptionPane.ERROR_MESSAGE);
-                    return;                 
-                }
-            if (!pass.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}")) {
-                
-                 JOptionPane.showMessageDialog(this,
-                    "Password must be between  5 and 10 characters, contain at "
-                            + "least one uppercase letter, one lowercase letter and one number.",
-                    "Database error",
-                    JOptionPane.ERROR_MESSAGE);
-                    return;    
-                   
-                }
+            user=new User(0,name,userN,pass,isDef);//to check regex
             if (pass.equals(passConf)) {
                 db.signUp(name,userN, pass, isDef);
                 
@@ -1248,11 +1248,15 @@ public class MainWindow extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        } catch (SQLException  ex) {
-           JOptionPane.showMessageDialog(this,
-                        "Error signing up:\n" + ex.getMessage(),
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: Name must contain"
+                            + " letters only and be between 2 and 15 characters."+"\n"+"Username must contain"
+                            + " minimum 3 and maximum 15 characters, can be made up of letters,"+"\n"
+                            + " numbers, underscore and hyphen. Password must be between  5 and 10 characters, contain at "+"\n"
+                            + "least one uppercase letter, one lowercase letter and one number.",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_dlgSignUp_btSignUpActionPerformed
@@ -1358,7 +1362,7 @@ public class MainWindow extends javax.swing.JFrame {
             reloadPortfolios();
         } catch (ParseException | IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this,
-                    "Error: you must enter a valid non-negative decimal number as the amount",
+                    "Error: you must enter a valid non-negative decimal number as the engine size",
                     "Database error",
                     JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
@@ -1561,6 +1565,17 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd.setVisible(true);
     }//GEN-LAST:event_btAddTradeActionPerformed
 
+    private void dlgAdd_tfSymbolKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolKeyTyped
+        String symbol = dlgAdd_tfSymbol.getText()+ evt.getKeyChar();
+        checkSymbol(symbol);
+    }//GEN-LAST:event_dlgAdd_tfSymbolKeyTyped
+
+    private void dlgAdd_tfSymbolPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolPropertyChange
+        System.out.println("EE");
+        checkSymbol(dlgAdd_tfSymbol.getText());
+        
+    }//GEN-LAST:event_dlgAdd_tfSymbolPropertyChange
+
 //    public void rewriteMainTable(Object[][] newData) {
 //        tm = new MyTableModel(newData);
 //        tTable.setModel(tm);
@@ -1646,10 +1661,31 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void resetDlgAdd() {
-        dlgAdd_lblStatus.setText("");
+        dlgAdd_lblStatus.setText(" ");
         dlgAdd_tfNumberOfShares.setText("");
-        dlgAdd_tfSymbol.setText("");
         btgAdd.clearSelection();
+        dlgAdd_tfSymbol.setText("");
+    }
+
+    private void checkSymbol(String symbol) {
+        
+        if (symbol.matches("[a-zA-Z]+")&&symbol.length()<20 && symbol.length()>0){
+            symbol = symbol.toUpperCase();
+            int symbolsFound = db.checkSymbol(symbol);
+            dlgAdd_lblStatus.setText(symbolsFound+" matches found");
+            if (symbolsFound==1){
+                dlgAdd_lblSymbolOk.setForeground(Color.green);
+                dlgAdd_lblSymbolOk.setText("");
+            }
+        }
+        else{
+            dlgAdd_lblSymbolOk.setForeground(Color.red);
+                dlgAdd_lblSymbolOk.setText("X");
+//            JOptionPane.showMessageDialog(this,
+//                    "Error: unable to reload transactions\n",
+//                    "Database error",
+//                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     class ItemChangeListener implements ItemListener {
