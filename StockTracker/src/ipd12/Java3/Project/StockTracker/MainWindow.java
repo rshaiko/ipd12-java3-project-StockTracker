@@ -1,19 +1,28 @@
 package ipd12.Java3.Project.StockTracker;
 
+import static ipd12.Java3.Project.StockTracker.Globals.currentPortfolio;
+import static ipd12.Java3.Project.StockTracker.Globals.currentUser;
+import static ipd12.Java3.Project.StockTracker.Globals.currentTradesSet;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * @author Roman Shaiko, Dmitrii Kudrik
@@ -38,14 +47,19 @@ public class MainWindow extends javax.swing.JFrame {
             db = new Database();
             initComponents();
             
-            cbbPortfolio.addItemListener(new ItemChangeListener());//R
-            tm = new MyTableModel(
-                    new Object[][]{
-                        {"Philip", "Milne", "Pool", new Integer(10),
-                            new Boolean(false), "Mary", "Campione", "Sn"}}
-            );
-            tTable.setModel(tm);
+            cbbPortfolio.addItemListener(new ItemChangeListener());
 
+            tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent lse) throws UnsupportedOperationException {
+                    int sRow = tTable.getSelectedRow();
+                    Trade t = currentTradesSet.get(sRow);
+                    String status = String.format("%s - %s (%s) opened since %s", t.symbol, t.sector, t.industry, t.opDate + "");
+                    lblStatus.setText(status);
+                }
+            });
+            tm = new MyTableModel( new Object[][] {{"", "", "", "", "", "", "", ""}} );
+            tTable.setModel(tm);
             tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             tTable.getColumnModel().getColumn(0).setPreferredWidth(120);
             tTable.getColumnModel().getColumn(1).setPreferredWidth(70);
@@ -54,10 +68,6 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(4).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(7).setPreferredWidth(48);
-            
-
-                    
-
         } catch (SQLException ex) {
             ex.printStackTrace();
             // display dialog with error message and terminate the program
@@ -70,25 +80,26 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
 
-    private void reloadPortfolios() throws SQLException {
-        // reload the list
-        modelPortfoliosList.clear();
+    private void reloadPortfolios() {       // reload the portolios list of current MODE of current user 
+        
         cbbPortfolioModel.removeAllElements();
-        ArrayList<Portfolio> list = db.getAllPortfolios();
-        boolean defExists = false;
-        if (list.size()!= 0) {
+        ArrayList<Portfolio> list = db.getPortfolios();
+        if (!list.isEmpty()) {
             for (Portfolio p : list) {
                 cbbPortfolioModel.addElement(p);
-                 modelPortfoliosList.addElement(p);
                 if (p.isIsDefault()){
-                    defExists = true;
                     cbbPortfolio.setSelectedIndex(cbbPortfolioModel.getSize()-1);
                     cbIsDefaultPortfolio.setSelected(true);
                 }
             }
-            
+            currentPortfolio = cbbPortfolioModel.getElementAt(cbbPortfolio.getSelectedIndex());
+            if(Globals.firstLoad){
+                rewriteMainTable();
+                Globals.firstLoad = false;
+            }
         }
         else {
+            currentPortfolio = null;
             lblStatus.setText("Add your new portfolio in Portfolio Manager");
         }
     }
@@ -1489,14 +1500,88 @@ public class MainWindow extends javax.swing.JFrame {
         tTable.setModel(tm);
     }
 
-    //R
+//    public void rewriteMainTable(Object[][] newData) {
+    public void rewriteMainTable() {
+        StringJoiner symbolJoiner = new StringJoiner(",");
+        int quantity; 
+        BigDecimal quantityBD, entry, last, change, value, gain;  
+        double dPercent;
+        currentTradesSet = db.updateByPortfolio();
+        int rows = currentTradesSet.size();
+        lblStatus.setText("Loading data ...");
+
+        //  Start updating prices from API
+        //1. Creating symbols list
+        if (rows > 0) {
+            for (int row = 0; row < rows; row++) {
+                symbolJoiner.add(currentTradesSet.get(row).symbol);
+            }
+            Object[][] newData = new Object[rows][8];
+            for (int row = 0; row < rows; row++) {
+                newData[row][0] = currentTradesSet.get(row).symbol;
+                quantity = currentTradesSet.get(row).numerOfShares;
+                quantityBD = new BigDecimal(quantity);
+                newData[row][1] = quantityBD;
+                entry = currentTradesSet.get(row).sharePrice;
+                newData[row][2] = entry;
+            }
+            
+            try {
+                String url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=" + symbolJoiner + "&apikey=FS3KK17YEXZPQ4W5";
+                JSONObject json = API.getJson(url);
+                JSONArray arr = json.getJSONArray("Stock Quotes");
+                for (int row = 0; row < rows; row++) {
+                    JSONObject o = arr.getJSONObject(row);
+                    last = o.getBigDecimal("2. price").setScale(2, RoundingMode.HALF_UP);
+                    newData[row][3] = last;
+                    change = last.subtract((BigDecimal) newData[row][2]);
+                    newData[row][4] = change;
+                    value = last.multiply((BigDecimal) newData[row][1]);
+                    newData[row][5] = value;
+                    gain = change.multiply((BigDecimal) newData[row][1]);
+                    newData[row][6] = gain;
+                    dPercent = gain.doubleValue() / ((      ((BigDecimal) newData[row][1])      .multiply(      (BigDecimal) newData[row][2]       )).doubleValue()) * 100;
+                    newData[row][7] = (dPercent <0 ? "" : "+") + ""+ String.format("%.2f", dPercent) + " %" ;
+                    
+            }
+            }catch (NullPointerException ex) {
+                lblStatus.setText("Error: API connection failed! Can not update the prices");
+                for (int row = 0; row < rows; row++) {
+                    newData[row][3]="updating...";
+                    newData[row][4]="";
+                    newData[row][5]="";
+                    newData[row][6]="";
+                    newData[row][7]="";
+                }
+            }
+            tm = new MyTableModel(newData);
+            tTable.setModel(tm);
+        }
+        else {
+            lblStatus.setText("You don't have active trades in this portfolio");
+            Object[][] newData = new Object[rows][8];
+            tm = new MyTableModel(newData);
+            tTable.setModel(tm);
+        }
+    }
+
     class ItemChangeListener implements ItemListener {
 
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {
-                Portfolio chosenPortfolio = cbbPortfolioModel.getElementAt(cbbPortfolio.getSelectedIndex());
-                db.updateByPortfolio(chosenPortfolio.getId());
+                //Here non critical one additional event when program starts
+                int ind = cbbPortfolio.getSelectedIndex();
+                Portfolio port = cbbPortfolioModel.getElementAt(ind);
+                currentPortfolio = port;
+                if (port.isIsDefault()) {
+                    cbIsDefaultPortfolio.setSelected(true);
+                }else{
+                    cbIsDefaultPortfolio.setSelected(false);
+                }
+                if(!Globals.firstLoad){
+                    rewriteMainTable();
+                }
             }
         }
     }

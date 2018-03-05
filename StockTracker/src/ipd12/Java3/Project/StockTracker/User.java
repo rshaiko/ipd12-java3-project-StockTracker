@@ -67,10 +67,10 @@ public class User {
     }
 
     public void setPassword(String password) {
-         if (!name.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}")) {
-                    throw new IllegalArgumentException("Password must be between  5 and 10 characters, contain at "
-                            + "least one uppercase letter, one lowercase letter and one number");
-                }
+//         if (!name.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}")) {
+//                    throw new IllegalArgumentException("Password must be between  5 and 10 characters, contain at "
+//                            + "least one uppercase letter, one lowercase letter and one number");
+//                }
         
         this.password = password;
     }

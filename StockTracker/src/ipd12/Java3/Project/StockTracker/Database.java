@@ -1,8 +1,11 @@
 package ipd12.Java3.Project.StockTracker;
 
+import static ipd12.Java3.Project.StockTracker.Globals.currentPortfolio;
+import static ipd12.Java3.Project.StockTracker.Globals.currentUser;
 import ipd12.Java3.Project.StockTracker.Portfolio.PortType;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -211,7 +214,7 @@ public class Database {
         if (MainWindow.isRealMode){
             mode="Real";
         }
-        String sql = "SELECT * FROM portfolios WHERE userId = " + Globals.currentUser.getId() + " AND type = '"+ mode + "'";
+        String sql = "SELECT * FROM portfolios WHERE userId = " + currentUser.getId() + " AND type = '"+ mode + "'";
         ArrayList <Portfolio> list= new ArrayList<>();
       
         Long qId; String qName; PortType qType; boolean qIsDef; BigDecimal qCash;  
@@ -225,6 +228,47 @@ public class Database {
                 qCash = new BigDecimal(result.getString("availCash"));
                 list.add(new Portfolio(qId, qName, qIsDef, qType, qCash));
             } 
+        }catch (SQLException e) {
+            //ADD ERROR  EDDING- in WINDOW
+        }
+        return list;
+    }
+
+    ArrayList<Trade> updateByPortfolio() {
+        
+        String sql = "SELECT t2.*, symbol, sector, industry FROM symbols as t1 JOIN\n"
+                + "	(SELECT id, symbolId, type, opDate, numberOfShares, sharePrice\n"
+                + "	 FROM trades\n"
+                + "     WHERE potrfolioId= "+currentPortfolio.getId()+" AND isActive=1) as t2\n"
+                + "ON t1.id=t2.symbolId\n"
+                + "ORDER BY symbol, type, opDate DESC";
+        
+        ArrayList <Trade> list= new ArrayList<>();
+      
+        long id;
+        long symbolID;
+        Date opDate;
+        String symbol;
+        Trade.TradeType tradeType;
+        int numerOfShares;
+        BigDecimal sharePrice;
+        String sector;
+        String industry;
+    
+        try (Statement stmt = getConn().createStatement()) {
+            ResultSet result = stmt.executeQuery(sql);
+            while (result.next()) {
+                id = result.getLong("id");
+                symbolID = result.getLong("symbolId");
+                opDate = result.getDate("opDate");
+                symbol = result.getString("symbol");
+                tradeType = Trade.TradeType.valueOf(result.getString("type"));
+                numerOfShares = result.getInt("numberOfShares");
+                sharePrice = new BigDecimal(result.getString("sharePrice"));
+                sector = result.getString("sector");
+                industry = result.getString("industry");
+                list.add(new Trade(id,symbolID,opDate,symbol,tradeType,numerOfShares,sharePrice, sector,industry));
+            }
         }catch (SQLException e) {
             //ADD ERROR  EDDING- in WINDOW
         }
