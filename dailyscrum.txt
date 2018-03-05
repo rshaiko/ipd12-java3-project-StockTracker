@@ -101,5 +101,17 @@ Each member write down 3 questions
 3. Need assistance / figure things out
 ----------- 
 
+05.03.2018 Roman
+1. Done since last scrum 
+- Update prices from JSON
+- Checking entered symbol
+- totals calculations
+2.  Plan until next Scrum 
+- Add trade
+- Edit Trade
+- Export to Excel
+3. Need assistance / figure things out
+- how to export to Excel
+- how to build chart
 
 
