@@ -193,7 +193,6 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tTable = new javax.swing.JTable();
-        lblTotal = new javax.swing.JLabel();
         btAddTrade = new javax.swing.JButton();
         btDeleteTrade = new javax.swing.JButton();
         btSaveChanges = new javax.swing.JButton();
@@ -202,12 +201,13 @@ public class MainWindow extends javax.swing.JFrame {
         btMove = new javax.swing.JButton();
         btRefresh = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btEditTrade = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lblTotalInv = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         lblTotalValue = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         lblTotalGain = new javax.swing.JLabel();
         mMenuBar = new javax.swing.JMenuBar();
         mFile = new javax.swing.JMenu();
@@ -874,8 +874,6 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(7).setHeaderValue("%");
         }
 
-        lblTotal.setText("Value:");
-
         btAddTrade.setText("Add Trade/Trade Now");
         btAddTrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -902,62 +900,68 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel9.setText("Portfolio:");
 
-        jLabel2.setText("Invested:");
-
         btEditTrade.setText("Edit Trade");
 
+        lblStatus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblStatus.setText("Status");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Invested:");
+
+        lblTotalInv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalInv.setText(" ");
+
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTotal.setText("Value:");
+
+        lblTotalValue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalValue.setText(" ");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Gain:");
 
-        lblTotalInv.setText("lblTotalInv");
-
-        lblTotalValue.setText("d");
-
-        lblTotalGain.setText("jLabel22");
+        lblTotalGain.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalGain.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbIsDefaultPortfolio))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btAddTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(424, 424, 424)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotalInv))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(lblTotalGain, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(39, 39, 39)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(18, 18, 18)
+                            .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbIsDefaultPortfolio))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(43, 43, 43)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btAddTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(229, 229, 229)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalInv, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(lblTotalGain, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -983,16 +987,20 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btSaveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblTotal)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotalInv)
-                    .addComponent(lblTotalValue)
-                    .addComponent(lblTotalGain))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(lblTotal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalGain, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTotalInv, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(lblStatus))
         );
 
@@ -1099,10 +1107,6 @@ public class MainWindow extends javax.swing.JFrame {
             dlgUser.setVisible(true);
         }
     }//GEN-LAST:event_mLoginMouseClicked
-
-    private void btMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btMoveActionPerformed
 
     private void dlgAdd_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btCancelActionPerformed
         dlgAdd.setVisible(false);
@@ -1527,6 +1531,14 @@ public class MainWindow extends javax.swing.JFrame {
                             + "least one uppercase letter, one lowercase letter and one number");
     }//GEN-LAST:event_dlgSignUp_lblHelpPasswordMouseEntered
 
+    private void dlgAdd_btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btResetActionPerformed
+        resetDlgAdd();
+    }//GEN-LAST:event_dlgAdd_btResetActionPerformed
+
+    private void btMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btMoveActionPerformed
+
     private void btAddTradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddTradeActionPerformed
         resetDlgAdd();
         dlgAdd.pack();
@@ -1534,14 +1546,10 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd.setVisible(true);
     }//GEN-LAST:event_btAddTradeActionPerformed
 
-    private void dlgAdd_btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btResetActionPerformed
-        resetDlgAdd();
-    }//GEN-LAST:event_dlgAdd_btResetActionPerformed
-
-    public void rewriteMainTable(Object[][] newData) {
-        tm = new MyTableModel(newData);
-        tTable.setModel(tm);
-    }
+//    public void rewriteMainTable(Object[][] newData) {
+//        tm = new MyTableModel(newData);
+//        tTable.setModel(tm);
+//    }
 
 //    public void rewriteMainTable(Object[][] newData) {
     public void rewriteMainTable() {
@@ -1572,6 +1580,7 @@ public class MainWindow extends javax.swing.JFrame {
                 entry = currentTradesSet.get(row).sharePrice;
                 newData[row][2] = entry;
                 totalInvested = totalInvested.add(quantityBD.multiply(entry));
+                lblTotalInv.setText(totalInvested.toString());
             }
             
             try {
@@ -1592,6 +1601,9 @@ public class MainWindow extends javax.swing.JFrame {
                     newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
                     totalGain = totalGain.add(gain);
                     totalValue = totalValue.add(value);
+                    lblStatus.setText("Prices are up to date");
+                    lblTotalValue.setText(totalValue.toString());
+                    lblTotalGain.setText(totalGain.toString());
                 }
             } catch (NullPointerException ex) {
                 lblStatus.setText("Error: API connection failed! Can not update the prices");
@@ -1626,6 +1638,9 @@ public class MainWindow extends javax.swing.JFrame {
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {
+                lblTotalValue.setText("");
+                lblTotalGain.setText("");
+                lblTotalInv.setText("");
                 int ind = cbbPortfolio.getSelectedIndex();
                 Portfolio port = cbbPortfolioModel.getElementAt(ind);
                 cbbPortfolio.enable(false);

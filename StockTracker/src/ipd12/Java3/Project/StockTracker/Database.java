@@ -42,7 +42,6 @@ public class Database {
         conn = DriverManager.getConnection(
                 "jdbc:mysql://" + HOSTNAME + "/" + DBNAME,
                 USERNAME, PASSWORD);
-        System.out.println("Connection to database established!");
     }
 
     public Connection getConn() {
@@ -181,7 +180,7 @@ public class Database {
 
     void updateIsDefaultUserSetTrue()throws SQLException {
        String sql = "UPDATE users set isDefault = 1 where id ="+  "'" + Globals.currentUser.getId() + "'";
-        System.out.println(Globals.currentUser.getId());
+        //System.out.println(Globals.currentUser.getId());
         PreparedStatement stmt = conn.prepareStatement(sql);
        
         stmt.executeUpdate();
