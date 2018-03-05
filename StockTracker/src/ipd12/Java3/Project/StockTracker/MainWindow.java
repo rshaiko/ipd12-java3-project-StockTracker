@@ -4,10 +4,12 @@ import static ipd12.Java3.Project.StockTracker.Globals.currentPortfolio;
 import static ipd12.Java3.Project.StockTracker.Globals.currentTradesSet;
 import static ipd12.Java3.Project.StockTracker.Globals.currentUser;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URI;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -146,6 +148,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgManage_cbByDefault = new javax.swing.JCheckBox();
         ppMain = new javax.swing.JPopupMenu();
         ppMain_Move = new javax.swing.JMenuItem();
+        ppMain_Browse = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         ppMain_Delete = new javax.swing.JMenuItem();
         ppManage = new javax.swing.JPopupMenu();
@@ -439,6 +442,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         ppMain_Move.setText("Move trade");
         ppMain.add(ppMain_Move);
+
+        ppMain_Browse.setText("Browse symbol");
+        ppMain_Browse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppMain_BrowseActionPerformed(evt);
+            }
+        });
+        ppMain.add(ppMain_Browse);
         ppMain.add(jSeparator2);
 
         ppMain_Delete.setText("Delete trade");
@@ -1600,6 +1611,17 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_dlgAdd_tfSymbolPropertyChange
 
+    private void ppMain_BrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BrowseActionPerformed
+        try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI("http://www.google.com");
+            desktop.browse(oURL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        
+    }//GEN-LAST:event_ppMain_BrowseActionPerformed
+
 //    public void rewriteMainTable(Object[][] newData) {
 //        tm = new MyTableModel(newData);
 //        tTable.setModel(tm);
@@ -1875,6 +1897,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu mTrade;
     private javax.swing.JMenu mUser;
     private javax.swing.JPopupMenu ppMain;
+    private javax.swing.JMenuItem ppMain_Browse;
     private javax.swing.JMenuItem ppMain_Delete;
     private javax.swing.JMenuItem ppMain_Move;
     private javax.swing.JPopupMenu ppManage;
