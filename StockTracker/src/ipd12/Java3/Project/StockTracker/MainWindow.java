@@ -85,12 +85,14 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
 
-    private void reloadPortfolios() {       // reload the portolios list of current MODE of current user 
+    private void reloadPortfolios() throws SQLException {       // reload the portolios list of current MODE of current user 
         
         cbbPortfolioModel.removeAllElements();
-        ArrayList<Portfolio> list = db.getPortfolios();
+        modelPortfoliosList.clear();
+        ArrayList<Portfolio> list = db.getAllPortfolios();
         if (!list.isEmpty()) {
             for (Portfolio p : list) {
+                modelPortfoliosList.addElement(p);
                 cbbPortfolioModel.addElement(p);
                 if (p.isIsDefault()){
                     cbbPortfolio.setSelectedIndex(cbbPortfolioModel.getSize()-1);
@@ -1226,7 +1228,33 @@ public class MainWindow extends javax.swing.JFrame {
             if (name.equals("") ||userN.equals("") || pass.equals("") || passConf.equals("")) {
                 return;
             }
-            user=new User(0,name,userN,pass,isDef);//to check regex
+        if (!name.matches("[A-Za-z]{2,25}")) {
+                    JOptionPane.showMessageDialog(this,
+                    "Error: Name must contain"
+                            + " letters only and be between 2 and 15 characters.",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            if (!userN.matches("[A-Za-z0-9_-]{3,10}")) {
+                 JOptionPane.showMessageDialog(this,
+                    "Username must contain  "
+                            + " minimum 3 and maximum 10 characters, "
+                            + "can be made up of letters, numbers, underscore and hyphen.",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+                    return;                 
+                }
+            if (!pass.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}")) {
+                
+                 JOptionPane.showMessageDialog(this,
+                    "Password must be between  5 and 10 characters, contain at "
+                            + "least one uppercase letter, one lowercase letter and one number.",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+                    return;    
+                   
+                }
             if (pass.equals(passConf)) {
                 db.signUp(name,userN, pass, isDef);
                 
@@ -1248,15 +1276,11 @@ public class MainWindow extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        } catch (SQLException | IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Error: Name must contain"
-                            + " letters only and be between 2 and 15 characters."+"\n"+"Username must contain"
-                            + " minimum 3 and maximum 15 characters, can be made up of letters,"+"\n"
-                            + " numbers, underscore and hyphen. Password must be between  5 and 10 characters, contain at "+"\n"
-                            + "least one uppercase letter, one lowercase letter and one number.",
-                    "Database error",
-                    JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException  ex) {
+           JOptionPane.showMessageDialog(this,
+                        "Error signing up:\n" + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_dlgSignUp_btSignUpActionPerformed
@@ -1362,7 +1386,7 @@ public class MainWindow extends javax.swing.JFrame {
             reloadPortfolios();
         } catch (ParseException | IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this,
-                    "Error: you must enter a valid non-negative decimal number as the engine size",
+                    "Error: you must enter a valid non-negative decimal number as the amount",
                     "Database error",
                     JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
