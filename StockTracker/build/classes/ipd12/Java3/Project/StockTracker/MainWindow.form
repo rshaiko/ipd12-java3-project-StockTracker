@@ -392,7 +392,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel19" max="32767" attributes="0"/>
+                              <Component id="dlgAdd_lblStatus" max="32767" attributes="0"/>
                               <Component id="jLabel18" max="32767" attributes="0"/>
                               <Component id="dlgAdd_tfSymbol" linkSize="4" pref="105" max="32767" attributes="0"/>
                           </Group>
@@ -438,7 +438,7 @@
                       <Component id="dlgAdd_btAdd" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                  <Component id="dlgAdd_lblStatus" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -590,6 +590,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reset"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlgAdd_btResetActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="dlgAdd_btCancel">
           <Properties>
@@ -610,7 +613,7 @@
             <Property name="text" type="java.lang.String" value="&#xf0fc;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel19">
+        <Component class="javax.swing.JLabel" name="dlgAdd_lblStatus">
           <Properties>
             <Property name="text" type="java.lang.String" value="symbol not found"/>
           </Properties>
@@ -1085,16 +1088,6 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Last"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -1105,37 +1098,55 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblTotal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cbbPortfolio" min="-2" pref="228" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbIsDefaultPortfolio" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbbPortfolio" min="-2" pref="228" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cbIsDefaultPortfolio" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jScrollPane1" min="-2" pref="659" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btAddTrade" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btDeleteTrade" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btSaveChanges" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btMove" max="32767" attributes="0"/>
+                                      <Component id="btRefresh" max="32767" attributes="0"/>
+                                      <Component id="btEditTrade" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="659" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btAddTrade" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btDeleteTrade" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btSaveChanges" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btMove" max="32767" attributes="0"/>
-                              <Component id="btRefresh" max="32767" attributes="0"/>
-                              <Component id="btEditTrade" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="424" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="lblTotalInv" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblTotal" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="lblTotalValue" min="-2" pref="65" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTotalGain" min="-2" pref="59" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <EmptySpace min="42" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="lblStatus" min="-2" pref="940" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1150,15 +1161,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="357" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="357" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btRefresh" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1171,9 +1174,22 @@
                           <Component id="btDeleteTrade" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btSaveChanges" min="-2" pref="35" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTotalInv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTotalValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTotalGain" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1251,13 +1267,16 @@
         </Container>
         <Component class="javax.swing.JLabel" name="lblTotal">
           <Properties>
-            <Property name="text" type="java.lang.String" value="sdfsdfsdfsd"/>
+            <Property name="text" type="java.lang.String" value="Value:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btAddTrade">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add Trade/Trade Now"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddTradeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btDeleteTrade">
           <Properties>
@@ -1304,12 +1323,37 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Total"/>
+            <Property name="text" type="java.lang.String" value="Invested:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btEditTrade">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit Trade"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblStatus">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Status"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gain:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTotalInv">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="lblTotalInv"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTotalValue">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="d"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTotalGain">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jLabel22"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -160,7 +160,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_btReset = new javax.swing.JButton();
         dlgAdd_btCancel = new javax.swing.JButton();
         dlgAdd_lblSymbolOk = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        dlgAdd_lblStatus = new javax.swing.JLabel();
         btgAdd = new javax.swing.ButtonGroup();
         dlgUser = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
@@ -190,7 +190,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         dlgSignUp_lblNameQ = new javax.swing.JLabel();
         dlgSignUp_tfName = new javax.swing.JTextField();
-        lblStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tTable = new javax.swing.JTable();
@@ -205,6 +204,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btEditTrade = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblTotalInv = new javax.swing.JLabel();
+        lblTotalValue = new javax.swing.JLabel();
+        lblTotalGain = new javax.swing.JLabel();
         mMenuBar = new javax.swing.JMenuBar();
         mFile = new javax.swing.JMenu();
         smExpExcel = new javax.swing.JMenuItem();
@@ -528,6 +532,11 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         dlgAdd_btReset.setText("Reset");
+        dlgAdd_btReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgAdd_btResetActionPerformed(evt);
+            }
+        });
 
         dlgAdd_btCancel.setText("Cancel");
         dlgAdd_btCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -540,7 +549,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_lblSymbolOk.setForeground(new java.awt.Color(51, 204, 0));
         dlgAdd_lblSymbolOk.setText("");
 
-        jLabel19.setText("symbol not found");
+        dlgAdd_lblStatus.setText("symbol not found");
 
         javax.swing.GroupLayout dlgAddLayout = new javax.swing.GroupLayout(dlgAdd.getContentPane());
         dlgAdd.getContentPane().setLayout(dlgAddLayout);
@@ -555,7 +564,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(dlgAdd_tfNumberOfShares))
                         .addGap(18, 18, 18)
                         .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dlgAdd_lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -593,7 +602,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(dlgAdd_lblSymbolOk)))
                     .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19)
+                .addComponent(dlgAdd_lblStatus)
                 .addGap(18, 18, 18)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -848,9 +857,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        lblStatus.setText("Status");
-        getContentPane().add(lblStatus, java.awt.BorderLayout.PAGE_END);
-
         tTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tTable.setComponentPopupMenu(ppMain);
         tTable.setNextFocusableComponent(btRefresh);
@@ -868,9 +874,14 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(7).setHeaderValue("%");
         }
 
-        lblTotal.setText("sdfsdfsdfsd");
+        lblTotal.setText("Value:");
 
         btAddTrade.setText("Add Trade/Trade Now");
+        btAddTrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddTradeActionPerformed(evt);
+            }
+        });
 
         btDeleteTrade.setText("Delete Trade");
 
@@ -891,40 +902,62 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel9.setText("Portfolio:");
 
-        jLabel2.setText("Total");
+        jLabel2.setText("Invested:");
 
         btEditTrade.setText("Edit Trade");
+
+        lblStatus.setText("Status");
+
+        jLabel7.setText("Gain:");
+
+        lblTotalInv.setText("lblTotalInv");
+
+        lblTotalValue.setText("d");
+
+        lblTotalGain.setText("jLabel22");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTotal)
-                .addGap(317, 317, 317))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbIsDefaultPortfolio))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbIsDefaultPortfolio))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btAddTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btAddTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(42, 42, 42))
+                        .addGap(424, 424, 424)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalInv))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(lblTotalGain, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -936,13 +969,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(cbIsDefaultPortfolio))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(lblTotal))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -954,8 +981,19 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btDeleteTrade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btSaveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btSaveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblTotal)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalInv)
+                    .addComponent(lblTotalValue)
+                    .addComponent(lblTotalGain))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(lblStatus))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -1067,7 +1105,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btMoveActionPerformed
 
     private void dlgAdd_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btCancelActionPerformed
-        // TODO add your handling code here:
+        dlgAdd.setVisible(false);
     }//GEN-LAST:event_dlgAdd_btCancelActionPerformed
 
     private void dlgAdd_rbSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_rbSellActionPerformed
@@ -1381,9 +1419,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void ppManage_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppManage_EditActionPerformed
         try {
-            
-            
-
            int id = Integer.parseInt(dlgManage_lblId.getText());
             
             String portN = dlgManage_tfName.getText();
@@ -1401,9 +1436,6 @@ public class MainWindow extends javax.swing.JFrame {
             
             //System.out.println(dlgAdd_sEngine.getValue()+"");
             //System.out.println(engine);
-
-           
-
             Portfolio p;
 
             p = new Portfolio(id, portN, isDef, portT, amount);
@@ -1495,6 +1527,17 @@ public class MainWindow extends javax.swing.JFrame {
                             + "least one uppercase letter, one lowercase letter and one number");
     }//GEN-LAST:event_dlgSignUp_lblHelpPasswordMouseEntered
 
+    private void btAddTradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddTradeActionPerformed
+        resetDlgAdd();
+        dlgAdd.pack();
+        dlgAdd.setLocationRelativeTo(null);
+        dlgAdd.setVisible(true);
+    }//GEN-LAST:event_btAddTradeActionPerformed
+
+    private void dlgAdd_btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btResetActionPerformed
+        resetDlgAdd();
+    }//GEN-LAST:event_dlgAdd_btResetActionPerformed
+
     public void rewriteMainTable(Object[][] newData) {
         tm = new MyTableModel(newData);
         tTable.setModel(tm);
@@ -1504,7 +1547,11 @@ public class MainWindow extends javax.swing.JFrame {
     public void rewriteMainTable() {
         StringJoiner symbolJoiner = new StringJoiner(",");
         int quantity; 
-        BigDecimal quantityBD, entry, last, change, value, gain;  
+        BigDecimal quantityBD, entry, last, change, value, gain; 
+        BigDecimal totalInvested = new BigDecimal(0);
+        BigDecimal totalGain = new BigDecimal(0);
+        BigDecimal totalValue = new BigDecimal(0);
+                
         double dPercent;
         currentTradesSet = db.updateByPortfolio();
         int rows = currentTradesSet.size();
@@ -1524,6 +1571,7 @@ public class MainWindow extends javax.swing.JFrame {
                 newData[row][1] = quantityBD;
                 entry = currentTradesSet.get(row).sharePrice;
                 newData[row][2] = entry;
+                totalInvested = totalInvested.add(quantityBD.multiply(entry));
             }
             
             try {
@@ -1540,29 +1588,37 @@ public class MainWindow extends javax.swing.JFrame {
                     newData[row][5] = value;
                     gain = change.multiply((BigDecimal) newData[row][1]);
                     newData[row][6] = gain;
-                    dPercent = gain.doubleValue() / ((      ((BigDecimal) newData[row][1])      .multiply(      (BigDecimal) newData[row][2]       )).doubleValue()) * 100;
-                    newData[row][7] = (dPercent <0 ? "" : "+") + ""+ String.format("%.2f", dPercent) + " %" ;
-                    
-            }
-            }catch (NullPointerException ex) {
+                    dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue()) * 100;
+                    newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
+                    totalGain = totalGain.add(gain);
+                    totalValue = totalValue.add(value);
+                }
+            } catch (NullPointerException ex) {
                 lblStatus.setText("Error: API connection failed! Can not update the prices");
                 for (int row = 0; row < rows; row++) {
-                    newData[row][3]="updating...";
-                    newData[row][4]="";
-                    newData[row][5]="";
-                    newData[row][6]="";
-                    newData[row][7]="";
+                    newData[row][3] = "updating...";
+                    newData[row][4] = "";
+                    newData[row][5] = "";
+                    newData[row][6] = "";
+                    newData[row][7] = "";
                 }
             }
             tm = new MyTableModel(newData);
             tTable.setModel(tm);
-        }
-        else {
+        } else {
             lblStatus.setText("You don't have active trades in this portfolio");
             Object[][] newData = new Object[rows][8];
             tm = new MyTableModel(newData);
             tTable.setModel(tm);
         }
+        cbbPortfolio.enable(true);
+    }
+
+    private void resetDlgAdd() {
+        dlgAdd_lblStatus.setText("");
+        dlgAdd_tfNumberOfShares.setText("");
+        dlgAdd_tfSymbol.setText("");
+        btgAdd.clearSelection();
     }
 
     class ItemChangeListener implements ItemListener {
@@ -1570,9 +1626,9 @@ public class MainWindow extends javax.swing.JFrame {
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {
-                //Here non critical one additional event when program starts
                 int ind = cbbPortfolio.getSelectedIndex();
                 Portfolio port = cbbPortfolioModel.getElementAt(ind);
+                cbbPortfolio.enable(false);
                 currentPortfolio = port;
                 if (port.isIsDefault()) {
                     cbIsDefaultPortfolio.setSelected(true);
@@ -1636,6 +1692,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton dlgAdd_btAdd;
     private javax.swing.JButton dlgAdd_btCancel;
     private javax.swing.JButton dlgAdd_btReset;
+    private javax.swing.JLabel dlgAdd_lblStatus;
     private javax.swing.JLabel dlgAdd_lblSymbolOk;
     private javax.swing.JRadioButton dlgAdd_rbBuy;
     private javax.swing.JRadioButton dlgAdd_rbCoverShort;
@@ -1689,13 +1746,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1708,6 +1765,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalGain;
+    private javax.swing.JLabel lblTotalInv;
+    private javax.swing.JLabel lblTotalValue;
     private javax.swing.JList<Portfolio> lstPortfolios;
     private javax.swing.JMenu mEmpty;
     private javax.swing.JMenu mFile;
