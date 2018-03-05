@@ -17,11 +17,15 @@ public class User {
     public boolean isDefault;
 
     public User(long id, String name, String userName, String password, boolean isDefault) {
-        this.id = id;
-        this.name = name;
-        this.userName = userName;
-        this.password = password;
-        this.isDefault = isDefault;
+        setId(id);
+        setName(name);
+        setUserName(userName);
+        setPassword(password);
+        isIsDefault();
+    }
+
+    public static void setId(long id) {
+        User.id = id;
     }
 
     public String getUserName() {
@@ -29,6 +33,11 @@ public class User {
     }
 
     public void setUserName(String userName) {
+         if (!userName.matches("[A-Za-z0-9_-]{3,10}")) {
+                    throw new IllegalArgumentException("Username must contain  "
+                            + " minimum 3 and maximum 10 characters, can be made up of letters, numbers, underscore and hyphen");
+                }
+        
         this.userName = userName;
     }
 
@@ -45,6 +54,11 @@ public class User {
     }
 
     public void setName(String name) {
+        if (!name.matches("[A-Za-z]{2,25}")) {
+                    throw new IllegalArgumentException("Name must contain"
+                            + " letters only and be between 2 and 15 characters");
+                }
+        
         this.name = name;
     }
 
@@ -53,6 +67,11 @@ public class User {
     }
 
     public void setPassword(String password) {
+         if (!name.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}")) {
+                    throw new IllegalArgumentException("Password must be between  5 and 10 characters, contain at "
+                            + "least one uppercase letter, one lowercase letter and one number");
+                }
+        
         this.password = password;
     }
 

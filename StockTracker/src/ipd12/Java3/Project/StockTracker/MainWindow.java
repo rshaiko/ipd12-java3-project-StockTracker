@@ -70,15 +70,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
 
-    private void reloadPortfolios(long id) {
+    private void reloadPortfolios() throws SQLException {
         // reload the list
+        modelPortfoliosList.clear();
         cbbPortfolioModel.removeAllElements();
-        ArrayList<Portfolio> list = db.getPortfolios();
+        ArrayList<Portfolio> list = db.getAllPortfolios();
         boolean defExists = false;
         if (list.size()!= 0) {
             for (Portfolio p : list) {
                 cbbPortfolioModel.addElement(p);
-                
+                 modelPortfoliosList.addElement(p);
                 if (p.isIsDefault()){
                     defExists = true;
                     cbbPortfolio.setSelectedIndex(cbbPortfolioModel.getSize()-1);
@@ -113,7 +114,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgManage_btnAdd = new javax.swing.JButton();
         dlgManage_btnEdit = new javax.swing.JButton();
         dlgManage_btnDelete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        dlgManage_btnCancel = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstPortfolios = new javax.swing.JList<>();
         jLabel13 = new javax.swing.JLabel();
@@ -176,7 +177,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgSignUp_lblUserOk = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        dlgSignUp_lblNameQ = new javax.swing.JLabel();
         dlgSignUp_tfName = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -288,10 +289,25 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         dlgManage_btnEdit.setText("Edit");
+        dlgManage_btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgManage_btnEditActionPerformed(evt);
+            }
+        });
 
         dlgManage_btnDelete.setText("Delete");
+        dlgManage_btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgManage_btnDeleteActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Cancel");
+        dlgManage_btnCancel.setText("Cancel");
+        dlgManage_btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgManage_btnCancelActionPerformed(evt);
+            }
+        });
 
         lstPortfolios.setModel(modelPortfoliosList);
         lstPortfolios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -355,7 +371,7 @@ public class MainWindow extends javax.swing.JFrame {
                                         .addComponent(dlgManage_tfCash))))))
                     .addGroup(dlgManageLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dlgManage_btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(dlgManage_btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -390,14 +406,14 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(dlgManage_cbByDefault)))
                 .addGap(18, 18, 18)
                 .addGroup(dlgManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(dlgManage_btnCancel)
                     .addComponent(dlgManage_btnAdd)
                     .addComponent(dlgManage_btnEdit)
                     .addComponent(dlgManage_btnDelete))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
-        dlgManageLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dlgManage_btnAdd, dlgManage_btnDelete, dlgManage_btnEdit, jButton1});
+        dlgManageLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dlgManage_btnAdd, dlgManage_btnCancel, dlgManage_btnDelete, dlgManage_btnEdit});
 
         ppMain_Move.setText("Move trade");
         ppMain.add(ppMain_Move);
@@ -407,10 +423,20 @@ public class MainWindow extends javax.swing.JFrame {
         ppMain.add(ppMain_Delete);
 
         ppManage_Edit.setText("Edit");
+        ppManage_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppManage_EditActionPerformed(evt);
+            }
+        });
         ppManage.add(ppManage_Edit);
         ppManage.add(jSeparator3);
 
         ppManage_Delete.setText("Delete");
+        ppManage_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppManage_DeleteActionPerformed(evt);
+            }
+        });
         ppManage.add(ppManage_Delete);
 
         dlgAdd.setModal(true);
@@ -663,8 +689,18 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         dlgSignUp_lblHelpUserName.setText("?");
+        dlgSignUp_lblHelpUserName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dlgSignUp_lblHelpUserNameMouseEntered(evt);
+            }
+        });
 
         dlgSignUp_lblHelpPassword.setText("?");
+        dlgSignUp_lblHelpPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dlgSignUp_lblHelpPasswordMouseEntered(evt);
+            }
+        });
 
         jLabel8.setBackground(new java.awt.Color(0, 204, 0));
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
@@ -701,14 +737,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel20.setText("Name");
 
-        jLabel21.setText("?");
+        dlgSignUp_lblNameQ.setText("?");
+        dlgSignUp_lblNameQ.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dlgSignUp_lblNameQMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout dlgSignUpLayout = new javax.swing.GroupLayout(dlgSignUp.getContentPane());
         dlgSignUp.getContentPane().setLayout(dlgSignUpLayout);
         dlgSignUpLayout.setHorizontalGroup(
             dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgSignUpLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgSignUpLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -729,9 +770,9 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(jLabel20))
                                 .addGap(18, 18, 18)
                                 .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel21)
+                                    .addComponent(dlgSignUp_lblNameQ)
                                     .addComponent(dlgSignUp_lblHelpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 23, Short.MAX_VALUE)
                         .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(dlgSignUpLayout.createSequentialGroup()
                                 .addComponent(dlgSignUp_tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -750,7 +791,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(dlgSignUp_tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(38, Short.MAX_VALUE))))
+                        .addContainerGap(43, Short.MAX_VALUE))))
         );
         dlgSignUpLayout.setVerticalGroup(
             dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -758,10 +799,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel21)
+                    .addComponent(dlgSignUp_lblNameQ)
                     .addComponent(dlgSignUp_tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(dlgSignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dlgSignUp_tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -1068,9 +1109,9 @@ public class MainWindow extends javax.swing.JFrame {
 
                 user = new User(currentUserIdForAdd, currentNameForAdd, currentUserNameForAdd, currentPasswordForAdd, currentIsDefaultForAdd);
                 Globals.currentUser = user;
-                reloadPortfolios(Globals.currentUser.getId());
+                reloadPortfolios();
 
-                if (currentIsDefaultForAdd == true) {
+                if (currentIsDefaultForAdd) {
                     db.updateIsDefaultUserSetFalse();
                     db.updateIsDefaultUserSetTrue();
                 }
@@ -1113,6 +1154,7 @@ public class MainWindow extends javax.swing.JFrame {
             if (name.equals("") ||userN.equals("") || pass.equals("") || passConf.equals("")) {
                 return;
             }
+            user=new User(0,name,userN,pass,isDef);//to check regex
             if (pass.equals(passConf)) {
                 db.signUp(name,userN, pass, isDef);
                 
@@ -1134,9 +1176,14 @@ public class MainWindow extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
-                    "Error",
+        } catch (SQLException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: Name must contain"
+                            + " letters only and be between 2 and 15 characters."+"\n"+"Username must contain"
+                            + " minimum 3 and maximum 15 characters, can be made up of letters,"+"\n"
+                            + " numbers, underscore and hyphen. Password must be between  5 and 10 characters, contain at "+"\n"
+                            + "least one uppercase letter, one lowercase letter and one number.",
+                    "Database error",
                     JOptionPane.ERROR_MESSAGE);
 
         }
@@ -1161,7 +1208,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 
     private void lstPortfoliosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPortfoliosValueChanged
-        Portfolio port = lstPortfolios.getSelectedValue();
+       Portfolio port = lstPortfolios.getSelectedValue();
         if (port == null) {
             currSelectedId = 0;
 
@@ -1173,6 +1220,21 @@ public class MainWindow extends javax.swing.JFrame {
         currSelectedType = port.getPortType();
         //currSelectedUserId = port.getUserId();
         currSelectedAmount = port.getAmount();
+
+        dlgManage_lblId.setText(currSelectedId + "");
+        dlgManage_tfName.setText(currSelectedName);
+        dlgManage_cbbType.setSelectedIndex(currSelectedType.ordinal());
+        dlgManage_cbByDefault.setSelected(currSelectedIsDef);
+        dlgManage_tfCash.setText(currSelectedAmount + "");
+
+        if (currSelectedType == Portfolio.PortType.Real) {
+            dlgManage_tfCash.enable(false);
+        } 
+        if (currSelectedType == Portfolio.PortType.Test) {
+            dlgManage_tfCash.enable(true);
+
+        }
+
 
 
     }//GEN-LAST:event_lstPortfoliosValueChanged
@@ -1225,7 +1287,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             db.addPortfolio(p);
 
-            reloadPortfolios(Globals.currentUser.getId());
+            reloadPortfolios();
         } catch (ParseException | IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this,
                     "Error: you must enter a valid non-negative decimal number as the engine size",
@@ -1261,6 +1323,166 @@ public class MainWindow extends javax.swing.JFrame {
             dlgUser.setVisible(true);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void dlgManage_btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgManage_btnDeleteActionPerformed
+         if (currSelectedId == 0) {
+
+            return;
+        }
+
+        Portfolio delPort = lstPortfolios.getSelectedValue();
+        if (delPort == null) {
+            return;
+        }
+        try {
+            db.deletePortfolio(delPort);
+            reloadPortfolios();
+            dlgManage_tfName.setText("");
+            dlgManage_tfCash.setText("");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error executing SQL query (DELETE)\n" + ex.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_dlgManage_btnDeleteActionPerformed
+
+    private void ppManage_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppManage_DeleteActionPerformed
+        if (currSelectedId == 0) {
+
+            return;
+        }
+
+        Portfolio delPort = lstPortfolios.getSelectedValue();
+        if (delPort == null) {
+            return;
+        }
+        try {
+            db.deletePortfolio(delPort);
+            reloadPortfolios();
+            dlgManage_tfName.setText("");
+            dlgManage_tfCash.setText("");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error executing SQL query (DELETE)\n" + ex.getMessage(),
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ppManage_DeleteActionPerformed
+
+    private void ppManage_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppManage_EditActionPerformed
+        try {
+            
+            
+
+           int id = Integer.parseInt(dlgManage_lblId.getText());
+            
+            String portN = dlgManage_tfName.getText();
+            if (portN.equals("")) {
+                return;
+            }
+
+             Portfolio.PortType portT = Portfolio.PortType.valueOf(dlgManage_cbbType.getSelectedItem().toString());
+             
+             boolean isDef = dlgManage_cbByDefault.isSelected();
+             
+            DecimalFormat formatter = new DecimalFormat("###.##");
+            formatter.setParseBigDecimal(true);
+            BigDecimal amount = (BigDecimal) formatter.parse(dlgManage_tfCash.getText());
+            
+            //System.out.println(dlgAdd_sEngine.getValue()+"");
+            //System.out.println(engine);
+
+           
+
+            Portfolio p;
+
+            p = new Portfolio(id, portN, isDef, portT, amount);
+
+           
+                db.updatePortfolio(p);
+               
+            dlgAdd.setVisible(false);
+            reloadPortfolios();
+        } catch (ParseException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: you must enter a valid non-negative decimal number as the engine size",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // display dialog with error message and terminate the program
+            JOptionPane.showMessageDialog(this,
+                    "Error adding/updating record:\n" + ex.getMessage(),
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ppManage_EditActionPerformed
+
+    private void dlgManage_btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgManage_btnEditActionPerformed
+         try {
+            
+            
+
+           int id = Integer.parseInt(dlgManage_lblId.getText());
+            
+            String portN = dlgManage_tfName.getText();
+            if (portN.equals("")) {
+                return;
+            }
+
+             Portfolio.PortType portT = Portfolio.PortType.valueOf(dlgManage_cbbType.getSelectedItem().toString());
+             
+             boolean isDef = dlgManage_cbByDefault.isSelected();
+             
+            DecimalFormat formatter = new DecimalFormat("###.##");
+            formatter.setParseBigDecimal(true);
+            BigDecimal amount = (BigDecimal) formatter.parse(dlgManage_tfCash.getText());
+            
+            
+
+           
+
+            Portfolio p;
+
+            p = new Portfolio(id, portN, isDef, portT, amount);
+
+           
+                db.updatePortfolio(p);
+               
+            dlgAdd.setVisible(false);
+            reloadPortfolios();
+        } catch (ParseException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: you must enter a valid non-negative decimal number as the engine size",
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // display dialog with error message and terminate the program
+            JOptionPane.showMessageDialog(this,
+                    "Error adding/updating record:\n" + ex.getMessage(),
+                    "Database error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_dlgManage_btnEditActionPerformed
+
+    private void dlgManage_btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgManage_btnCancelActionPerformed
+        dlgManage.setVisible(false);
+    }//GEN-LAST:event_dlgManage_btnCancelActionPerformed
+
+    private void dlgSignUp_lblNameQMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dlgSignUp_lblNameQMouseEntered
+        dlgSignUp_lblNameQ.setToolTipText("Letters only, between 2 and 15 characters");
+    }//GEN-LAST:event_dlgSignUp_lblNameQMouseEntered
+
+    private void dlgSignUp_lblHelpUserNameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dlgSignUp_lblHelpUserNameMouseEntered
+        dlgSignUp_lblHelpUserName.setToolTipText( "Between 3 and 10 characters"
+                + " (letters, numbers, underscore and hyphen)");
+    }//GEN-LAST:event_dlgSignUp_lblHelpUserNameMouseEntered
+
+    private void dlgSignUp_lblHelpPasswordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dlgSignUp_lblHelpPasswordMouseEntered
+        dlgSignUp_lblHelpPassword.setToolTipText( "Between  5 and 10 characters, at "
+                            + "least one uppercase letter, one lowercase letter and one number");
+    }//GEN-LAST:event_dlgSignUp_lblHelpPasswordMouseEntered
 
     public void rewriteMainTable(Object[][] newData) {
         tm = new MyTableModel(newData);
@@ -1338,6 +1560,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField dlgAdd_tfSymbol;
     private javax.swing.JDialog dlgManage;
     private javax.swing.JButton dlgManage_btnAdd;
+    private javax.swing.JButton dlgManage_btnCancel;
     private javax.swing.JButton dlgManage_btnDelete;
     private javax.swing.JButton dlgManage_btnEdit;
     private javax.swing.JCheckBox dlgManage_cbByDefault;
@@ -1356,6 +1579,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox dlgSignUp_cbbDefaultUser;
     private javax.swing.JLabel dlgSignUp_lblHelpPassword;
     private javax.swing.JLabel dlgSignUp_lblHelpUserName;
+    private javax.swing.JLabel dlgSignUp_lblNameQ;
     private javax.swing.JLabel dlgSignUp_lblPassOk;
     private javax.swing.JLabel dlgSignUp_lblUserOk;
     private javax.swing.JButton dlgSignUp_rbtCancel;
@@ -1370,7 +1594,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox dlgUser_cbbDefaultUser;
     private javax.swing.JPasswordField dlgUser_tfPassword;
     private javax.swing.JTextField dlgUser_tfUsername;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1384,7 +1607,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

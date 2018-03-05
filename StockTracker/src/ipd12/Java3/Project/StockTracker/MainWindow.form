@@ -166,7 +166,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="84" max="-2" attributes="0"/>
+                          <Component id="dlgManage_btnCancel" min="-2" pref="84" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="dlgManage_btnAdd" min="-2" pref="96" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -211,7 +211,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dlgManage_btnCancel" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dlgManage_btnAdd" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dlgManage_btnEdit" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dlgManage_btnDelete" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -234,16 +234,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlgManage_btnEditActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="dlgManage_btnDelete">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlgManage_btnDeleteActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="dlgManage_btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlgManage_btnCancelActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -348,6 +357,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppManage_EditActionPerformed"/>
+          </Events>
         </MenuItem>
         <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
         </Component>
@@ -355,6 +367,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppManage_DeleteActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>
@@ -731,7 +746,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -755,12 +770,12 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dlgSignUp_lblNameQ" min="-2" max="-2" attributes="0"/>
                                       <Component id="dlgSignUp_lblHelpUserName" min="-2" pref="12" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" pref="23" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="dlgSignUp_tfPassword" min="-2" pref="189" max="-2" attributes="0"/>
@@ -784,7 +799,7 @@
                                   <Component id="jLabel8" min="-2" pref="16" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="38" max="32767" attributes="0"/>
+                          <EmptySpace pref="43" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -796,11 +811,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dlgSignUp_lblNameQ" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dlgSignUp_tfName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="dlgSignUp_tfUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -859,11 +874,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="?"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dlgSignUp_lblHelpUserNameMouseEntered"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="dlgSignUp_lblHelpPassword">
           <Properties>
             <Property name="text" type="java.lang.String" value="?"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dlgSignUp_lblHelpPasswordMouseEntered"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -937,10 +958,13 @@
             <Property name="text" type="java.lang.String" value="Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel21">
+        <Component class="javax.swing.JLabel" name="dlgSignUp_lblNameQ">
           <Properties>
             <Property name="text" type="java.lang.String" value="?"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dlgSignUp_lblNameQMouseEntered"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="dlgSignUp_tfName">
         </Component>

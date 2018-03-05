@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 class RecordNotFoundException extends SQLException {
@@ -95,20 +96,25 @@ public class Database {
      
      
     ArrayList<Portfolio> getAllPortfolios()throws SQLException {
-        String sql = "SELECT * FROM portfolios";
+         String mode="Test";
+        if (MainWindow.isRealMode){
+            mode="Real";
+        }
+        String sql = "SELECT * FROM portfolios WHERE userId = " +
+                Globals.currentUser.getId() + " AND type = '"+ mode + "'";
         ArrayList<Portfolio> list = new ArrayList<>();
-        
+
         try (Statement stmt = conn.createStatement()) {
             ResultSet result = stmt.executeQuery(sql);
             while (result.next()) {
                 long id = result.getLong("id");
                 String name = result.getString("name");
-                Portfolio.PortType type = PortType.valueOf(result.getString("type"));
-                
+                Portfolio.PortType type = Portfolio.PortType.valueOf(result.getString("type"));
+
                 boolean isDef = result.getBoolean("isDefault");
                 //long userId = result.getLong("userId");
                 BigDecimal amount = result.getBigDecimal("availCash");
-                Portfolio portfolio = new Portfolio(id, name,isDef, type, amount);
+                Portfolio portfolio = new Portfolio(id, name, isDef, type, amount);
                 list.add(portfolio);
             }
         }
@@ -223,5 +229,40 @@ public class Database {
             //ADD ERROR  EDDING- in WINDOW
         }
         return list;
+    }
+    
+     void deletePortfolio(Portfolio delPort) throws SQLException {
+        Object[] options
+                = {
+                    "Delete", "Cancel"
+                };
+        int decision = JOptionPane.showOptionDialog(null,
+                "Are you sure you want to delete: " + delPort.toString() + "?",
+                "Confirm deletion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null, //do not use a custom Icon
+                options, //the titles of buttons
+                options[0]); //default button title
+        if (decision == JOptionPane.YES_OPTION) {
+            String sql = "DELETE from portfolios where id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, delPort.getId());
+            statement.executeUpdate();
+
+        }
+    }
+
+    void updatePortfolio(Portfolio p) throws SQLException {
+        String sql = "UPDATE portfolios set name = ?, type = ?,userId=?, isDefault=?,"
+                + "availCash=?  where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, p.getName());
+        stmt.setString(2, p.getPortType() + "");
+        stmt.setLong(3, Globals.currentUser.getId());
+        stmt.setBoolean(4, p.isIsDefault());
+        stmt.setBigDecimal(5, p.getAmount());
+        stmt.setLong(6, p.getId());
+        stmt.executeUpdate();
     }
 }
