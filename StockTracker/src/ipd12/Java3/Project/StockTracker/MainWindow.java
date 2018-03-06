@@ -7,23 +7,35 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
+import jxl.write.WriteException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -50,6 +62,8 @@ public class MainWindow extends javax.swing.JFrame {
             db = new Database();
             initComponents();
             
+            FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("Excel files (*.xls)", "xls");
+            fileChooser.setFileFilter(csvFilter);
             cbbPortfolio.addItemListener(new ItemChangeListener());
 
             tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -200,6 +214,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         dlgSignUp_lblNameQ = new javax.swing.JLabel();
         dlgSignUp_tfName = new javax.swing.JTextField();
+        fileChooser = new javax.swing.JFileChooser();
         lblStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -895,6 +910,11 @@ public class MainWindow extends javax.swing.JFrame {
         tTable.setComponentPopupMenu(ppMain);
         tTable.setNextFocusableComponent(btRefresh);
         tTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tTableMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tTable);
         tTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tTable.getColumnModel().getColumnCount() > 0) {
@@ -1047,6 +1067,11 @@ public class MainWindow extends javax.swing.JFrame {
         mFile.setText(" File ");
 
         smExpExcel.setText("Export to Excel");
+        smExpExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smExpExcelActionPerformed(evt);
+            }
+        });
         mFile.add(smExpExcel);
 
         smExpCsv.setText("Export to CSV");
@@ -1612,22 +1637,48 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_dlgAdd_tfSymbolPropertyChange
 
     private void ppMain_BrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BrowseActionPerformed
+        // PopUp menu - button Browse THIS
         try {
+            int sRow = tTable.getSelectedRow();
+            Trade t = currentTradesSet.get(sRow);
+            String url = "https://www.nasdaq.com/symbol/" + t.symbol;
             Desktop desktop = java.awt.Desktop.getDesktop();
-            URI oURL = new URI("http://www.google.com");
+            URI oURL = new URI(url);
             desktop.browse(oURL);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        
+        } catch (ArrayIndexOutOfBoundsException | URISyntaxException | IOException ex) {
+        }
     }//GEN-LAST:event_ppMain_BrowseActionPerformed
 
-//    public void rewriteMainTable(Object[][] newData) {
-//        tm = new MyTableModel(newData);
-//        tTable.setModel(tm);
-//    }
+    private void tTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tTableMouseReleased
+      
+               
+    }//GEN-LAST:event_tTableMouseReleased
 
-//    public void rewriteMainTable(Object[][] newData) {
+    private void smExpExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smExpExcelActionPerformed
+        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            String path = file.getAbsolutePath();
+            if (!path.matches(".+\\.[A-Za-z0-9]{1,20}")) {
+                System.out.println("no extension match");
+                file = new File(path + ".xls");
+            }
+            ExcelWriter ew = new ExcelWriter(file.getPath());
+            try {
+                ew.write(tm); // write current table model
+
+            } catch (IOException | WriteException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Error access to the file :\n" + ex.getMessage(),
+                        "File saving error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            JOptionPane.showMessageDialog(this,
+                        "The portfolio was successfully exported!",
+                        "Confirmation message",
+                        JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_smExpExcelActionPerformed
+
     public void rewriteMainTable() {
         StringJoiner symbolJoiner = new StringJoiner(",");
         int quantity; 
@@ -1674,9 +1725,13 @@ public class MainWindow extends javax.swing.JFrame {
                     gain = change.multiply((BigDecimal) newData[row][1]);
                     newData[row][6] = gain;
                     dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue()) * 100;
+                    if (((BigDecimal)newData[row][1]).doubleValue() < 0){
+                        dPercent=-dPercent;
+                    } 
                     newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
                     totalGain = totalGain.add(gain);
                     totalValue = totalValue.add(value);
+                    
                     lblStatus.setText("Prices are up to date");
                     lblTotalValue.setText("$ "+ totalValue.toString());
                     lblTotalGain.setText("$ "+ totalGain.toString());
@@ -1754,7 +1809,7 @@ public class MainWindow extends javax.swing.JFrame {
                     cbIsDefaultPortfolio.setSelected(false);
                 }
                 if(!Globals.firstLoad){
-                    rewriteMainTable();
+                    rewriteMainTable();                  
                 }
             }
         }
@@ -1854,6 +1909,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox dlgUser_cbbDefaultUser;
     private javax.swing.JPasswordField dlgUser_tfPassword;
     private javax.swing.JTextField dlgUser_tfUsername;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -41,6 +41,7 @@ public class MyTableModel extends AbstractTableModel {
             return data[row][col];
         }
 
+
         /*
      * JTable uses this method to determine the default renderer/ editor for
      * each cell. If we didn't implement this method, then the last column

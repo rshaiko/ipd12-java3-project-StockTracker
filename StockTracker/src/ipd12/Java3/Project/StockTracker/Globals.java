@@ -16,4 +16,5 @@ public class Globals {
     static Portfolio currentPortfolio;
     static boolean firstLoad = true;
     static ArrayList<Trade> currentTradesSet;
+    Object [][] currentTableData;
 }
