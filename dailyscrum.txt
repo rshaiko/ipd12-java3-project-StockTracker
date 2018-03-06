@@ -127,3 +127,17 @@ Each member write down 3 questions
 -charts
 -export to csv
 3. charts
+
+06.03.2018 Roman
+1. Done since last scrum 
+- adding trade validations
+- Export to Excel
+- Open SYMBOL in browser
+2.  Plan until next Scrum 
+- Add trade, close trade
+- Edit Trade
+- TEST mode implementation
+3. Need assistance / figure things out
+
+- how to export to Excel
+- how to build chart
