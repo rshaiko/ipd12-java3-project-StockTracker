@@ -310,19 +310,22 @@ public class Database {
         stmt.executeUpdate();
     }
 
-    int checkSymbol(String symbol) {
+    int[] checkSymbol(String symbol) {
 
-        String sql = "Select count(*) as count from symbols where symbol like '%" + symbol + "%'";
-
-        int numberReturned=0;
+        //String sql = "Select count(*) as cou from symbols where symbol like '%" + symbol + "%'";
+        String sql = "Select count(*) as cou, (Select count(*) from symbols where symbol like '"+ symbol +"') as uni from symbols where symbol like '" + symbol + "%'";
+        //System.out.println(sql);
+        int [] numberReturned={0,0};
         try (Statement stmt = getConn().createStatement()) {
             ResultSet result = stmt.executeQuery(sql);
             while (result.next()) {
-                numberReturned = result.getInt("count");
+                numberReturned[0] = result.getInt("cou");
+                numberReturned[1] = result.getInt("uni");
             } 
         }catch (SQLException e) {
             //ADD ERROR  EDDING- in WINDOW
         }
-         return numberReturned;
+        //System.out.println(numberReturned[0]+ "asdqa "+numberReturned[1]);
+        return numberReturned;
     }
 }

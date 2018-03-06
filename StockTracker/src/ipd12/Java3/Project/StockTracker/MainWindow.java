@@ -3,6 +3,7 @@ package ipd12.Java3.Project.StockTracker;
 import static ipd12.Java3.Project.StockTracker.Globals.currentPortfolio;
 import static ipd12.Java3.Project.StockTracker.Globals.currentTradesSet;
 import static ipd12.Java3.Project.StockTracker.Globals.currentUser;
+import ipd12.Java3.Project.StockTracker.Trade.TradeType;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ItemEvent;
@@ -31,6 +32,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -64,31 +67,19 @@ public class MainWindow extends javax.swing.JFrame {
             
             FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("Excel files (*.xls)", "xls");
             fileChooser.setFileFilter(csvFilter);
-            cbbPortfolio.addItemListener(new ItemChangeListener());
-
-            tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent lse) throws UnsupportedOperationException {
-                    try {
-                        int sRow = tTable.getSelectedRow();
-                        Trade t = currentTradesSet.get(sRow);
-                        String status = String.format("   %s - %s (%s) trade opened since %s", t.name, t.sector, t.industry, t.opDate + "");
-                        lblStatus.setText(status);
-                    } catch (ArrayIndexOutOfBoundsException ex) {
-                    }
-                    
-                }
-            });
+            
+            //Table model initialazation 
             tm = new MyTableModel( new Object[][] {{"", "", "", "", "", "", "", ""}} );
             tTable.setModel(tm);
             tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            tTable.getColumnModel().getColumn(0).setPreferredWidth(120);
-            tTable.getColumnModel().getColumn(1).setPreferredWidth(70);
-            tTable.getColumnModel().getColumn(2).setPreferredWidth(90);
-            tTable.getColumnModel().getColumn(3).setPreferredWidth(90);
-            tTable.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(7).setPreferredWidth(48);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
         } catch (SQLException ex) {
             ex.printStackTrace();
             // display dialog with error message and terminate the program
@@ -98,6 +89,47 @@ public class MainWindow extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
+        
+        //Listeners
+        cbbPortfolio.addItemListener(new ItemChangeListener());
+
+        tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) throws UnsupportedOperationException {
+                try {
+                    int sRow = tTable.getSelectedRow();
+                    Trade t = currentTradesSet.get(sRow);
+                    String status = String.format("   %s - %s (%s) trade opened since %s", t.name, t.sector, t.industry, t.opDate + "");
+                    lblStatus.setText(status);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                }
+
+            }
+        });
+        dlgAdd_tfSymbol.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void warn() {
+                String symbol = dlgAdd_tfSymbol.getText();
+                checkSymbol(symbol);
+//                System.out.println("WOW!");
+//                if (Integer.parseInt(dlgAdd_tfSymbol.getText()) <= 0) {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Error: Please enter number bigger than 0", "Error Massage",
+//                            JOptionPane.ERROR_MESSAGE);
+//                }
+            }
+        });
 
     }
 
@@ -125,6 +157,8 @@ public class MainWindow extends javax.swing.JFrame {
             currentPortfolio = null;
             lblStatus.setText("Add your new portfolio in Portfolio Manager");
         }
+        
+        
     }
 
     /**
@@ -176,8 +210,8 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_tfSymbol = new javax.swing.JTextField();
         dlgAdd_btAdd = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        dlgAdd_rbBuy = new javax.swing.JRadioButton();
-        dlgAdd_rbSell = new javax.swing.JRadioButton();
+        Buy = new javax.swing.JRadioButton();
+        Sell = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         dlgAdd_rbShortSell = new javax.swing.JRadioButton();
         dlgAdd_rbCoverShort = new javax.swing.JRadioButton();
@@ -185,6 +219,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_btCancel = new javax.swing.JButton();
         dlgAdd_lblSymbolOk = new javax.swing.JLabel();
         dlgAdd_lblStatus = new javax.swing.JLabel();
+        dlgAdd_lblStatus2 = new javax.swing.JLabel();
         btgAdd = new javax.swing.ButtonGroup();
         dlgUser = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
@@ -487,6 +522,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         ppManage.add(ppManage_Delete);
 
+        dlgAdd.setTitle("New trade");
         dlgAdd.setModal(true);
         dlgAdd.setResizable(false);
 
@@ -506,22 +542,27 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         dlgAdd_btAdd.setText("Add Trade");
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btgAdd.add(dlgAdd_rbBuy);
-        dlgAdd_rbBuy.setText("Buy");
-        dlgAdd_rbBuy.addActionListener(new java.awt.event.ActionListener() {
+        dlgAdd_btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dlgAdd_rbBuyActionPerformed(evt);
+                dlgAdd_btAddActionPerformed(evt);
             }
         });
 
-        btgAdd.add(dlgAdd_rbSell);
-        dlgAdd_rbSell.setText("Sell");
-        dlgAdd_rbSell.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btgAdd.add(Buy);
+        Buy.setText("Buy");
+        Buy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dlgAdd_rbSellActionPerformed(evt);
+                BuyActionPerformed(evt);
+            }
+        });
+
+        btgAdd.add(Sell);
+        Sell.setText("Sell");
+        Sell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SellActionPerformed(evt);
             }
         });
 
@@ -531,9 +572,9 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dlgAdd_rbBuy)
+                .addComponent(Buy)
                 .addGap(10, 10, 10)
-                .addComponent(dlgAdd_rbSell)
+                .addComponent(Sell)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -541,8 +582,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgAdd_rbBuy)
-                    .addComponent(dlgAdd_rbSell))
+                    .addComponent(Buy)
+                    .addComponent(Sell))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -590,10 +631,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         dlgAdd_lblSymbolOk.setBackground(new java.awt.Color(51, 204, 0));
-        dlgAdd_lblSymbolOk.setForeground(new java.awt.Color(51, 204, 0));
+        dlgAdd_lblSymbolOk.setForeground(new java.awt.Color(204, 204, 204));
         dlgAdd_lblSymbolOk.setText("");
 
-        dlgAdd_lblStatus.setText("symbol not found");
+        dlgAdd_lblStatus.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        dlgAdd_lblStatus.setText(" ");
+
+        dlgAdd_lblStatus2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        dlgAdd_lblStatus2.setText(" ");
 
         javax.swing.GroupLayout dlgAddLayout = new javax.swing.GroupLayout(dlgAdd.getContentPane());
         dlgAdd.getContentPane().setLayout(dlgAddLayout);
@@ -607,14 +652,17 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dlgAdd_tfNumberOfShares))
                         .addGap(18, 18, 18)
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dlgAdd_lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dlgAdd_lblSymbolOk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dlgAdd_btAdd))
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dlgAddLayout.createSequentialGroup()
+                                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dlgAdd_lblSymbolOk)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dlgAdd_btAdd))
+                            .addComponent(dlgAdd_lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dlgAdd_lblStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(dlgAddLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -645,13 +693,15 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dlgAdd_lblSymbolOk)))
                     .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dlgAdd_lblStatus)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dlgAdd_lblStatus2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1169,13 +1219,13 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd.setVisible(false);
     }//GEN-LAST:event_dlgAdd_btCancelActionPerformed
 
-    private void dlgAdd_rbSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_rbSellActionPerformed
+    private void SellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SellActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dlgAdd_rbSellActionPerformed
+    }//GEN-LAST:event_SellActionPerformed
 
-    private void dlgAdd_rbBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_rbBuyActionPerformed
+    private void BuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dlgAdd_rbBuyActionPerformed
+    }//GEN-LAST:event_BuyActionPerformed
 
     private void mMenuBarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMenuBarMouseMoved
         // mMenuBar.set
@@ -1626,14 +1676,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddTradeActionPerformed
 
     private void dlgAdd_tfSymbolKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolKeyTyped
-        String symbol = dlgAdd_tfSymbol.getText()+ evt.getKeyChar();
-        checkSymbol(symbol);
+
     }//GEN-LAST:event_dlgAdd_tfSymbolKeyTyped
 
     private void dlgAdd_tfSymbolPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolPropertyChange
-        System.out.println("EE");
         checkSymbol(dlgAdd_tfSymbol.getText());
-        
     }//GEN-LAST:event_dlgAdd_tfSymbolPropertyChange
 
     private void ppMain_BrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BrowseActionPerformed
@@ -1650,8 +1697,6 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ppMain_BrowseActionPerformed
 
     private void tTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tTableMouseReleased
-      
-               
     }//GEN-LAST:event_tTableMouseReleased
 
     private void smExpExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smExpExcelActionPerformed
@@ -1678,6 +1723,10 @@ public class MainWindow extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_smExpExcelActionPerformed
+
+    private void dlgAdd_btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btAddActionPerformed
+        addTrade();
+    }//GEN-LAST:event_dlgAdd_btAddActionPerformed
 
     public void rewriteMainTable() {
         StringJoiner symbolJoiner = new StringJoiner(",");
@@ -1740,7 +1789,7 @@ public class MainWindow extends javax.swing.JFrame {
                         lblTotalGain.setForeground(Color.red);
                     }
                 }
-            } catch (NullPointerException ex) {
+            } catch (NullPointerException | org.json.JSONException ex) {
                 lblStatus.setText("Error: API connection failed! Can not update the prices");
                 for (int row = 0; row < rows; row++) {
                     newData[row][3] = "updating...";
@@ -1752,11 +1801,29 @@ public class MainWindow extends javax.swing.JFrame {
             }
             tm = new MyTableModel(newData);
             tTable.setModel(tm);
+            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
+            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
         } else {
             lblStatus.setText("You don't have active trades in this portfolio");
             Object[][] newData = new Object[rows][8];
             tm = new MyTableModel(newData);
             tTable.setModel(tm);
+            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
+            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
         }
         cbbPortfolio.enable(true);
     }
@@ -1765,28 +1832,123 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_lblStatus.setText(" ");
         dlgAdd_tfNumberOfShares.setText("");
         btgAdd.clearSelection();
+        dlgAdd_tfSymbol.setBackground(Color.white);
         dlgAdd_tfSymbol.setText("");
     }
 
     private void checkSymbol(String symbol) {
-        
-        if (symbol.matches("[a-zA-Z]+")&&symbol.length()<20 && symbol.length()>0){
+        if (symbol.length()==0){
+        dlgAdd_lblStatus.setText("Please enter a symbol");
+        dlgAdd_lblStatus2.setText(" ");
+        dlgAdd_lblSymbolOk.setForeground(Color.red);
+        dlgAdd_tfSymbol.setBackground(Color.white);
+        dlgAdd_lblSymbolOk.setText("X");
+        dlgAdd_btAdd.enable(false);
+        return;
+        }
+        if (symbol.matches("[a-zA-Z]+")&&symbol.length()<=20 && symbol.length()>0){
             symbol = symbol.toUpperCase();
-            int symbolsFound = db.checkSymbol(symbol);
-            dlgAdd_lblStatus.setText(symbolsFound+" matches found");
-            if (symbolsFound==1){
+            int[] symbolsFound = db.checkSymbol(symbol);
+            String statusMessage = symbolsFound[0]+" matches found";
+            dlgAdd_lblStatus.setText(statusMessage);
+            if (symbolsFound[1]==1){
+                dlgAdd_lblStatus2.setText("Unique symbol \""+ symbol + "\" exists!") ;
+                dlgAdd_lblStatus.setText(statusMessage);
                 dlgAdd_lblSymbolOk.setForeground(Color.green);
                 dlgAdd_lblSymbolOk.setText("");
+                dlgAdd_btAdd.enable(true);
+                dlgAdd_tfSymbol.setBackground(Color.decode("#CCFFCC"));
+            }
+            else{
+                dlgAdd_btAdd.enable(false);
+                dlgAdd_lblStatus2.setText("\nNO Unique symbol \""+ symbol + "\" found!");
+                dlgAdd_lblSymbolOk.setForeground(Color.red);
+                dlgAdd_lblSymbolOk.setText("X");
+                dlgAdd_tfSymbol.setBackground(Color.white);
             }
         }
-        else{
-            dlgAdd_lblSymbolOk.setForeground(Color.red);
-                dlgAdd_lblSymbolOk.setText("X");
-//            JOptionPane.showMessageDialog(this,
-//                    "Error: unable to reload transactions\n",
-//                    "Database error",
-//                    JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void addTrade() {
+        String number = dlgAdd_tfNumberOfShares.getText();
+        boolean numberOk = false;
+        if(number.matches("[0-9]+")){
+            if(Integer.valueOf(number)>0){
+                numberOk = true;
+            }
+        } 
+        if (!numberOk){
+            JOptionPane.showMessageDialog(this,
+            "Please enter positive integer number of stocks\n",
+            "Data format error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        
+        String symbol = dlgAdd_tfSymbol.getText().toUpperCase();
+        if(dlgAdd_lblSymbolOk.getText().equals("X")){
+            return;
+        }
+        
+        try {
+            String tradeType = btgAdd.getSelection().getActionCommand();
+        } catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this,
+            "Please select a trade type",
+            "Data format error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        
+        //getting current price
+        BigDecimal lastPrice = new BigDecimal(0);
+        try {
+                String url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=" + symbol + "&apikey=FS3KK17YEXZPQ4W5";
+                JSONObject json = API.getJson(url);
+                JSONArray arr = json.getJSONArray("Stock Quotes");
+                JSONObject o = arr.getJSONObject(0);
+                lastPrice = o.getBigDecimal("2. price").setScale(2, RoundingMode.HALF_UP);
+            } catch (NullPointerException | org.json.JSONException ex) {
+                JOptionPane.showMessageDialog(this,"Error API request for "+symbol+ " price", "Connection error!",
+                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        if (lastPrice==new BigDecimal(0)){
+            JOptionPane.showMessageDialog(this,"Error API request for "+symbol+ " price", "Connection error!",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+        String message;
+        TradeType tt;
+        BigDecimal amount = lastPrice.multiply(new BigDecimal(number));
+        boolean noCheck=false;
+        if (Buy.isSelected()) {
+            tt = TradeType.Buy;
+            message="Please confirm you want to BUY " +  number + " share(s) of " + symbol + "\n for an estimated total of $" + amount + "?";
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this, message, "Confirmation the trade", dialogButton);
+            if(dialogResult == 0) {
+              System.out.println("Yes option");
+            } else {
+              System.out.println("No Option");
+            } 
+            
+            
+            
+            
+            
+            noCheck=true;
+        } else {
+            tt = TradeType.ShortSell;
+            noCheck=true;
+        }
+        
+        
+        
+        System.out.println(lastPrice.toString());
     }
 
     class ItemChangeListener implements ItemListener {
@@ -1852,6 +2014,8 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Buy;
+    private javax.swing.JRadioButton Sell;
     private javax.swing.JButton btAddTrade;
     private javax.swing.JButton btDeleteTrade;
     private javax.swing.JButton btEditTrade;
@@ -1866,10 +2030,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton dlgAdd_btCancel;
     private javax.swing.JButton dlgAdd_btReset;
     private javax.swing.JLabel dlgAdd_lblStatus;
+    private javax.swing.JLabel dlgAdd_lblStatus2;
     private javax.swing.JLabel dlgAdd_lblSymbolOk;
-    private javax.swing.JRadioButton dlgAdd_rbBuy;
     private javax.swing.JRadioButton dlgAdd_rbCoverShort;
-    private javax.swing.JRadioButton dlgAdd_rbSell;
     private javax.swing.JRadioButton dlgAdd_rbShortSell;
     private javax.swing.JTextField dlgAdd_tfNumberOfShares;
     private javax.swing.JTextField dlgAdd_tfSymbol;
