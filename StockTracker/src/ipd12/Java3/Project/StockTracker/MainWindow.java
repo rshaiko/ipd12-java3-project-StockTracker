@@ -1914,7 +1914,7 @@ public class MainWindow extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        if (lastPrice==new BigDecimal(0)){
+        if (lastPrice.toString().equals("0.00")){
             JOptionPane.showMessageDialog(this,"Error API request for "+symbol+ " price", "Connection error!",
             JOptionPane.ERROR_MESSAGE);
             return;
