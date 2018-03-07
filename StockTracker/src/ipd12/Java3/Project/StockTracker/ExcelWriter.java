@@ -126,8 +126,8 @@ public ExcelWriter(String fn)
         s.addCell(n);
         // %
         String pValue = tm.getValueAt(row, 7).toString();
-        pValue = pValue.replaceAll(" %", "");
-        n = new Number(9, row+1, (Double.valueOf(pValue))/100, cfi4);
+        //pValue = pValue.replaceAll(" %", "");
+        n = new Number(9, row+1, (Double.valueOf(pValue)), cfi4);
         s.addCell(n);
     }
     CellView cf = new CellView();

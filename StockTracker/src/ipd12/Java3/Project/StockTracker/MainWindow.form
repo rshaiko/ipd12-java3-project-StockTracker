@@ -408,96 +408,100 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="dlgAdd_btAdd" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="dlgAdd_btCancel" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="dlgAdd_btReset" min="-2" pref="100" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel16" max="32767" attributes="0"/>
-                                  <Component id="dlgAdd_tfNumberOfShares" linkSize="4" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="dlgAdd_lblSymbolId" min="-2" pref="50" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel18" max="32767" attributes="0"/>
-                                      <Component id="dlgAdd_tfSymbol" linkSize="4" pref="105" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="dlgAdd_lblSymbolOk" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel18" max="32767" attributes="0"/>
+                                          <Component id="dlgAdd_tfSymbol" linkSize="4" pref="105" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel16" max="32767" attributes="0"/>
+                                          <Component id="dlgAdd_tfNumberOfShares" linkSize="4" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <Component id="dlgAdd_lblStatus" min="-2" pref="145" max="-2" attributes="0"/>
-                              <Component id="dlgAdd_lblStatus2" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="dlgAdd_lblStatus" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dlgAdd_tfPrice" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                      <Component id="dlgAdd_lblStatus2" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="dlgAdd_btAdd" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="dlgAdd_lblSymbolId" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="dlgAdd_btCancel" linkSize="6" min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="dlgAdd_btReset" linkSize="6" min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="96" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="79" max="32767" attributes="0"/>
-                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="dlgAdd_tfNumberOfShares" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="dlgAdd_tfSymbol" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="dlgAdd_lblSymbolOk" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="dlgAdd_lblStatus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="dlgAdd_lblStatus2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="dlgAdd_lblSymbolId" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="dlgAdd_btReset" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="dlgAdd_btCancel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dlgAdd_lblStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="dlgAdd_tfSymbol" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dlgAdd_lblSymbolOk" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dlgAdd_lblStatus2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="dlgAdd_tfNumberOfShares" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dlgAdd_tfPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="dlgAdd_btAdd" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="dlgAdd_btAdd" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="dlgAdd_lblSymbolId" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dlgAdd_btCancel" linkSize="5" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="dlgAdd_btReset" linkSize="5" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" pref="35" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -558,7 +562,7 @@
                           <Component id="Buy" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Sell" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -568,6 +572,9 @@
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btgAdd"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buy"/>
               </Properties>
@@ -579,6 +586,9 @@
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btgAdd"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sell"/>
               </Properties>
@@ -602,9 +612,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="dlgAdd_rbShortSell" min="-2" max="-2" attributes="0"/>
+                      <Component id="ShortSell" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="dlgAdd_rbCoverShort" min="-2" max="-2" attributes="0"/>
+                      <Component id="CoverAShort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -614,8 +624,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="dlgAdd_rbShortSell" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dlgAdd_rbCoverShort" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ShortSell" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CoverAShort" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -623,18 +633,24 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="dlgAdd_rbShortSell">
+            <Component class="javax.swing.JRadioButton" name="ShortSell">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btgAdd"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Short Sell"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="dlgAdd_rbCoverShort">
+            <Component class="javax.swing.JRadioButton" name="CoverAShort">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btgAdd"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cover a Short"/>
               </Properties>
@@ -691,6 +707,19 @@
             </Property>
             <Property name="text" type="java.lang.String" value="sdfsfsd"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Price"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="dlgAdd_tfPrice">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlgAdd_tfPriceActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1050,6 +1079,11 @@
     <Component class="javax.swing.JFileChooser" name="fileChooser">
     </Component>
     <Menu class="javax.swing.JMenuBar" name="mMenuBar">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="mMenuBarMouseMoved"/>
       </Events>
@@ -1057,6 +1091,9 @@
         <Menu class="javax.swing.JMenu" name="mFile">
           <Properties>
             <Property name="text" type="java.lang.String" value=" File "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="smExpExcel">
@@ -1083,17 +1120,26 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mTrade">
           <Properties>
-            <Property name="text" type="java.lang.String" value=" Add trade/Trade now "/>
+            <Property name="text" type="java.lang.String" value=" Add trade"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mSwitch">
           <Properties>
             <Property name="text" type="java.lang.String" value=" Switch to Test Mode "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mPortfolios">
           <Properties>
             <Property name="text" type="java.lang.String" value=" Manage portfolios "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mPortfoliosMouseClicked"/>
@@ -1102,6 +1148,9 @@
         <Menu class="javax.swing.JMenu" name="mReports">
           <Properties>
             <Property name="text" type="java.lang.String" value=" Create report "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="smReportCurrent">
@@ -1118,17 +1167,23 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mEmpty">
           <Properties>
-            <Property name="text" type="java.lang.String" value="                                                                                         "/>
+            <Property name="text" type="java.lang.String" value="                                                                                      "/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="User:                               "/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mLogin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Log In"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mLoginMouseClicked"/>
@@ -1171,7 +1226,7 @@
     <Component class="javax.swing.JLabel" name="lblStatus">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="0"/>
+          <Font name="Tahoma" size="13" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Status"/>
       </Properties>
@@ -1235,7 +1290,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1266,7 +1321,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="357" max="-2" attributes="0"/>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace pref="19" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1302,6 +1357,9 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tTable">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="13" style="0"/>
+                </Property>
                 <Property name="autoResizeMode" type="int" value="0"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="1">
@@ -1368,7 +1426,10 @@
         </Container>
         <Component class="javax.swing.JButton" name="btAddTrade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Trade/Trade Now"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Add Trade"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddTradeActionPerformed"/>
@@ -1376,12 +1437,19 @@
         </Component>
         <Component class="javax.swing.JButton" name="btDeleteTrade">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Delete Trade"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btSaveChanges">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Save Changes"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbbPortfolio">
@@ -1396,12 +1464,19 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="cbIsDefaultPortfolio">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="use by default"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btMove">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Move to another portfolio"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btMoveActionPerformed"/>
@@ -1409,23 +1484,35 @@
         </Component>
         <Component class="javax.swing.JButton" name="btRefresh">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Refresh"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRefreshActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Portfolio:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btEditTrade">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Edit Trade"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Invested:"/>
           </Properties>
@@ -1433,7 +1520,7 @@
         <Component class="javax.swing.JLabel" name="lblTotalInv">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
@@ -1441,7 +1528,7 @@
         <Component class="javax.swing.JLabel" name="lblTotal">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Value:"/>
           </Properties>
@@ -1449,7 +1536,7 @@
         <Component class="javax.swing.JLabel" name="lblTotalValue">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
@@ -1457,7 +1544,7 @@
         <Component class="javax.swing.JLabel" name="lblTotalGainText">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Current profit:"/>
           </Properties>
@@ -1465,7 +1552,7 @@
         <Component class="javax.swing.JLabel" name="lblTotalGain">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>

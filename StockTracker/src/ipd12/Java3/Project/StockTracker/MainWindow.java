@@ -198,14 +198,16 @@ public class MainWindow extends javax.swing.JFrame {
         Buy = new javax.swing.JRadioButton();
         Sell = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
-        dlgAdd_rbShortSell = new javax.swing.JRadioButton();
-        dlgAdd_rbCoverShort = new javax.swing.JRadioButton();
+        ShortSell = new javax.swing.JRadioButton();
+        CoverAShort = new javax.swing.JRadioButton();
         dlgAdd_btReset = new javax.swing.JButton();
         dlgAdd_btCancel = new javax.swing.JButton();
         dlgAdd_lblSymbolOk = new javax.swing.JLabel();
         dlgAdd_lblStatus = new javax.swing.JLabel();
         dlgAdd_lblStatus2 = new javax.swing.JLabel();
         dlgAdd_lblSymbolId = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        dlgAdd_tfPrice = new javax.swing.JTextField();
         btgAdd = new javax.swing.ButtonGroup();
         dlgUser = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
@@ -553,6 +555,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btgAdd.add(Buy);
+        Buy.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Buy.setText("Buy");
         Buy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -561,6 +564,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btgAdd.add(Sell);
+        Sell.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Sell.setText("Sell");
         Sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -586,16 +590,18 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Buy)
                     .addComponent(Sell))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btgAdd.add(dlgAdd_rbShortSell);
-        dlgAdd_rbShortSell.setText("Short Sell");
+        btgAdd.add(ShortSell);
+        ShortSell.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ShortSell.setText("Short Sell");
 
-        btgAdd.add(dlgAdd_rbCoverShort);
-        dlgAdd_rbCoverShort.setText("Cover a Short");
+        btgAdd.add(CoverAShort);
+        CoverAShort.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        CoverAShort.setText("Cover a Short");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -603,9 +609,9 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dlgAdd_rbShortSell)
+                .addComponent(ShortSell)
                 .addGap(18, 18, 18)
-                .addComponent(dlgAdd_rbCoverShort)
+                .addComponent(CoverAShort)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -613,8 +619,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgAdd_rbShortSell)
-                    .addComponent(dlgAdd_rbCoverShort))
+                    .addComponent(ShortSell)
+                    .addComponent(CoverAShort))
                 .addContainerGap())
         );
 
@@ -645,84 +651,99 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_lblSymbolId.setForeground(new java.awt.Color(215, 215, 215));
         dlgAdd_lblSymbolId.setText("sdfsfsd");
 
+        jLabel7.setText("Price");
+
+        dlgAdd_tfPrice.setText(" ");
+        dlgAdd_tfPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlgAdd_tfPriceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dlgAddLayout = new javax.swing.GroupLayout(dlgAdd.getContentPane());
         dlgAdd.getContentPane().setLayout(dlgAddLayout);
         dlgAddLayout.setHorizontalGroup(
             dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgAddLayout.createSequentialGroup()
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(dlgAdd_btAdd)
-                        .addGap(18, 18, 18)
-                        .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dlgAdd_tfNumberOfShares))
-                            .addComponent(dlgAdd_lblSymbolId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(16, 16, 16)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(dlgAddLayout.createSequentialGroup()
-                                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                                .addComponent(dlgAdd_lblSymbolOk)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dlgAdd_lblSymbolOk))
-                            .addComponent(dlgAdd_lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dlgAdd_lblStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)))
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addGroup(dlgAddLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                                    .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(dlgAdd_tfNumberOfShares)))))
+                        .addGap(15, 15, 15)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dlgAddLayout.createSequentialGroup()
+                                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dlgAdd_lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(dlgAdd_tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dlgAdd_lblStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dlgAdd_btAdd))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dlgAddLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dlgAdd_lblSymbolId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         dlgAddLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgAdd_tfNumberOfShares, dlgAdd_tfSymbol});
 
+        dlgAddLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgAdd_btCancel, dlgAdd_btReset});
+
         dlgAddLayout.setVerticalGroup(
             dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgAddLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgAdd_tfNumberOfShares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgAdd_lblSymbolOk))
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(dlgAdd_lblStatus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dlgAdd_lblStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dlgAdd_lblStatus2))
-                    .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(dlgAdd_lblSymbolId)))
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dlgAdd_lblSymbolOk)
+                            .addComponent(dlgAdd_lblStatus2))
+                        .addGap(18, 18, 18)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dlgAdd_tfNumberOfShares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dlgAdd_tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dlgAdd_lblSymbolId)
                 .addGap(11, 11, 11)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(115, 115, 115))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 35, Short.MAX_VALUE))
         );
+
+        dlgAddLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dlgAdd_btCancel, dlgAdd_btReset});
 
         dlgUser.setModal(true);
         dlgUser.setResizable(false);
@@ -968,10 +989,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        lblStatus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblStatus.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         lblStatus.setText("Status");
         getContentPane().add(lblStatus, java.awt.BorderLayout.PAGE_END);
 
+        tTable.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         tTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tTable.setComponentPopupMenu(ppMain);
         tTable.setNextFocusableComponent(btRefresh);
@@ -994,50 +1016,65 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(7).setHeaderValue("%");
         }
 
-        btAddTrade.setText("Add Trade/Trade Now");
+        btAddTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btAddTrade.setText("Add Trade");
         btAddTrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddTradeActionPerformed(evt);
             }
         });
 
+        btDeleteTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btDeleteTrade.setText("Delete Trade");
 
+        btSaveChanges.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btSaveChanges.setText("Save Changes");
+        btSaveChanges.setEnabled(false);
 
         cbbPortfolio.setModel(cbbPortfolioModel);
 
+        cbIsDefaultPortfolio.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         cbIsDefaultPortfolio.setText("use by default");
 
+        btMove.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btMove.setText("Move to another portfolio");
+        btMove.setEnabled(false);
         btMove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btMoveActionPerformed(evt);
             }
         });
 
+        btRefresh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btRefresh.setText("Refresh");
+        btRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRefreshActionPerformed(evt);
+            }
+        });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel9.setText("Portfolio:");
 
+        btEditTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btEditTrade.setText("Edit Trade");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Invested:");
 
-        lblTotalInv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalInv.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTotalInv.setText(" ");
 
-        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotal.setText("Value:");
 
-        lblTotalValue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalValue.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTotalValue.setText(" ");
 
-        lblTotalGainText.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTotalGainText.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalGainText.setText("Current profit:");
 
-        lblTotalGain.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalGain.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTotalGain.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1078,7 +1115,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTotalGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTotalGainText, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1105,7 +1142,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1124,6 +1161,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
+        mMenuBar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mMenuBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 mMenuBarMouseMoved(evt);
@@ -1131,6 +1169,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         mFile.setText(" File ");
+        mFile.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         smExpExcel.setText("Export to Excel");
         smExpExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -1149,13 +1188,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         mMenuBar.add(mFile);
 
-        mTrade.setText(" Add trade/Trade now ");
+        mTrade.setText(" Add trade");
+        mTrade.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         mMenuBar.add(mTrade);
 
         mSwitch.setText(" Switch to Test Mode ");
+        mSwitch.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         mMenuBar.add(mSwitch);
 
         mPortfolios.setText(" Manage portfolios ");
+        mPortfolios.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         mPortfolios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mPortfoliosMouseClicked(evt);
@@ -1164,6 +1206,7 @@ public class MainWindow extends javax.swing.JFrame {
         mMenuBar.add(mPortfolios);
 
         mReports.setText(" Create report ");
+        mReports.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         smReportCurrent.setText("Current portfolio");
         mReports.add(smReportCurrent);
@@ -1173,13 +1216,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         mMenuBar.add(mReports);
 
-        mEmpty.setText("                                                                                         ");
+        mEmpty.setText("                                                                                      ");
         mMenuBar.add(mEmpty);
 
         mUser.setText("User:                               ");
+        mUser.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         mMenuBar.add(mUser);
 
         mLogin.setText("Log In");
+        mLogin.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         mLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mLoginMouseClicked(evt);
@@ -1230,18 +1275,6 @@ public class MainWindow extends javax.swing.JFrame {
             dlgUser.setVisible(true);
         }
     }//GEN-LAST:event_mLoginMouseClicked
-
-    private void dlgAdd_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btCancelActionPerformed
-        dlgAdd.setVisible(false);
-    }//GEN-LAST:event_dlgAdd_btCancelActionPerformed
-
-    private void SellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SellActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SellActionPerformed
-
-    private void BuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BuyActionPerformed
 
     private void mMenuBarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMenuBarMouseMoved
         // mMenuBar.set
@@ -1676,10 +1709,6 @@ public class MainWindow extends javax.swing.JFrame {
                             + "least one uppercase letter, one lowercase letter and one number");
     }//GEN-LAST:event_dlgSignUp_lblHelpPasswordMouseEntered
 
-    private void dlgAdd_btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btResetActionPerformed
-        resetDlgAdd();
-    }//GEN-LAST:event_dlgAdd_btResetActionPerformed
-
     private void btMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btMoveActionPerformed
@@ -1690,14 +1719,6 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd.setLocationRelativeTo(null);
         dlgAdd.setVisible(true);
     }//GEN-LAST:event_btAddTradeActionPerformed
-
-    private void dlgAdd_tfSymbolKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolKeyTyped
-
-    }//GEN-LAST:event_dlgAdd_tfSymbolKeyTyped
-
-    private void dlgAdd_tfSymbolPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolPropertyChange
-        checkSymbol(dlgAdd_tfSymbol.getText());
-    }//GEN-LAST:event_dlgAdd_tfSymbolPropertyChange
 
     private void ppMain_BrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BrowseActionPerformed
         // PopUp menu - button Browse THIS
@@ -1740,10 +1761,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_smExpExcelActionPerformed
 
-    private void dlgAdd_btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btAddActionPerformed
-        addTrade();
-    }//GEN-LAST:event_dlgAdd_btAddActionPerformed
-
     private void ppMain_OpenInChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_OpenInChartActionPerformed
       
         getIntradayPrices();
@@ -1754,6 +1771,42 @@ public class MainWindow extends javax.swing.JFrame {
     private void ppMain_BarChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BarChartActionPerformed
         getIntradayPrices();
     }//GEN-LAST:event_ppMain_BarChartActionPerformed
+
+    private void dlgAdd_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btCancelActionPerformed
+        dlgAdd.setVisible(false);
+    }//GEN-LAST:event_dlgAdd_btCancelActionPerformed
+
+    private void dlgAdd_btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btResetActionPerformed
+        resetDlgAdd();
+    }//GEN-LAST:event_dlgAdd_btResetActionPerformed
+
+    private void SellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SellActionPerformed
+
+    private void BuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuyActionPerformed
+
+    private void dlgAdd_btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btAddActionPerformed
+        addTrade();
+    }//GEN-LAST:event_dlgAdd_btAddActionPerformed
+
+    private void dlgAdd_tfSymbolKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolKeyTyped
+
+    }//GEN-LAST:event_dlgAdd_tfSymbolKeyTyped
+
+    private void dlgAdd_tfSymbolPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dlgAdd_tfSymbolPropertyChange
+        checkSymbol(dlgAdd_tfSymbol.getText());
+    }//GEN-LAST:event_dlgAdd_tfSymbolPropertyChange
+
+    private void dlgAdd_tfPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_tfPriceActionPerformed
+        
+    }//GEN-LAST:event_dlgAdd_tfPriceActionPerformed
+
+    private void btRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRefreshActionPerformed
+        rewriteMainTable();
+    }//GEN-LAST:event_btRefreshActionPerformed
 // call it from popup listener
 
 private void getIntradayPrices(){
@@ -1815,16 +1868,12 @@ private void getIntradayPrices(){
        frame.setVisible(true);
      //  frame.setLocationRelativeTo(null);
        frame.setSize(300,400);
-            
        
         } catch (NullPointerException | org.json.JSONException ex) {
             JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-     
-       
     }
     
     
@@ -1873,11 +1922,12 @@ private void getIntradayPrices(){
                     newData[row][5] = value;
                     gain = change.multiply((BigDecimal) newData[row][1]);
                     newData[row][6] = gain;
-                    dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue()) * 100;
+                    dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue());
                     if (((BigDecimal)newData[row][1]).doubleValue() < 0){
                         dPercent=-dPercent;
                     } 
-                    newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
+                    newData[row][7] = dPercent;
+                    //newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
                     totalGain = totalGain.add(gain);
                     totalValue = totalValue.add(value);
                     
@@ -1911,11 +1961,14 @@ private void getIntradayPrices(){
     }
 
     private void resetDlgAdd() {
+        dlgAdd_tfPrice.enable(!isRealMode);
         dlgAdd_lblStatus.setText(" ");
         dlgAdd_tfNumberOfShares.setText("");
         btgAdd.clearSelection();
         dlgAdd_tfSymbol.setBackground(Color.white);
         dlgAdd_tfSymbol.setText("");
+        dlgAdd_tfPrice.setText("");
+        
     }
 
     private void checkSymbol(String symbol) {
@@ -1955,61 +2008,71 @@ private void getIntradayPrices(){
     private void addTrade() {
         String number = dlgAdd_tfNumberOfShares.getText();
         boolean numberOk = false;
-        if(number.matches("[0-9]+")){
-            if(Integer.valueOf(number)>0){
+        if (number.matches("[0-9]+")) {
+            if (Integer.valueOf(number) > 0) {
                 numberOk = true;
             }
-        } 
-        if (!numberOk){
-            JOptionPane.showMessageDialog(this,
-            "Please enter positive integer number of stocks\n",
-            "Data format error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
         }
-        
-        String symbol = dlgAdd_tfSymbol.getText().toUpperCase();
-        if(dlgAdd_lblSymbolOk.getText().equals("X")){
-            return;
-        }
-        
-        try {
-            String tradeType = btgAdd.getSelection().getActionCommand();
-        } catch(NullPointerException e){
+        if (!numberOk) {
             JOptionPane.showMessageDialog(this,
-            "Please select a trade type",
-            "Data format error",
-            JOptionPane.ERROR_MESSAGE);
+                    "Please enter positive integer number of stocks\n",
+                    "Data format error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        
-        //getting current price
-        BigDecimal lastPrice = new BigDecimal(0);
+        String symbol = dlgAdd_tfSymbol.getText().toUpperCase();
+        if (dlgAdd_lblSymbolOk.getText().equals("X")) {
+            return;
+        }
+
         try {
-            String url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=" + symbol + "&apikey=FS3KK17YEXZPQ4W5";
-            JSONObject json = API.getJson(url);
-            JSONArray arr = json.getJSONArray("Stock Quotes");
-            JSONObject o = arr.getJSONObject(0);
-            lastPrice = o.getBigDecimal("2. price").setScale(2, RoundingMode.HALF_UP);
-        } catch (NullPointerException | org.json.JSONException ex) {
-            JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
+            String tradeType = btgAdd.getSelection().getActionCommand();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Please select a trade type",
+                    "Data format error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (lastPrice.toString().equals("0.00")) {
-            JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
+        double lp;
+        BigDecimal lastPrice = new BigDecimal(0);
+        if (!isRealMode) { //TRACK MODE 
+            //getting current price
+            try {
+                String url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=" + symbol + "&apikey=FS3KK17YEXZPQ4W5";
+                JSONObject json = API.getJson(url);
+                JSONArray arr = json.getJSONArray("Stock Quotes");
+                JSONObject o = arr.getJSONObject(0);
+                lastPrice = o.getBigDecimal("2. price").setScale(2, RoundingMode.HALF_UP);
+                if (lastPrice.toString().equals("0.00")) {
+                    JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NullPointerException | org.json.JSONException ex) {
+                JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else { //TEST MODE
+            String strPrice = dlgAdd_tfPrice.getText();
+            try {
+                lp = Double.parseDouble(strPrice);
+                lastPrice = new BigDecimal(lp).setScale(2, RoundingMode.HALF_UP);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a correct price\n",
+                        "Data format error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
-        
         
         String message;
         NewTrade nt;
         BigDecimal amount = lastPrice.multiply(new BigDecimal(number));
-        boolean noCheck=false;
-        if (Buy.isSelected()) {
-            //TradeType.Buy;
+        if (Buy.isSelected()) {  //TradeType.Buy;
             message="Please confirm you want to BUY " +  number + " share(s) of " + symbol + "\n for an estimated total of $" + amount + "?";
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, message, "Confirmation the trade", dialogButton);
@@ -2019,28 +2082,43 @@ private void getIntradayPrices(){
                 nt = new NewTrade(Long.valueOf(dlgAdd_lblSymbolId.getText()), TradeType.Buy, lastPrice, Integer.valueOf(number));
                 try {
                     db.addNewTrade(nt);
+                    dlgAdd.setVisible(false);
+                    rewriteMainTable();
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
-                             
-                    System.out.println("ex.getMessage()");
+                    JOptionPane.showMessageDialog(this, "Trade was not added", "Database error!",
+                        JOptionPane.ERROR_MESSAGE);
                 }
-              
-              
-              
             } else {
-                //NO Choice
-              return;
+              return;  //NOT Confirmed by user
             } 
             
+        } else if(ShortSell.isSelected()) {      //TradeType.Short SELL;
+            message="Please confirm you want to SELL " +  number + " share(s) of " + symbol + "\n for an estimated total of $" + amount + "?";
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this, message, "Confirmation the trade", dialogButton);
+            if(dialogResult == 0) {
+                //YES Option
+                //adding new ShortSell trade to the database
+                nt = new NewTrade(Long.valueOf(dlgAdd_lblSymbolId.getText()), TradeType.ShortSell, lastPrice, -Integer.valueOf(number));
+                try {
+                    db.addNewTrade(nt);
+                    dlgAdd.setVisible(false);
+                    rewriteMainTable();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Trade was not added", "Database error!",
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+              return; //NOT Confirmed by user
+            } 
+        }
+        else if (Sell.isSelected()){ // Sell Trade
             
-            
-            noCheck=true;
-        } else {
-            //tt = TradeType.ShortSell;
-            noCheck=true;
+        }
+        else { // Cover a short trade
         }
         
-        System.out.println(lastPrice.toString());
+        
     }
 
     private void setTable(TableModel tm) {
@@ -2051,9 +2129,12 @@ private void getIntradayPrices(){
             tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
+            tTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
+            
+            tTable.getColumnModel().getColumn(5).setCellRenderer(new CurrencyTableCellRenderer());
+            tTable.getColumnModel().getColumn(7).setCellRenderer(new PercentTableCellRenderer());
     }
 
     class ItemChangeListener implements ItemListener {
@@ -2120,7 +2201,9 @@ private void getIntradayPrices(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Buy;
+    private javax.swing.JRadioButton CoverAShort;
     private javax.swing.JRadioButton Sell;
+    private javax.swing.JRadioButton ShortSell;
     private javax.swing.JButton btAddTrade;
     private javax.swing.JButton btDeleteTrade;
     private javax.swing.JButton btEditTrade;
@@ -2138,9 +2221,8 @@ private void getIntradayPrices(){
     private javax.swing.JLabel dlgAdd_lblStatus2;
     private javax.swing.JLabel dlgAdd_lblSymbolId;
     private javax.swing.JLabel dlgAdd_lblSymbolOk;
-    private javax.swing.JRadioButton dlgAdd_rbCoverShort;
-    private javax.swing.JRadioButton dlgAdd_rbShortSell;
     private javax.swing.JTextField dlgAdd_tfNumberOfShares;
+    private javax.swing.JTextField dlgAdd_tfPrice;
     private javax.swing.JTextField dlgAdd_tfSymbol;
     private javax.swing.JDialog dlgManage;
     private javax.swing.JButton dlgManage_btnAdd;
@@ -2195,6 +2277,7 @@ private void getIntradayPrices(){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
