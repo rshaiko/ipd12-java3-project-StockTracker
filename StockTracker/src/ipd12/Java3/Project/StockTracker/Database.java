@@ -11,7 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 
@@ -315,19 +319,46 @@ public class Database {
     int[] checkSymbol(String symbol) {
 
         //String sql = "Select count(*) as cou from symbols where symbol like '%" + symbol + "%'";
-        String sql = "Select count(*) as cou, (Select count(*) from symbols where symbol like '"+ symbol +"') as uni from symbols where symbol like '" + symbol + "%'";
+        //String sql = "Select count(*) as cou, (Select count(*) from symbols where symbol like '"+ symbol +"') as uni from symbols where symbol like '" + symbol + "%'";
         //System.out.println(sql);
+        String sql = "Select count(*) as cou, if(\n"
+                + "(\n"
+                + "	Select count(*) from symbols where symbol like '" + symbol + "'\n"
+                + ")=1,(Select id from symbols where symbol like '" + symbol + "')\n"
+                + "\n"
+                + ",0) as indexId from symbols where symbol like '" + symbol + "%'";
         int [] numberReturned={0,0};
         try (Statement stmt = getConn().createStatement()) {
             ResultSet result = stmt.executeQuery(sql);
             while (result.next()) {
                 numberReturned[0] = result.getInt("cou");
-                numberReturned[1] = result.getInt("uni");
+                numberReturned[1] = result.getInt("indexId");
             } 
         }catch (SQLException e) {
             //ADD ERROR  EDDING- in WINDOW
         }
         //System.out.println(numberReturned[0]+ "asdqa "+numberReturned[1]);
         return numberReturned;
+    }
+
+    void addNewTrade(NewTrade nt) throws SQLException {
+        String sql = "INSERT INTO trades (opDate, symbolId, type, numberOfShares, sharePrice, potrfolioId, isActive) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+            
+            
+            stmt.setString(1, dateFormat.format(cal.getTime()));
+            stmt.setLong(2, nt.indexId);            
+            stmt.setString(3,nt.tradeType.toString());
+            stmt.setInt(4, nt.quantity);
+            stmt.setBigDecimal(5, nt.price);
+            stmt.setLong(6, Globals.currentPortfolio.getId());
+            stmt.setInt(7, 1);
+            stmt.executeUpdate();
+        }
+        
     }
 }

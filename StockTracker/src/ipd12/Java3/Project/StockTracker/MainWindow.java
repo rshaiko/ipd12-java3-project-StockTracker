@@ -18,6 +18,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -69,16 +71,7 @@ public class MainWindow extends javax.swing.JFrame {
             
             //Table model initialazation 
             tm = new MyTableModel( new Object[][] {{"", "", "", "", "", "", "", ""}} );
-            tTable.setModel(tm);
-            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
-            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
-            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
-            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
+            setTable(tm);
         } catch (SQLException ex) {
             ex.printStackTrace();
             // display dialog with error message and terminate the program
@@ -109,24 +102,15 @@ public class MainWindow extends javax.swing.JFrame {
             public void changedUpdate(DocumentEvent e) {
                 warn();
             }
-
             public void removeUpdate(DocumentEvent e) {
                 warn();
             }
-
             public void insertUpdate(DocumentEvent e) {
                 warn();
             }
-
             public void warn() {
                 String symbol = dlgAdd_tfSymbol.getText();
                 checkSymbol(symbol);
-//                System.out.println("WOW!");
-//                if (Integer.parseInt(dlgAdd_tfSymbol.getText()) <= 0) {
-//                    JOptionPane.showMessageDialog(null,
-//                            "Error: Please enter number bigger than 0", "Error Massage",
-//                            JOptionPane.ERROR_MESSAGE);
-//                }
             }
         });
 
@@ -220,6 +204,7 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_lblSymbolOk = new javax.swing.JLabel();
         dlgAdd_lblStatus = new javax.swing.JLabel();
         dlgAdd_lblStatus2 = new javax.swing.JLabel();
+        dlgAdd_lblSymbolId = new javax.swing.JLabel();
         btgAdd = new javax.swing.ButtonGroup();
         dlgUser = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
@@ -648,17 +633,29 @@ public class MainWindow extends javax.swing.JFrame {
         dlgAdd_lblStatus2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         dlgAdd_lblStatus2.setText(" ");
 
+        dlgAdd_lblSymbolId.setForeground(new java.awt.Color(215, 215, 215));
+        dlgAdd_lblSymbolId.setText("sdfsfsd");
+
         javax.swing.GroupLayout dlgAddLayout = new javax.swing.GroupLayout(dlgAdd.getContentPane());
         dlgAdd.getContentPane().setLayout(dlgAddLayout);
         dlgAddLayout.setHorizontalGroup(
             dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgAddLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dlgAdd_tfNumberOfShares))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(dlgAdd_btAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dlgAdd_tfNumberOfShares))
+                            .addComponent(dlgAdd_lblSymbolId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(dlgAddLayout.createSequentialGroup()
@@ -666,22 +663,17 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dlgAdd_lblSymbolOk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dlgAdd_btAdd))
+                                .addComponent(dlgAdd_lblSymbolOk))
                             .addComponent(dlgAdd_lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dlgAdd_lblStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgAddLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                            .addComponent(dlgAdd_lblStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)))
+                .addContainerGap(96, Short.MAX_VALUE))
+            .addGroup(dlgAddLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         dlgAddLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dlgAdd_tfNumberOfShares, dlgAdd_tfSymbol});
@@ -690,30 +682,37 @@ public class MainWindow extends javax.swing.JFrame {
             dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(dlgAddLayout.createSequentialGroup()
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel18))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dlgAdd_tfNumberOfShares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dlgAdd_lblSymbolOk)))
-                    .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dlgAdd_lblStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dlgAdd_lblStatus2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dlgAdd_tfNumberOfShares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgAdd_tfSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dlgAdd_lblSymbolOk))
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dlgAdd_lblStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dlgAdd_lblStatus2))
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(dlgAdd_lblSymbolId)))
+                .addGap(11, 11, 11)
                 .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(dlgAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dlgAdd_btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dlgAdd_btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(dlgAddLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(dlgAdd_btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(115, 115, 115))
         );
 
         dlgUser.setModal(true);
@@ -1797,21 +1796,21 @@ private void getIntradayPrices(){
         
         
         
-        String pressure ="50";
-       String temperature ="30";
-       
-       DefaultCategoryDataset dataset= new DefaultCategoryDataset();
-       dataset.setValue(new Double(pressure),"Parameters", "Pressure");
-       dataset.setValue(new Double(temperature),"Parameters", "Temperature");
-       
-       JFreeChart chart = ChartFactory.createBarChart3D("Values","","", dataset, PlotOrientation.VERTICAL,false,false,false);
-       chart.setBackgroundPaint(Color.BLUE);
-       chart.getTitle().setPaint(Color.YELLOW);
-       CategoryPlot p= chart.getCategoryPlot();
-       p.setRangeGridlinePaint(Color.BLACK);
-       ChartFrame frame =  new ChartFrame("Barchart for symbol", chart);
-       frame.setVisible(true);
-       frame.setSize(300,400);
+//        String pressure ="50";
+//       String temperature ="30";
+//       
+//       DefaultCategoryDataset dataset= new DefaultCategoryDataset();
+//       dataset.setValue(new Double(pressure),"Parameters", "Pressure");
+//       dataset.setValue(new Double(temperature),"Parameters", "Temperature");
+//       
+//       JFreeChart chart = ChartFactory.createBarChart3D("Values","","", dataset, PlotOrientation.VERTICAL,false,false,false);
+//       chart.setBackgroundPaint(Color.BLUE);
+//       chart.getTitle().setPaint(Color.YELLOW);
+//       CategoryPlot p= chart.getCategoryPlot();
+//       p.setRangeGridlinePaint(Color.BLACK);
+//       ChartFrame frame =  new ChartFrame("Barchart for symbol", chart);
+//       frame.setVisible(true);
+//       frame.setSize(300,400);
        
     }
     
@@ -1888,30 +1887,12 @@ private void getIntradayPrices(){
                 }
             }
             tm = new MyTableModel(newData);
-            tTable.setModel(tm);
-            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
-            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
-            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
-            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
+            setTable(tm);
         } else {
             lblStatus.setText("You don't have active trades in this portfolio");
             Object[][] newData = new Object[rows][8];
             tm = new MyTableModel(newData);
-            tTable.setModel(tm);
-            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
-            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
-            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
-            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
+            setTable(tm);
         }
         cbbPortfolio.enable(true);
     }
@@ -1939,10 +1920,11 @@ private void getIntradayPrices(){
             int[] symbolsFound = db.checkSymbol(symbol);
             String statusMessage = symbolsFound[0]+" matches found";
             dlgAdd_lblStatus.setText(statusMessage);
-            if (symbolsFound[1]==1){
+            if (symbolsFound[1]>0){
                 dlgAdd_lblStatus2.setText("Unique symbol \""+ symbol + "\" exists!") ;
                 dlgAdd_lblStatus.setText(statusMessage);
                 dlgAdd_lblSymbolOk.setForeground(Color.green);
+                dlgAdd_lblSymbolId.setText(symbolsFound[1]+"");
                 dlgAdd_lblSymbolOk.setText("");
                 dlgAdd_btAdd.enable(true);
                 dlgAdd_tfSymbol.setBackground(Color.decode("#CCFFCC"));
@@ -1992,51 +1974,73 @@ private void getIntradayPrices(){
         //getting current price
         BigDecimal lastPrice = new BigDecimal(0);
         try {
-                String url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=" + symbol + "&apikey=FS3KK17YEXZPQ4W5";
-                JSONObject json = API.getJson(url);
-                JSONArray arr = json.getJSONArray("Stock Quotes");
-                JSONObject o = arr.getJSONObject(0);
-                lastPrice = o.getBigDecimal("2. price").setScale(2, RoundingMode.HALF_UP);
-            } catch (NullPointerException | org.json.JSONException ex) {
-                JOptionPane.showMessageDialog(this,"Error API request for "+symbol+ " price", "Connection error!",
-                JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        if (lastPrice.toString().equals("0.00")){
-            JOptionPane.showMessageDialog(this,"Error API request for "+symbol+ " price", "Connection error!",
-            JOptionPane.ERROR_MESSAGE);
+            String url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=" + symbol + "&apikey=FS3KK17YEXZPQ4W5";
+            JSONObject json = API.getJson(url);
+            JSONArray arr = json.getJSONArray("Stock Quotes");
+            JSONObject o = arr.getJSONObject(0);
+            lastPrice = o.getBigDecimal("2. price").setScale(2, RoundingMode.HALF_UP);
+        } catch (NullPointerException | org.json.JSONException ex) {
+            JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (lastPrice.toString().equals("0.00")) {
+            JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         
         String message;
-        TradeType tt;
+        NewTrade nt;
         BigDecimal amount = lastPrice.multiply(new BigDecimal(number));
         boolean noCheck=false;
         if (Buy.isSelected()) {
-            tt = TradeType.Buy;
+            //TradeType.Buy;
             message="Please confirm you want to BUY " +  number + " share(s) of " + symbol + "\n for an estimated total of $" + amount + "?";
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, message, "Confirmation the trade", dialogButton);
             if(dialogResult == 0) {
-              System.out.println("Yes option");
+                //YES Option
+                //adding new BUY trade to the database
+                nt = new NewTrade(Long.valueOf(dlgAdd_lblSymbolId.getText()), TradeType.Buy, lastPrice, Integer.valueOf(number));
+                try {
+                    db.addNewTrade(nt);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                             
+                    System.out.println("ex.getMessage()");
+                }
+              
+              
+              
             } else {
-              System.out.println("No Option");
+                //NO Choice
+              return;
             } 
-            
-            
             
             
             
             noCheck=true;
         } else {
-            tt = TradeType.ShortSell;
+            //tt = TradeType.ShortSell;
             noCheck=true;
         }
         
-        
-        
         System.out.println(lastPrice.toString());
+    }
+
+    private void setTable(TableModel tm) {
+            tTable.setModel(tm);
+            tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+            tTable.getColumnModel().getColumn(5).setPreferredWidth(95);
+            tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
     }
 
     class ItemChangeListener implements ItemListener {
@@ -2119,6 +2123,7 @@ private void getIntradayPrices(){
     private javax.swing.JButton dlgAdd_btReset;
     private javax.swing.JLabel dlgAdd_lblStatus;
     private javax.swing.JLabel dlgAdd_lblStatus2;
+    private javax.swing.JLabel dlgAdd_lblSymbolId;
     private javax.swing.JLabel dlgAdd_lblSymbolOk;
     private javax.swing.JRadioButton dlgAdd_rbCoverShort;
     private javax.swing.JRadioButton dlgAdd_rbShortSell;
