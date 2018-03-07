@@ -346,6 +346,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppMain_BrowseActionPerformed"/>
           </Events>
         </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="ppMain_BarChart">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Open in barchart"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppMain_BarChartActionPerformed"/>
+          </Events>
+        </MenuItem>
         <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
         </Component>
         <MenuItem class="javax.swing.JMenuItem" name="ppMain_Delete">

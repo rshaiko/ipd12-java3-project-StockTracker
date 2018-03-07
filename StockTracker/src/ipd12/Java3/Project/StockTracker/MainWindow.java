@@ -180,6 +180,7 @@ public class MainWindow extends javax.swing.JFrame {
         ppMain = new javax.swing.JPopupMenu();
         ppMain_Move = new javax.swing.JMenuItem();
         ppMain_Browse = new javax.swing.JMenuItem();
+        ppMain_BarChart = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         ppMain_Delete = new javax.swing.JMenuItem();
         ppMain_OpenInChart = new javax.swing.JMenuItem();
@@ -485,6 +486,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         ppMain.add(ppMain_Browse);
+
+        ppMain_BarChart.setText("Open in barchart");
+        ppMain_BarChart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppMain_BarChartActionPerformed(evt);
+            }
+        });
+        ppMain.add(ppMain_BarChart);
         ppMain.add(jSeparator2);
 
         ppMain_Delete.setText("Delete trade");
@@ -1741,6 +1750,10 @@ public class MainWindow extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_ppMain_OpenInChartActionPerformed
+
+    private void ppMain_BarChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BarChartActionPerformed
+        getIntradayPrices();
+    }//GEN-LAST:event_ppMain_BarChartActionPerformed
 // call it from popup listener
 
 private void getIntradayPrices(){
@@ -1783,9 +1796,26 @@ private void getIntradayPrices(){
                 arrVolume[ind]=json3.getInt("5. volume");
                 
                 System.out.println("Date: "+ arrStrDates[ind] + "  Open price: " + arrPrices[ind] + "\tVolume: " + arrVolume[ind] );
-                
+    
                 ind++;
             }
+            //Arrays.sort(arrStrDates);
+           // arrStrDates[arrStrDates.length-1];
+            DefaultCategoryDataset dataset= new DefaultCategoryDataset();
+       dataset.setValue(arrPrices[arrPrices.length-5],arrStrDates[arrStrDates.length-5], "Price, "+arrPrices[arrPrices.length-5]);
+       //dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
+       dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
+       
+       JFreeChart chart = ChartFactory.createBarChart(symbol,"","", dataset, PlotOrientation.VERTICAL,true,true,true);
+       chart.setBackgroundPaint(Color.BLUE);
+       chart.getTitle().setPaint(Color.YELLOW);
+       CategoryPlot p= chart.getCategoryPlot();
+       p.setRangeGridlinePaint(Color.BLACK);
+       ChartFrame frame =  new ChartFrame("Barchart for symbol", chart);
+       frame.setVisible(true);
+     //  frame.setLocationRelativeTo(null);
+       frame.setSize(300,400);
+            
        
         } catch (NullPointerException | org.json.JSONException ex) {
             JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
@@ -1793,24 +1823,7 @@ private void getIntradayPrices(){
             return;
         }
         
-        
-        
-        
-//        String pressure ="50";
-//       String temperature ="30";
-//       
-//       DefaultCategoryDataset dataset= new DefaultCategoryDataset();
-//       dataset.setValue(new Double(pressure),"Parameters", "Pressure");
-//       dataset.setValue(new Double(temperature),"Parameters", "Temperature");
-//       
-//       JFreeChart chart = ChartFactory.createBarChart3D("Values","","", dataset, PlotOrientation.VERTICAL,false,false,false);
-//       chart.setBackgroundPaint(Color.BLUE);
-//       chart.getTitle().setPaint(Color.YELLOW);
-//       CategoryPlot p= chart.getCategoryPlot();
-//       p.setRangeGridlinePaint(Color.BLACK);
-//       ChartFrame frame =  new ChartFrame("Barchart for symbol", chart);
-//       frame.setVisible(true);
-//       frame.setSize(300,400);
+     
        
     }
     
@@ -2209,6 +2222,7 @@ private void getIntradayPrices(){
     private javax.swing.JMenu mTrade;
     private javax.swing.JMenu mUser;
     private javax.swing.JPopupMenu ppMain;
+    private javax.swing.JMenuItem ppMain_BarChart;
     private javax.swing.JMenuItem ppMain_Browse;
     private javax.swing.JMenuItem ppMain_Delete;
     private javax.swing.JMenuItem ppMain_Move;
