@@ -152,6 +152,15 @@ not done: charts
 3.  Need assistance / figure things out
 -charts
 
+07.03.2018 Roman
+1. Done since last scrum 
+- adding trades in test mode 
+- formatted output to the table
+- getting intraday prices
+2. Plan until next Scrum 
+- Presentation preparation
+- edit, delete trade
+3. Need assistance / figure things out
 
 07.03.2018 Dmitrii
 1. Done since last scrum 
@@ -159,4 +168,3 @@ not done: charts
 2. Plan until next Scrum
 -presentation
 3.  Need assistance / figure things out
-
