@@ -343,6 +343,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         dlgManage.setModal(true);
+        dlgManage.setResizable(false);
 
         dlgManage_btnAdd.setText("Add");
         dlgManage_btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -407,11 +408,11 @@ public class MainWindow extends javax.swing.JFrame {
         dlgManageLayout.setHorizontalGroup(
             dlgManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgManageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dlgManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(dlgManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(dlgManageLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(dlgManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(dlgManageLayout.createSequentialGroup()
                                 .addComponent(jLabel13)
@@ -433,7 +434,6 @@ public class MainWindow extends javax.swing.JFrame {
                                         .addComponent(dlgManage_cbByDefault)
                                         .addComponent(dlgManage_tfCash))))))
                     .addGroup(dlgManageLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addComponent(dlgManage_btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(dlgManage_btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1833,7 +1833,7 @@ private void getIntradayPrices(){
             
             //3 arrays - dates, prices, volumes
             String [] arrStrDates = new String [length];
-            double[]arrPrices = new double[length];
+            double[][]arrPrices = new double[length][4];
             int [] arrVolume = new int[length];
             
             int ind=0;
@@ -1845,19 +1845,23 @@ private void getIntradayPrices(){
                 arrStrDates[ind]=key.toString();
                 
                 json3 = (JSONObject) keyvalue;
-                arrPrices[ind]=json3.getDouble("1. open");
+                arrPrices[ind][0]=json3.getDouble("1. open");
+                arrPrices[ind][1]=json3.getDouble("2. high");
+                arrPrices[ind][2]=json3.getDouble("3. low");
+                arrPrices[ind][3]=json3.getDouble("4. close");
                 arrVolume[ind]=json3.getInt("5. volume");
                 
-                System.out.println("Date: "+ arrStrDates[ind] + "  Open price: " + arrPrices[ind] + "\tVolume: " + arrVolume[ind] );
-    
+                
+                System.out.println("Date: "+ arrStrDates[ind] + "  Open price: " + arrPrices[ind][0] + "\tVolume: " + arrVolume[ind] );
+                System.out.println("Close:" + arrPrices[ind][3]);
                 ind++;
             }
             //Arrays.sort(arrStrDates);
            // arrStrDates[arrStrDates.length-1];
             DefaultCategoryDataset dataset= new DefaultCategoryDataset();
-       dataset.setValue(arrPrices[arrPrices.length-5],arrStrDates[arrStrDates.length-5], "Price, "+arrPrices[arrPrices.length-5]);
+       //dataset.setValue(arrPrices[arrPrices.length-5],arrStrDates[arrStrDates.length-5], "Price, "+arrPrices[arrPrices.length-5]);
        //dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
-       dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
+       //dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
        
        JFreeChart chart = ChartFactory.createBarChart(symbol,"","", dataset, PlotOrientation.VERTICAL,true,true,true);
        chart.setBackgroundPaint(Color.BLUE);
