@@ -281,7 +281,8 @@ public class Database {
                     "Delete", "Cancel"
                 };
         int decision = JOptionPane.showOptionDialog(null,
-                "Are you sure you want to delete: " + delPort.toString() + "?",
+                "Are you sure you want to delete portfolio: " + delPort.toString() + " and"
+                        + " all the data about trades in this portfolio?",
                 "Confirm deletion",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE,
@@ -289,7 +290,8 @@ public class Database {
                 options, //the titles of buttons
                 options[0]); //default button title
         if (decision == JOptionPane.YES_OPTION) {
-            String sql = "DELETE from portfolios where id = ?";
+            String sql = "DELETE  portfolios from portfolios inner join trades"
+                    + " on trades.potrfolioId=portfolios.id where portfolios.id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, delPort.getId());
             statement.executeUpdate();

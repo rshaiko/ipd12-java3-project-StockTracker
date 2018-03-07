@@ -2,18 +2,13 @@ package ipd12.Java3.Project.StockTracker;
 
 import static ipd12.Java3.Project.StockTracker.Globals.currentPortfolio;
 import static ipd12.Java3.Project.StockTracker.Globals.currentTradesSet;
-import static ipd12.Java3.Project.StockTracker.Globals.currentUser;
 import ipd12.Java3.Project.StockTracker.Trade.TradeType;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
@@ -23,8 +18,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.StringJoiner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -39,6 +32,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import jxl.write.WriteException;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -199,6 +198,7 @@ public class MainWindow extends javax.swing.JFrame {
         ppMain_Browse = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         ppMain_Delete = new javax.swing.JMenuItem();
+        ppMain_OpenInChart = new javax.swing.JMenuItem();
         ppManage = new javax.swing.JPopupMenu();
         ppManage_Edit = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -504,6 +504,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         ppMain_Delete.setText("Delete trade");
         ppMain.add(ppMain_Delete);
+
+        ppMain_OpenInChart.setText("Open in Chart");
+        ppMain_OpenInChart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppMain_OpenInChartActionPerformed(evt);
+            }
+        });
+        ppMain.add(ppMain_OpenInChart);
 
         ppManage_Edit.setText("Edit");
         ppManage_Edit.addActionListener(new java.awt.event.ActionListener() {
@@ -1728,6 +1736,86 @@ public class MainWindow extends javax.swing.JFrame {
         addTrade();
     }//GEN-LAST:event_dlgAdd_btAddActionPerformed
 
+    private void ppMain_OpenInChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_OpenInChartActionPerformed
+      
+        getIntradayPrices();
+        
+        
+    }//GEN-LAST:event_ppMain_OpenInChartActionPerformed
+// call it from popup listener
+
+private void getIntradayPrices(){
+        
+        // PopUp menu - button Show Chart
+        String symbol="";
+        try {
+            int sRow = tTable.getSelectedRow();
+            Trade t = currentTradesSet.get(sRow);
+            symbol = t.symbol;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+        }
+        if (symbol.equals("")){
+            System.out.println("Error: Symbol not found");
+            return;
+        }
+        try {
+            String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=60min&apikey=FS3KK17YEXZPQ4W5";
+            System.out.println(url);
+            JSONObject json = API.getJson(url);
+            JSONObject json2 = (JSONObject) json.get("Time Series (60min)");
+        
+            int length = json2.length();
+            
+            //3 arrays - dates, prices, volumes
+            String [] arrStrDates = new String [length];
+            double[]arrPrices = new double[length];
+            int [] arrVolume = new int[length];
+            
+            int ind=0;
+            JSONObject json3;
+            for (Object key : json2.keySet()) {
+                String keyStr = (String) key;
+                Object keyvalue = json2.get(keyStr);
+                
+                arrStrDates[ind]=key.toString();
+                
+                json3 = (JSONObject) keyvalue;
+                arrPrices[ind]=json3.getDouble("1. open");
+                arrVolume[ind]=json3.getInt("5. volume");
+                
+                System.out.println("Date: "+ arrStrDates[ind] + "  Open price: " + arrPrices[ind] + "\tVolume: " + arrVolume[ind] );
+                
+                ind++;
+            }
+       
+        } catch (NullPointerException | org.json.JSONException ex) {
+            JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+        
+        
+        String pressure ="50";
+       String temperature ="30";
+       
+       DefaultCategoryDataset dataset= new DefaultCategoryDataset();
+       dataset.setValue(new Double(pressure),"Parameters", "Pressure");
+       dataset.setValue(new Double(temperature),"Parameters", "Temperature");
+       
+       JFreeChart chart = ChartFactory.createBarChart3D("Values","","", dataset, PlotOrientation.VERTICAL,false,false,false);
+       chart.setBackgroundPaint(Color.BLUE);
+       chart.getTitle().setPaint(Color.YELLOW);
+       CategoryPlot p= chart.getCategoryPlot();
+       p.setRangeGridlinePaint(Color.BLACK);
+       ChartFrame frame =  new ChartFrame("Barchart for symbol", chart);
+       frame.setVisible(true);
+       frame.setSize(300,400);
+       
+    }
+    
+    
     public void rewriteMainTable() {
         StringJoiner symbolJoiner = new StringJoiner(",");
         int quantity; 
@@ -2119,6 +2207,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem ppMain_Browse;
     private javax.swing.JMenuItem ppMain_Delete;
     private javax.swing.JMenuItem ppMain_Move;
+    private javax.swing.JMenuItem ppMain_OpenInChart;
     private javax.swing.JPopupMenu ppManage;
     private javax.swing.JMenuItem ppManage_Delete;
     private javax.swing.JMenuItem ppManage_Edit;
