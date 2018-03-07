@@ -151,3 +151,12 @@ not done: charts
 -finalize project
 3.  Need assistance / figure things out
 -charts
+
+
+07.03.2018 Dmitrii
+1. Done since last scrum 
+-charts for selected symbol from the main table
+2. Plan until next Scrum
+-presentation
+3.  Need assistance / figure things out
+

@@ -361,14 +361,6 @@
             <Property name="text" type="java.lang.String" value="Delete trade"/>
           </Properties>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="ppMain_OpenInChart">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Open in Chart"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppMain_OpenInChartActionPerformed"/>
-          </Events>
-        </MenuItem>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPopupMenu" name="ppManage">

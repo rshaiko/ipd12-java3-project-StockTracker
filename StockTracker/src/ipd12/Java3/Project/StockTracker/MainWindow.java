@@ -183,7 +183,6 @@ public class MainWindow extends javax.swing.JFrame {
         ppMain_BarChart = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         ppMain_Delete = new javax.swing.JMenuItem();
-        ppMain_OpenInChart = new javax.swing.JMenuItem();
         ppManage = new javax.swing.JPopupMenu();
         ppManage_Edit = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -500,14 +499,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         ppMain_Delete.setText("Delete trade");
         ppMain.add(ppMain_Delete);
-
-        ppMain_OpenInChart.setText("Open in Chart");
-        ppMain_OpenInChart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppMain_OpenInChartActionPerformed(evt);
-            }
-        });
-        ppMain.add(ppMain_OpenInChart);
 
         ppManage_Edit.setText("Edit");
         ppManage_Edit.addActionListener(new java.awt.event.ActionListener() {
@@ -1761,13 +1752,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_smExpExcelActionPerformed
 
-    private void ppMain_OpenInChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_OpenInChartActionPerformed
-      
-        getIntradayPrices();
-        
-        
-    }//GEN-LAST:event_ppMain_OpenInChartActionPerformed
-
     private void ppMain_BarChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BarChartActionPerformed
         getIntradayPrices();
     }//GEN-LAST:event_ppMain_BarChartActionPerformed
@@ -1859,16 +1843,19 @@ private void getIntradayPrices(){
             //Arrays.sort(arrStrDates);
            // arrStrDates[arrStrDates.length-1];
             DefaultCategoryDataset dataset= new DefaultCategoryDataset();
-       //dataset.setValue(arrPrices[arrPrices.length-5],arrStrDates[arrStrDates.length-5], "Price, "+arrPrices[arrPrices.length-5]);
-       //dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
-       //dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
+       dataset.setValue(new Double (arrPrices[arrPrices.length-5][0]*1000),arrStrDates[arrStrDates.length-5], "open, "+arrPrices[arrPrices.length-5][0]);
+        dataset.setValue(new Double (arrPrices[arrPrices.length-5][1]*1000),arrStrDates[arrStrDates.length-5], "high, "+arrPrices[arrPrices.length-5][1]);
+          dataset.setValue(new Double (arrPrices[arrPrices.length-5][2]*1000),arrStrDates[arrStrDates.length-5], "low, "+arrPrices[arrPrices.length-5][2]);
+            dataset.setValue(new Double (arrPrices[arrPrices.length-5][3]*1000),arrStrDates[arrStrDates.length-5], "close, "+arrPrices[arrPrices.length-5][3]);
+      // dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
+      // dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
        
        JFreeChart chart = ChartFactory.createBarChart(symbol,"","", dataset, PlotOrientation.VERTICAL,true,true,true);
        chart.setBackgroundPaint(Color.BLUE);
        chart.getTitle().setPaint(Color.YELLOW);
        CategoryPlot p= chart.getCategoryPlot();
        p.setRangeGridlinePaint(Color.BLACK);
-       ChartFrame frame =  new ChartFrame("Barchart for symbol", chart);
+       ChartFrame frame =  new ChartFrame("Barchart for symbol"+symbol, chart);
        frame.setVisible(true);
      //  frame.setLocationRelativeTo(null);
        frame.setSize(300,400);
@@ -2313,7 +2300,6 @@ private void getIntradayPrices(){
     private javax.swing.JMenuItem ppMain_Browse;
     private javax.swing.JMenuItem ppMain_Delete;
     private javax.swing.JMenuItem ppMain_Move;
-    private javax.swing.JMenuItem ppMain_OpenInChart;
     private javax.swing.JPopupMenu ppManage;
     private javax.swing.JMenuItem ppManage_Delete;
     private javax.swing.JMenuItem ppManage_Edit;
