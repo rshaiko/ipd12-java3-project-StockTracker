@@ -1098,8 +1098,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="smExpCsv">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Export to CSV"/>
+                <Property name="text" type="java.lang.String" value="Export portfolios to CSV"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smExpCsvActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
@@ -1473,6 +1476,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="use by default"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbIsDefaultPortfolioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btMove">
           <Properties>

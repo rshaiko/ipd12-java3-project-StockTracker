@@ -8,7 +8,9 @@ import java.awt.Desktop;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
@@ -1033,6 +1035,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         cbIsDefaultPortfolio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbIsDefaultPortfolio.setText("use by default");
+        cbIsDefaultPortfolio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIsDefaultPortfolioActionPerformed(evt);
+            }
+        });
 
         btMove.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btMove.setText("Move to another portfolio");
@@ -1184,7 +1191,12 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mFile.add(smExpExcel);
 
-        smExpCsv.setText("Export to CSV");
+        smExpCsv.setText("Export portfolios to CSV");
+        smExpCsv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smExpCsvActionPerformed(evt);
+            }
+        });
         mFile.add(smExpCsv);
         mFile.add(jSeparator1);
 
@@ -1868,6 +1880,65 @@ public class MainWindow extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btDeleteTradeActionPerformed
+
+    private void smExpCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smExpCsvActionPerformed
+        
+        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = fileChooser.getSelectedFile();
+                String path = file.getAbsolutePath();
+                if (!path.matches(".+\\.[A-Za-z0-9]{1,20}")) {
+                    System.out.println("no extension match");
+                    file = new File(path + ".csv");
+                }
+                try (PrintWriter out = new PrintWriter(new FileWriter(file))) {
+                    ArrayList<Portfolio> list = db.getAllPortfolios();
+                    for (Portfolio p : list) {
+                        out.printf("%s;%s;%s;%.2f\n", p.getName(),p.getPortType(),p.isIsDefault(), p.getAmount());
+                    }
+                }
+            } catch (IOException | SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this,
+                        "Error saving data to file:\n" + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }//GEN-LAST:event_smExpCsvActionPerformed
+
+    private void cbIsDefaultPortfolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIsDefaultPortfolioActionPerformed
+       
+          if(cbIsDefaultPortfolio.isSelected()){
+       try{ db.setDefaultPortfolio();
+           db.unselectDefaultPorfolio();
+       }
+           
+               
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Error updating the table\n" + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        else{
+        try{ db.setDefaultPortfolioTo0();
+        
+       }
+           
+               
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Error updating the table\n" + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }//GEN-LAST:event_cbIsDefaultPortfolioActionPerformed
 // call it from popup listener
 
 private void getIntradayPrices(){
@@ -1919,14 +1990,14 @@ private void getIntradayPrices(){
             //Arrays.sort(arrStrDates);
            // arrStrDates[arrStrDates.length-1];
             DefaultCategoryDataset dataset= new DefaultCategoryDataset();
-       dataset.setValue(new Double (arrPrices[arrPrices.length-5][0]*1000),arrStrDates[arrStrDates.length-5], "open, "+arrPrices[arrPrices.length-5][0]);
-        dataset.setValue(new Double (arrPrices[arrPrices.length-5][1]*1000),arrStrDates[arrStrDates.length-5], "high, "+arrPrices[arrPrices.length-5][1]);
-          dataset.setValue(new Double (arrPrices[arrPrices.length-5][2]*1000),arrStrDates[arrStrDates.length-5], "low, "+arrPrices[arrPrices.length-5][2]);
-            dataset.setValue(new Double (arrPrices[arrPrices.length-5][3]*1000),arrStrDates[arrStrDates.length-5], "close, "+arrPrices[arrPrices.length-5][3]);
+       dataset.setValue(new Double (arrPrices[arrPrices.length-5][0]),arrStrDates[arrStrDates.length-5], "open, "+arrPrices[arrPrices.length-5][0]);
+        dataset.setValue(new Double (arrPrices[arrPrices.length-5][1]),arrStrDates[arrStrDates.length-5], "high, "+arrPrices[arrPrices.length-5][1]);
+          dataset.setValue(new Double (arrPrices[arrPrices.length-5][2]),arrStrDates[arrStrDates.length-5], "low, "+arrPrices[arrPrices.length-5][2]);
+            dataset.setValue(new Double (arrPrices[arrPrices.length-5][3]),arrStrDates[arrStrDates.length-5], "close, "+arrPrices[arrPrices.length-5][3]);
       // dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
       // dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
        
-       JFreeChart chart = ChartFactory.createBarChart(symbol,"","", dataset, PlotOrientation.VERTICAL,true,true,true);
+       JFreeChart chart = ChartFactory.createBarChart(symbol,"Price","USD", dataset, PlotOrientation.VERTICAL,true,true,true);
        chart.setBackgroundPaint(Color.YELLOW);
        chart.getTitle().setPaint(Color.BLUE);
        CategoryPlot p= chart.getCategoryPlot();

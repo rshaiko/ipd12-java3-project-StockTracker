@@ -367,4 +367,28 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.executeUpdate();
     }
+    
+     void setDefaultPortfolio()throws SQLException {
+         String sql = "UPDATE portfolios set isDefault = 1 where  id="
+               +"'" + Globals.currentPortfolio.getId() + "'";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+       
+        stmt.executeUpdate();
+    }
+
+    void unselectDefaultPorfolio() throws SQLException {
+         String sql = "UPDATE portfolios set isDefault = 0 where  id!="
+               +"'" + Globals.currentPortfolio.getId() + "'";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+       
+        stmt.executeUpdate();
+    }
+
+    void setDefaultPortfolioTo0() throws SQLException {
+         String sql = "UPDATE portfolios set isDefault = 0 where  id="
+               +"'" + Globals.currentPortfolio.getId() + "'";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+       
+        stmt.executeUpdate();
+    }
 }
