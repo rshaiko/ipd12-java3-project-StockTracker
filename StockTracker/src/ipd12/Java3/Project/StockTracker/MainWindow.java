@@ -981,7 +981,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        lblStatus.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        lblStatus.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         lblStatus.setText("Status");
         getContentPane().add(lblStatus, java.awt.BorderLayout.PAGE_END);
 
@@ -1008,7 +1008,7 @@ public class MainWindow extends javax.swing.JFrame {
             tTable.getColumnModel().getColumn(7).setHeaderValue("%");
         }
 
-        btAddTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btAddTrade.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btAddTrade.setText("Add Trade");
         btAddTrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1016,7 +1016,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btDeleteTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btDeleteTrade.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btDeleteTrade.setText("Delete Trade");
         btDeleteTrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1024,13 +1024,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btSaveChanges.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btSaveChanges.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btSaveChanges.setText("Save Changes");
         btSaveChanges.setEnabled(false);
 
+        cbbPortfolio.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         cbbPortfolio.setModel(cbbPortfolioModel);
 
-        cbIsDefaultPortfolio.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        cbIsDefaultPortfolio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbIsDefaultPortfolio.setText("use by default");
 
         btMove.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1042,7 +1043,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btRefresh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btRefresh.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btRefresh.setText("Refresh");
         btRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1050,28 +1051,28 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Portfolio:");
 
-        btEditTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btEditTrade.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btEditTrade.setText("Edit Trade");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel2.setText("Invested:");
 
-        lblTotalInv.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblTotalInv.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         lblTotalInv.setText(" ");
 
-        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         lblTotal.setText("Value:");
 
-        lblTotalValue.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblTotalValue.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         lblTotalValue.setText(" ");
 
-        lblTotalGainText.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalGainText.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         lblTotalGainText.setText("Current profit:");
 
-        lblTotalGain.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblTotalGain.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         lblTotalGain.setText(" ");
 
         lblMode.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -1083,52 +1084,51 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(180, 180, 180)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalInv, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotalGainText, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbIsDefaultPortfolio)
-                                .addGap(39, 39, 39)
-                                .addComponent(lblMode, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btAddTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotalInv, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 71, 71)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
+                                .addComponent(cbIsDefaultPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblMode, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTotalGain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTotalGainText, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                            .addComponent(btAddTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btDeleteTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btEditTrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btSaveChanges, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel9)
-                        .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbIsDefaultPortfolio))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cbbPortfolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbIsDefaultPortfolio)
                     .addComponent(lblMode, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1147,7 +1147,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1174,7 +1174,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         mFile.setText(" File ");
-        mFile.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mFile.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
         smExpExcel.setText("Export to Excel");
         smExpExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -1194,11 +1194,11 @@ public class MainWindow extends javax.swing.JFrame {
         mMenuBar.add(mFile);
 
         mTrade.setText(" Add trade");
-        mTrade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mTrade.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         mMenuBar.add(mTrade);
 
         mSwitch.setText(" Switch to Test Mode ");
-        mSwitch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mSwitch.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         mSwitch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mSwitchMouseClicked(evt);
@@ -1210,7 +1210,7 @@ public class MainWindow extends javax.swing.JFrame {
         mMenuBar.add(mSwitch);
 
         mPortfolios.setText(" Manage portfolios ");
-        mPortfolios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mPortfolios.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         mPortfolios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mPortfoliosMouseClicked(evt);
@@ -1219,7 +1219,7 @@ public class MainWindow extends javax.swing.JFrame {
         mMenuBar.add(mPortfolios);
 
         mReports.setText(" Create report ");
-        mReports.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mReports.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
         smReportCurrent.setText("Current portfolio");
         mReports.add(smReportCurrent);
@@ -1229,15 +1229,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         mMenuBar.add(mReports);
 
-        mEmpty.setText("                                                                                  ");
+        mEmpty.setText("                                                                         ");
         mMenuBar.add(mEmpty);
 
         mUser.setText("User:                               ");
-        mUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mUser.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         mMenuBar.add(mUser);
 
         mLogin.setText("Log In");
-        mLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mLogin.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         mLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mLoginMouseClicked(evt);
@@ -2203,14 +2203,14 @@ private void getIntradayPrices(){
     private void setTable(TableModel tm) {
             tTable.setModel(tm);
             tTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            tTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tTable.getColumnModel().getColumn(0).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(1).setPreferredWidth(60);
             tTable.getColumnModel().getColumn(2).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(3).setPreferredWidth(80);
             tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            tTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tTable.getColumnModel().getColumn(5).setPreferredWidth(113);
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(7).setPreferredWidth(85);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(90);
             
             tTable.getColumnModel().getColumn(5).setCellRenderer(new CurrencyTableCellRenderer());
             tTable.getColumnModel().getColumn(7).setCellRenderer(new PercentTableCellRenderer());

@@ -34,7 +34,7 @@ public class Portfolio {
         if (!amount.toString().equals("0.00")  ){
             amountOutput = ": $" + getAmount().toString();
         }
-        return String.format("%d. %s", getId(), getName())+ amountOutput;
+        return String.format("%s", getName())+ amountOutput;
     }
 
     /**
