@@ -14,20 +14,23 @@ import org.json.JSONObject;
  * @author Roman Shaiko, Dmitrii Kudrik
  */
 
-public class API {
-    private static String readAll(Reader rd)  {
-    StringBuilder sb = new StringBuilder();
-    int cp;
+public class API {  
+    
+    //getting String from BufferedReader
+    private static String readAll(Reader rd) {
+        StringBuilder sb = new StringBuilder();
+        int cp;
         try {
             while ((cp = rd.read()) != -1) {
                 sb.append((char) cp);
-            }   } catch (IOException ex) {            
+            }
+        } catch (IOException ex) {
         }
-        
-    return sb.toString();
-  }
+        return sb.toString();
+    }
 
-    public static JSONObject getJson(String url)  {
+    //returns JSON object from HTTP request
+    public static JSONObject getJson(String url) {
         JSONObject json = null;
         try (InputStream is = new URL(url).openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));

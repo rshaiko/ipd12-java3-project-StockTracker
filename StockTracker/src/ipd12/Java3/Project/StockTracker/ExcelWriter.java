@@ -28,11 +28,10 @@ import jxl.write.WriteException;
  */
 public class ExcelWriter {
 private String filename;
-
 private WritableWorkbook workbook;
 
   
-public ExcelWriter(String fn)
+public ExcelWriter(String fn) // get the file name from fileChooser
   {
     filename = fn;
   }
@@ -49,11 +48,13 @@ public ExcelWriter(String fn)
     Number n;
     DateTime dt;
     
+    //formatter for the header
     WritableFont arial10ptBold = new WritableFont
       (WritableFont.ARIAL, 10, WritableFont.BOLD);
     WritableCellFormat arial10BoldFormat = new WritableCellFormat
       (arial10ptBold);
     
+    //Header output
     l = new Label(0,0,"Symbol", arial10BoldFormat);
     s.addCell(l);
     l = new Label(1,0,"Company name", arial10BoldFormat);
@@ -77,6 +78,8 @@ public ExcelWriter(String fn)
     
     int cols = tm.getColumnCount();
     int rows = tm.getRowCount();
+    
+    //formatters fo the columns
     WritableCellFormat cf1 = new WritableCellFormat(NumberFormats.INTEGER);
     
     NumberFormat pounddp2 = new NumberFormat("$#0.00");
@@ -94,6 +97,7 @@ public ExcelWriter(String fn)
     
     WritableCellFormat df = new WritableCellFormat(DateFormats.FORMAT2);
     
+    // Data output
     for(int row = 0; row<rows; row++ ){
         //symbol
         l = new Label(0, row+1, tm.getValueAt(row, 0).toString());
@@ -105,7 +109,6 @@ public ExcelWriter(String fn)
         Date date = Globals.currentTradesSet.get(row).opDate;
         dt = new DateTime(2, row+1, date , df);
         s.addCell(dt);
-        
         //quantity
         n = new Number(3, row+1, Integer.valueOf(tm.getValueAt(row, 1).toString()), cf1);
         s.addCell(n);
@@ -126,8 +129,8 @@ public ExcelWriter(String fn)
         s.addCell(n);
         // %
         String pValue = tm.getValueAt(row, 7).toString();
-        //pValue = pValue.replaceAll(" %", "");
-        n = new Number(9, row+1, (Double.valueOf(pValue)), cfi4);
+        pValue = pValue.replaceAll(" %", "");
+        n = new Number(9, row+1, (Double.valueOf(pValue)/100), cfi4);
         s.addCell(n);
     }
     CellView cf = new CellView();

@@ -1018,6 +1018,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         btDeleteTrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btDeleteTrade.setText("Delete Trade");
+        btDeleteTrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteTradeActionPerformed(evt);
+            }
+        });
 
         btSaveChanges.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btSaveChanges.setText("Save Changes");
@@ -1833,6 +1838,35 @@ public class MainWindow extends javax.swing.JFrame {
     private void mSwitchMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mSwitchMouseReleased
      
     }//GEN-LAST:event_mSwitchMouseReleased
+
+    private void btDeleteTradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteTradeActionPerformed
+        long id = 0;
+        try {
+            int sRow = tTable.getSelectedRow();
+            Trade t = currentTradesSet.get(sRow);
+            id = t.id;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+        }
+        String message = "Please confirm deleting selected trade";
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, message, "Confirmation message", dialogButton);
+        if (dialogResult == 0) {
+            //YES Option
+            //adding new ShortSell trade to the database
+            try {
+                db.deleteTrade(id);
+                JOptionPane.showMessageDialog(this, "Trade was successfully deleted", "Information message!",
+                        JOptionPane.INFORMATION_MESSAGE);
+                rewriteMainTable();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Trade was not deleted", "Database error!",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_btDeleteTradeActionPerformed
 // call it from popup listener
 
 private void getIntradayPrices(){
@@ -1844,9 +1878,9 @@ private void getIntradayPrices(){
             Trade t = currentTradesSet.get(sRow);
             symbol = t.symbol;
         } catch (ArrayIndexOutOfBoundsException ex) {
+            return;
         }
         if (symbol.equals("")){
-            System.out.println("Error: Symbol not found");
             return;
         }
         try {
@@ -1954,21 +1988,34 @@ private void getIntradayPrices(){
                     newData[row][5] = value;
                     gain = change.multiply((BigDecimal) newData[row][1]);
                     newData[row][6] = gain;
-                    dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue());
+                    dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue()) * 100;
                     if (((BigDecimal)newData[row][1]).doubleValue() < 0){
                         dPercent=-dPercent;
                     } 
-                    newData[row][7] = dPercent;
-                    //newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
+                    newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
                     totalGain = totalGain.add(gain);
                     totalValue = totalValue.add(value);
                     
+//                    dPercent = gain.doubleValue() / ((((BigDecimal) newData[row][1]).multiply((BigDecimal) newData[row][2])).doubleValue());
+//                    if (((BigDecimal)newData[row][1]).doubleValue() < 0){
+//                        dPercent=-dPercent;
+//                    } 
+//                    newData[row][7] = dPercent;
+//                    //newData[row][7] = (dPercent < 0 ? "" : "+") + "" + String.format("%.2f", dPercent) + " %";
+//                    totalGain = totalGain.add(gain);
+//                    totalValue = totalValue.add(value);
+                    
                     lblStatus.setText("Prices are up to date");
                     lblTotalValue.setText("$ "+ totalValue.toString());
+                    
                     lblTotalGain.setText("$ "+ totalGain.toString());
                     if(totalGain.doubleValue()<0){
                         lblTotalGainText.setText("Current loss:");
-                        lblTotalGain.setForeground(Color.red);
+                        lblTotalGain.setForeground(Color.RED);
+                    }
+                    else{
+                        lblTotalGainText.setText("Current profit:");
+                        lblTotalGain.setForeground(Color.decode("#006600"));
                     }
                 }
             } catch (NullPointerException | org.json.JSONException ex) {
@@ -2163,7 +2210,7 @@ private void getIntradayPrices(){
             tTable.getColumnModel().getColumn(4).setPreferredWidth(70);
             tTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             tTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tTable.getColumnModel().getColumn(7).setPreferredWidth(80);
+            tTable.getColumnModel().getColumn(7).setPreferredWidth(85);
             
             tTable.getColumnModel().getColumn(5).setCellRenderer(new CurrencyTableCellRenderer());
             tTable.getColumnModel().getColumn(7).setCellRenderer(new PercentTableCellRenderer());

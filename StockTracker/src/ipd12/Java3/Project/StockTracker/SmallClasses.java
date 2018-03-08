@@ -48,6 +48,7 @@ class NewTrade {
         return result;
     }
 }
+
 class PercentTableCellRenderer extends DefaultTableCellRenderer {
 
     private static final NumberFormat FORMAT = NumberFormat.getPercentInstance();
@@ -61,7 +62,8 @@ class PercentTableCellRenderer extends DefaultTableCellRenderer {
             setHorizontalAlignment(JLabel.RIGHT);
             setText(FORMAT.format(value));
         } else {
-            setText("");
+            setText(value+"");
+            setHorizontalAlignment(JLabel.RIGHT);
         }
         return result;
     }

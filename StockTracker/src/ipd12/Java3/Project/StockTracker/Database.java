@@ -361,4 +361,10 @@ public class Database {
         }
         
     }
+
+    void deleteTrade(long id) throws SQLException {
+        String sql = "DELETE FROM trades WHERE id =" + id;
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.executeUpdate();
+    }
 }
