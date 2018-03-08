@@ -1816,19 +1816,20 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void mSwitchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mSwitchMouseClicked
         isRealMode = !isRealMode;
-        if(isRealMode){
+        try {
+            reloadPortfolios();
+            if(!isRealMode){
             mSwitch.setText("Switch to Track mode");
-            lblMode.setText("TRACK MODE");
-            lblMode.setForeground(Color.decode("#003366"));
-        }
-        else{
-            mSwitch.setText("Switch to Test mode");
             lblMode.setText("TEST MODE");
             lblMode.setForeground(Color.decode("#006600"));
         }
-        try {
-            reloadPortfolios();
+        else{
+            mSwitch.setText("Switch to Test mode");
+            lblMode.setText("TRACK MODE");
+            lblMode.setForeground(Color.decode("#003366"));
+        }
         } catch (SQLException ex) {
+            isRealMode = !isRealMode;
             JOptionPane.showMessageDialog(this,
                     "Updating Error" + ex.getMessage(),
                     "Database Error", JOptionPane.ERROR_MESSAGE);
