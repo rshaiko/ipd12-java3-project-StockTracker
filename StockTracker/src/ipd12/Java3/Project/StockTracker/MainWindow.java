@@ -2166,7 +2166,6 @@ private void getIntradayPrices() throws ParseException {
         }
         try {
             String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=60min&apikey=FS3KK17YEXZPQ4W5";
-            System.out.println(url);
             JSONObject json = API.getJson(url);
             JSONObject json2 = (JSONObject) json.get("Time Series (60min)");
 
@@ -2182,39 +2181,22 @@ private void getIntradayPrices() throws ParseException {
             for (Object key : json2.keySet()) {
                 String keyStr = (String) key;
                 Object keyvalue = json2.get(keyStr);
-
                 arrStrDates[ind] = key.toString();
-
                 json3 = (JSONObject) keyvalue;
                 arrPrices[ind][0] = json3.getDouble("1. open");
                 arrPrices[ind][1] = json3.getDouble("2. high");
                 arrPrices[ind][2] = json3.getDouble("3. low");
                 arrPrices[ind][3] = json3.getDouble("4. close");
                 arrVolume[ind] = json3.getInt("5. volume");
-
-                System.out.println("Date: " + arrStrDates[ind] + "  Open price: " + arrPrices[ind][0] + "\tVolume: " + arrVolume[ind]);
-                System.out.println("Close:" + arrPrices[ind][3]);
                 ind++;
             }
 
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            List<java.util.Date> arrayOfDates = new ArrayList<java.util.Date>();
+            List<java.util.Date> arrayOfDates = new ArrayList<>();
 
             for (int i = 0; i < arrStrDates.length; i++) {
-
                 arrayOfDates.add(sdf.parse(arrStrDates[i]));
-                System.out.println("Date: " + arrayOfDates.get(i));
-
             }
-            /*
- System.out.println("Maximum Element : "
-    + sdf.format(Collections.min(arrayOfDates)));
-
-         //System.out.println(Collections.max(lastArray));
-        
-         Collections.sort(arrayOfDates);
-  System.out.println("Maximum Element After Sorting - "
-    + sdf.format(arrayOfDates.get(arrayOfDates.size() - 1)));*/
 
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String s = formatter.format(Collections.max(arrayOfDates));
@@ -2222,8 +2204,7 @@ private void getIntradayPrices() throws ParseException {
             for (int i = 0; i < arrayOfDates.size(); i++) {
                 if (arrayOfDates.get(i) == Collections.max(arrayOfDates)) {
                     j = i;
-                  
-                };
+                }
 
             }//j=arrayOfDates.indexOf(Collections.max(arrayOfDates));
            
@@ -2232,17 +2213,14 @@ private void getIntradayPrices() throws ParseException {
             dataset.setValue(new Double(arrPrices[j][1]), Collections.max(arrayOfDates), "high, " + arrPrices[j][1]);
             dataset.setValue(new Double(arrPrices[j][2]), Collections.max(arrayOfDates), "low, " + arrPrices[j][2]);
             dataset.setValue(new Double(arrPrices[j][3]), Collections.max(arrayOfDates), "close, " + arrPrices[j][3]);
-            // dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
-            // dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
 
             JFreeChart chart = ChartFactory.createBarChart(symbol, "Price", "USD", dataset, PlotOrientation.VERTICAL, true, true, true);
             chart.setBackgroundPaint(Color.YELLOW);
             chart.getTitle().setPaint(Color.BLUE);
             CategoryPlot p = chart.getCategoryPlot();
             p.setRangeGridlinePaint(Color.BLACK);
-            ChartFrame frame = new ChartFrame("Barchart for symbol" + symbol, chart);
+            ChartFrame frame = new ChartFrame("Barchart for symbol: " + symbol, chart);
             frame.setVisible(true);
-            //  frame.setLocationRelativeTo(null);
             frame.setSize(600, 500);
 
         } catch (NullPointerException | org.json.JSONException ex) {
