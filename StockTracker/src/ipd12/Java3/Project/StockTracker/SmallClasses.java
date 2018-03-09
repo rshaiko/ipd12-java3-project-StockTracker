@@ -12,8 +12,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class SmallClasses {
 }
 
-//to create new Trade
+//to create new Trade or updating
 class NewTrade {
+
     long indexId;
     TradeType tradeType;
     BigDecimal price;
@@ -25,12 +26,9 @@ class NewTrade {
         this.price = price;
         this.quantity = quantity;
     }
-
-    NewTrade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
- class CurrencyTableCellRenderer extends DefaultTableCellRenderer {
+
+class CurrencyTableCellRenderer extends DefaultTableCellRenderer {
 
     private static final NumberFormat FORMAT = NumberFormat.getCurrencyInstance();
 

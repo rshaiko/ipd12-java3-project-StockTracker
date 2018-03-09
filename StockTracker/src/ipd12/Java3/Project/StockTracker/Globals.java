@@ -9,4 +9,5 @@ public class Globals {
     static boolean firstLoad = true;
     static ArrayList<Trade> currentTradesSet;
     Object [][] currentTableData;
+    static long selectedTradeID;
 }

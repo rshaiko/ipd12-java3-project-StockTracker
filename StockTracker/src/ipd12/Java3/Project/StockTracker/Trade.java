@@ -3,7 +3,6 @@ package ipd12.Java3.Project.StockTracker;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author Roman Shaiko, Dmitrii Kudrik

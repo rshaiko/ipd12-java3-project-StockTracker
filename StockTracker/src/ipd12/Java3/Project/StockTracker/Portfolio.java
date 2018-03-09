@@ -13,7 +13,6 @@ public class Portfolio {
     private boolean isDefault;
     private PortType portType;
     public enum PortType {Real, Test};
-    //private long userId;
     private BigDecimal amount;
 
     public Portfolio(long id, String name, boolean isDefault, PortType portType, BigDecimal amount) {
@@ -21,7 +20,6 @@ public class Portfolio {
         this.name = name;
         this.isDefault = isDefault;
         this.portType = portType;
-        //this.userId = userId;
         this.amount = amount;
     }
 

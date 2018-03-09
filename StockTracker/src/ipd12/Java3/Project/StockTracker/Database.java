@@ -62,20 +62,16 @@ public class Database {
                 int id = result.getInt("id");
                 String name = result.getString("name");
                 String username = result.getString("username");
-
-                
                 String password = result.getString("password");
                 boolean isDef = result.getBoolean("isDefault");
 
                 if (password.equals(pass)) {
-
                     return true;
                 } else {
                     return false;
                 }
             } else {
                 throw new RecordNotFoundException("Username or password are incorrect!");
-
                 // return null;
             }
         }
@@ -88,19 +84,10 @@ public class Database {
             stmt.setString(2, userN);
             stmt.setString(3, pass);
             stmt.setBoolean(4,def);
-            
-            
-            
             stmt.executeUpdate();
         }
     }
 
-     void updateByPortfolio(long id) throws UnsupportedOperationException {
-        
-    }
-
-     
-     
     ArrayList<Portfolio> getAllPortfolios()throws SQLException {
          String mode="Test";
         if (MainWindow.isRealMode){
@@ -184,8 +171,7 @@ public class Database {
 
     void updateIsDefaultUserSetTrue()throws SQLException {
        String sql = "UPDATE users set isDefault = 1 where id ="+  "'" + Globals.currentUser.getId() + "'";
-        //System.out.println(Globals.currentUser.getId());
-        PreparedStatement stmt = conn.prepareStatement(sql);
+       PreparedStatement stmt = conn.prepareStatement(sql);
        
         stmt.executeUpdate();
     }
@@ -232,7 +218,6 @@ public class Database {
                 list.add(new Portfolio(qId, qName, qIsDef, qType, qCash));
             } 
         }catch (SQLException e) {
-            //ADD ERROR  EDDING- in WINDOW
         }
         return list;
     }
@@ -274,7 +259,6 @@ public class Database {
                 list.add(new Trade(id,symbolID,name, opDate,symbol,tradeType,numerOfShares,sharePrice, sector,industry));
             }
         }catch (SQLException e) {
-            //ADD ERROR  EDDING- in WINDOW
         }
         return list;
     }
@@ -318,9 +302,6 @@ public class Database {
 
     int[] checkSymbol(String symbol) {
 
-        //String sql = "Select count(*) as cou from symbols where symbol like '%" + symbol + "%'";
-        //String sql = "Select count(*) as cou, (Select count(*) from symbols where symbol like '"+ symbol +"') as uni from symbols where symbol like '" + symbol + "%'";
-        //System.out.println(sql);
         String sql = "Select count(*) as cou, if(\n"
                 + "(\n"
                 + "	Select count(*) from symbols where symbol like '" + symbol + "'\n"
@@ -335,9 +316,7 @@ public class Database {
                 numberReturned[1] = result.getInt("indexId");
             } 
         }catch (SQLException e) {
-            //ADD ERROR  EDDING- in WINDOW
         }
-        //System.out.println(numberReturned[0]+ "asdqa "+numberReturned[1]);
         return numberReturned;
     }
 
@@ -347,9 +326,6 @@ public class Database {
         Calendar cal = Calendar.getInstance();
         
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-        
-            
-            
             stmt.setString(1, dateFormat.format(cal.getTime()));
             stmt.setLong(2, nt.indexId);            
             stmt.setString(3,nt.tradeType.toString());
@@ -359,7 +335,6 @@ public class Database {
             stmt.setInt(7, 1);
             stmt.executeUpdate();
         }
-        
     }
 
     void deleteTrade(long id) throws SQLException {
@@ -390,5 +365,16 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(sql);
        
         stmt.executeUpdate();
+    }
+
+
+        void updateTrade(NewTrade nt) throws SQLException {
+        String sql = "UPDATE trades SET numberOfShares = ?, sharePrice = ? WHERE id = ? ";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, nt.quantity);
+            stmt.setBigDecimal(2, nt.price);            
+            stmt.setLong(3,nt.indexId);
+            stmt.executeUpdate();
+        }
     }
 }
