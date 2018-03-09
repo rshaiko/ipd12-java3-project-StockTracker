@@ -17,9 +17,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -1925,7 +1931,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_smExpExcelActionPerformed
 
     private void ppMain_BarChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMain_BarChartActionPerformed
-        getIntradayPrices();
+        try {
+            getIntradayPrices();
+        } catch (ParseException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ppMain_BarChartActionPerformed
 
     private void dlgAdd_btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlgAdd_btCancelActionPerformed
@@ -2140,10 +2150,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ppMain_EditActionPerformed
 // call it from popup listener
 
-private void getIntradayPrices(){
-        
+private void getIntradayPrices() throws ParseException {
+
         // PopUp menu - button Show Chart
-        String symbol="";
+        String symbol = "";
         try {
             int sRow = tTable.getSelectedRow();
             Trade t = currentTradesSet.get(sRow);
@@ -2151,7 +2161,7 @@ private void getIntradayPrices(){
         } catch (ArrayIndexOutOfBoundsException ex) {
             return;
         }
-        if (symbol.equals("")){
+        if (symbol.equals("")) {
             return;
         }
         try {
@@ -2159,53 +2169,82 @@ private void getIntradayPrices(){
             System.out.println(url);
             JSONObject json = API.getJson(url);
             JSONObject json2 = (JSONObject) json.get("Time Series (60min)");
-        
+
             int length = json2.length();
-            
+
             //3 arrays - dates, prices, volumes
-            String [] arrStrDates = new String [length];
-            double[][]arrPrices = new double[length][4];
-            int [] arrVolume = new int[length];
-            
-            int ind=0;
+            String[] arrStrDates = new String[length];
+            double[][] arrPrices = new double[length][4];
+            int[] arrVolume = new int[length];
+
+            int ind = 0;
             JSONObject json3;
             for (Object key : json2.keySet()) {
                 String keyStr = (String) key;
                 Object keyvalue = json2.get(keyStr);
-                
-                arrStrDates[ind]=key.toString();
-                
+
+                arrStrDates[ind] = key.toString();
+
                 json3 = (JSONObject) keyvalue;
-                arrPrices[ind][0]=json3.getDouble("1. open");
-                arrPrices[ind][1]=json3.getDouble("2. high");
-                arrPrices[ind][2]=json3.getDouble("3. low");
-                arrPrices[ind][3]=json3.getDouble("4. close");
-                arrVolume[ind]=json3.getInt("5. volume");
-                
-                //System.out.println("Date: "+ arrStrDates[ind] + "  Open price: " + arrPrices[ind][0] + "\tVolume: " + arrVolume[ind] );
-                //System.out.println("Close:" + arrPrices[ind][3]);
+                arrPrices[ind][0] = json3.getDouble("1. open");
+                arrPrices[ind][1] = json3.getDouble("2. high");
+                arrPrices[ind][2] = json3.getDouble("3. low");
+                arrPrices[ind][3] = json3.getDouble("4. close");
+                arrVolume[ind] = json3.getInt("5. volume");
+
+                System.out.println("Date: " + arrStrDates[ind] + "  Open price: " + arrPrices[ind][0] + "\tVolume: " + arrVolume[ind]);
+                System.out.println("Close:" + arrPrices[ind][3]);
                 ind++;
             }
-            //Arrays.sort(arrStrDates);
-           // arrStrDates[arrStrDates.length-1];
-            DefaultCategoryDataset dataset= new DefaultCategoryDataset();
-       dataset.setValue(new Double (arrPrices[arrPrices.length-5][0]),arrStrDates[arrStrDates.length-5], "open, "+arrPrices[arrPrices.length-5][0]);
-        dataset.setValue(new Double (arrPrices[arrPrices.length-5][1]),arrStrDates[arrStrDates.length-5], "high, "+arrPrices[arrPrices.length-5][1]);
-          dataset.setValue(new Double (arrPrices[arrPrices.length-5][2]),arrStrDates[arrStrDates.length-5], "low, "+arrPrices[arrPrices.length-5][2]);
-            dataset.setValue(new Double (arrPrices[arrPrices.length-5][3]),arrStrDates[arrStrDates.length-5], "close, "+arrPrices[arrPrices.length-5][3]);
-      // dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
-      // dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
-       
-       JFreeChart chart = ChartFactory.createBarChart(symbol,"Price","USD", dataset, PlotOrientation.VERTICAL,true,true,true);
-       chart.setBackgroundPaint(Color.YELLOW);
-       chart.getTitle().setPaint(Color.BLUE);
-       CategoryPlot p= chart.getCategoryPlot();
-       p.setRangeGridlinePaint(Color.BLACK);
-       ChartFrame frame =  new ChartFrame("Barchart for symbol"+symbol, chart);
-       frame.setVisible(true);
-     //  frame.setLocationRelativeTo(null);
-       frame.setSize(600,500);
-       
+
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            List<java.util.Date> arrayOfDates = new ArrayList<java.util.Date>();
+
+            for (int i = 0; i < arrStrDates.length; i++) {
+
+                arrayOfDates.add(sdf.parse(arrStrDates[i]));
+                System.out.println("Date: " + arrayOfDates.get(i));
+
+            }
+            /*
+ System.out.println("Maximum Element : "
+    + sdf.format(Collections.min(arrayOfDates)));
+
+         //System.out.println(Collections.max(lastArray));
+        
+         Collections.sort(arrayOfDates);
+  System.out.println("Maximum Element After Sorting - "
+    + sdf.format(arrayOfDates.get(arrayOfDates.size() - 1)));*/
+
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = formatter.format(Collections.max(arrayOfDates));
+            int j = 0;
+            for (int i = 0; i < arrayOfDates.size(); i++) {
+                if (arrayOfDates.get(i) == Collections.max(arrayOfDates)) {
+                    j = i;
+                  
+                };
+
+            }//j=arrayOfDates.indexOf(Collections.max(arrayOfDates));
+           
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            dataset.setValue(new Double(arrPrices[j][0]), Collections.max(arrayOfDates), "open, " + arrPrices[j][0]);
+            dataset.setValue(new Double(arrPrices[j][1]), Collections.max(arrayOfDates), "high, " + arrPrices[j][1]);
+            dataset.setValue(new Double(arrPrices[j][2]), Collections.max(arrayOfDates), "low, " + arrPrices[j][2]);
+            dataset.setValue(new Double(arrPrices[j][3]), Collections.max(arrayOfDates), "close, " + arrPrices[j][3]);
+            // dataset.setValue(arrStrDates[0].toString().getTime(),"Parameters",    "Date");
+            // dataset.setValue(new Double(arrVolume[arrVolume.length-5]/1000.0),arrStrDates[arrStrDates.length-5],    "Volume, "+arrVolume[arrVolume.length-5]);
+
+            JFreeChart chart = ChartFactory.createBarChart(symbol, "Price", "USD", dataset, PlotOrientation.VERTICAL, true, true, true);
+            chart.setBackgroundPaint(Color.YELLOW);
+            chart.getTitle().setPaint(Color.BLUE);
+            CategoryPlot p = chart.getCategoryPlot();
+            p.setRangeGridlinePaint(Color.BLACK);
+            ChartFrame frame = new ChartFrame("Barchart for symbol" + symbol, chart);
+            frame.setVisible(true);
+            //  frame.setLocationRelativeTo(null);
+            frame.setSize(600, 500);
+
         } catch (NullPointerException | org.json.JSONException ex) {
             JOptionPane.showMessageDialog(this, "Error API request for " + symbol + " price", "Connection error!",
                     JOptionPane.ERROR_MESSAGE);
